@@ -297,6 +297,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/11/7z-error-codes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liu Jun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LOVEAI.INFO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/11/7z-error-codes/" class="post-title-link" itemprop="url">7z 解压文件名乱码</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-11 23:12:27 / Modified: 23:56:00" itemprop="dateCreated datePublished" datetime="2019-05-11T23:12:27+08:00">2019-05-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/05/11/7z-error-codes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/7z-error-codes/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。</p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
+<li>使用python重命名<br>先解压，然后使用如下代码重命名<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- encoding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    names = os.listdir(<span class="string">"."</span>)</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        new_name = name.encode(<span class="string">"cp437"</span>).decode(<span class="string">"gbk"</span>)</span><br><span class="line">        os.rename(name,new_name)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在Windows下python对文件名编码使用cp437或者utf8，name 这个字符串是经过cp437解码得到的unicode。<br>unicode 转为 bytes 采用encode<br>bytes 转为 unicode 采用decode</p>
+<ul>
+<li>在7z压缩时使用utf8编码文件名<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z a -tzip -mcu examples.zip examples/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="代码页"><a href="#代码页" class="headerlink" title="代码页"></a>代码页</h1><p>在Windows 10 Pro 上默认的代码页是cp437 这个代码页不能表示中文字符<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准输出的编码</span></span><br><span class="line">sys.stdout.encoding</span><br><span class="line"><span class="comment"># 系统本地化设置的编码</span></span><br><span class="line">locale.getpreferredencoding()</span><br></pre></td></tr></table></figure></p>
+<p>代码页这个东西太神奇了，还是采用mac或者linux吧。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/24/javascript-basic-syntax/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1306,7 +1474,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1325,7 +1493,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

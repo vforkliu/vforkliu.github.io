@@ -96,17 +96,18 @@
 
 
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="问题描述在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。 原因使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。 解决方法 使用python重命名先解压，然后使用如下代码重命名1234567# -*- encoding:utf-8 -*-import">
+<meta name="keywords" content="7z,code page">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://loveaiinfo.github.io/2019/04/18/hello-world/index.html">
+<meta property="og:title" content="7z 解压文件名乱码">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/11/7z-error-codes/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="问题描述在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。 原因使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。 解决方法 使用python重命名先解压，然后使用如下代码重命名1234567# -*- encoding:utf-8 -*-import">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-18T03:50:59.248Z">
+<meta property="og:updated_time" content="2019-05-11T15:56:00.166Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="7z 解压文件名乱码">
+<meta name="twitter:description" content="问题描述在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。 原因使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。 解决方法 使用python重命名先解压，然后使用如下代码重命名1234567# -*- encoding:utf-8 -*-import">
 
 
 
@@ -114,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/2019/04/18/hello-world/">
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/11/7z-error-codes/">
 
 
 
@@ -124,7 +125,7 @@
   };
 </script>
 
-  <title>Hello World | LOVEAI.INFO</title>
+  <title>7z 解压文件名乱码 | LOVEAI.INFO</title>
   
 
 
@@ -300,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/18/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/11/7z-error-codes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liu Jun">
@@ -317,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">7z 解压文件名乱码
 
               
             
@@ -343,9 +344,13 @@
                 
               
 
-              <time title="Created: 2019-04-18 11:50:59" itemprop="dateCreated datePublished" datetime="2019-04-18T11:50:59+08:00">2019-04-18</time>
+              <time title="Created: 2019-05-11 23:12:27 / Modified: 23:56:00" itemprop="dateCreated datePublished" datetime="2019-05-11T23:12:27+08:00">2019-05-11</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -362,8 +367,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/04/18/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/hello-world/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/7z-error-codes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/7z-error-codes/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -391,15 +396,19 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。</p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
+<li>使用python重命名<br>先解压，然后使用如下代码重命名<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- encoding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    names = os.listdir(<span class="string">"."</span>)</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        new_name = name.encode(<span class="string">"cp437"</span>).decode(<span class="string">"gbk"</span>)</span><br><span class="line">        os.rename(name,new_name)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在Windows下python对文件名编码使用cp437或者utf8，name 这个字符串是经过cp437解码得到的unicode。<br>unicode 转为 bytes 采用encode<br>bytes 转为 unicode 采用decode</p>
+<ul>
+<li>在7z压缩时使用utf8编码文件名<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z a -tzip -mcu examples.zip examples/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="代码页"><a href="#代码页" class="headerlink" title="代码页"></a>代码页</h1><p>在Windows 10 Pro 上默认的代码页是cp437 这个代码页不能表示中文字符<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准输出的编码</span></span><br><span class="line">sys.stdout.encoding</span><br><span class="line"><span class="comment"># 系统本地化设置的编码</span></span><br><span class="line">locale.getpreferredencoding()</span><br></pre></td></tr></table></figure></p>
+<p>代码页这个东西太神奇了，还是采用mac或者linux吧。</p>
 
       
     </div>
@@ -421,6 +430,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/7z/" rel="tag"># 7z</a>
+          
+            <a href="/tags/code-page/" rel="tag"># code page</a>
+          
+        </div>
+      
 
       
       
@@ -430,8 +447,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/12/JSBridge-Learning/" rel="next" title="JSBridge Learning">
-                <i class="fa fa-chevron-left"></i> JSBridge Learning
+              <a href="/2019/04/24/javascript-basic-syntax/" rel="next" title="javascript basic syntax">
+                <i class="fa fa-chevron-left"></i> javascript basic syntax
               </a>
             
           </div>
@@ -439,10 +456,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/18/Kotlin-tutorial-1/" rel="prev" title="Kotlin tutorial-1">
-                Kotlin tutorial-1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -518,7 +531,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -535,7 +548,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -573,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码页"><span class="nav-number">4.</span> <span class="nav-text">代码页</span></a></li></ol></div>
             
 
           </div>
@@ -731,9 +750,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://loveaiinfo.github.io/2019/04/18/hello-world/";
-    this.page.identifier = "2019/04/18/hello-world/";
-    this.page.title = 'Hello World';
+    this.page.url = "https://loveaiinfo.github.io/2019/05/11/7z-error-codes/";
+    this.page.identifier = "2019/05/11/7z-error-codes/";
+    this.page.title = '7z 解压文件名乱码';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
