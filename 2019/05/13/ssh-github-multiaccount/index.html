@@ -96,14 +96,18 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Kotlin tutorial-1">
-<meta property="og:url" content="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/index.html">
+  <meta name="description" content="创建ssh-key 并且重命名12cd ~/.sshssh-keygen -t rsa -C &quot;example@example.com&quot; 将ssh-key添加到ssh agent1ssh-add example 配置，将不同账号与ssh-key关联12345vim configHost example    Hostname github.com    PreferredAuthenticatio">
+<meta name="keywords" content="ssh,github">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用SSH配置多个github账号">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/13/ssh-github-multiaccount/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
+<meta property="og:description" content="创建ssh-key 并且重命名12cd ~/.sshssh-keygen -t rsa -C &quot;example@example.com&quot; 将ssh-key添加到ssh agent1ssh-add example 配置，将不同账号与ssh-key关联12345vim configHost example    Hostname github.com    PreferredAuthenticatio">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-18T06:55:33.329Z">
+<meta property="og:updated_time" content="2019-05-12T16:16:37.304Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kotlin tutorial-1">
+<meta name="twitter:title" content="使用SSH配置多个github账号">
+<meta name="twitter:description" content="创建ssh-key 并且重命名12cd ~/.sshssh-keygen -t rsa -C &quot;example@example.com&quot; 将ssh-key添加到ssh agent1ssh-add example 配置，将不同账号与ssh-key关联12345vim configHost example    Hostname github.com    PreferredAuthenticatio">
 
 
 
@@ -111,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/">
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/13/ssh-github-multiaccount/">
 
 
 
@@ -121,7 +125,7 @@
   };
 </script>
 
-  <title>Kotlin tutorial-1 | LOVEAI.INFO</title>
+  <title>使用SSH配置多个github账号 | LOVEAI.INFO</title>
   
 
 
@@ -297,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/13/ssh-github-multiaccount/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liu Jun">
@@ -314,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kotlin tutorial-1
+          <h1 class="post-title" itemprop="name headline">使用SSH配置多个github账号
 
               
             
@@ -340,9 +344,13 @@
                 
               
 
-              <time title="Created: 2019-04-18 14:55:33" itemprop="dateCreated datePublished" datetime="2019-04-18T14:55:33+08:00">2019-04-18</time>
+              <time title="Created: 2019-05-13 00:07:46 / Modified: 00:16:37" itemprop="dateCreated datePublished" datetime="2019-05-13T00:07:46+08:00">2019-05-13</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -359,8 +367,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/04/18/Kotlin-tutorial-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/Kotlin-tutorial-1/" itemprop="commentCount"></span>
+                <a href="/2019/05/13/ssh-github-multiaccount/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/13/ssh-github-multiaccount/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -388,7 +396,12 @@
       
 
       
-        
+        <h1 id="创建ssh-key-并且重命名"><a href="#创建ssh-key-并且重命名" class="headerlink" title="创建ssh-key 并且重命名"></a>创建ssh-key 并且重命名</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -C "example@example.com"</span><br></pre></td></tr></table></figure>
+<h1 id="将ssh-key添加到ssh-agent"><a href="#将ssh-key添加到ssh-agent" class="headerlink" title="将ssh-key添加到ssh agent"></a>将ssh-key添加到ssh agent</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add example</span><br></pre></td></tr></table></figure>
+<h1 id="配置，将不同账号与ssh-key关联"><a href="#配置，将不同账号与ssh-key关联" class="headerlink" title="配置，将不同账号与ssh-key关联"></a>配置，将不同账号与ssh-key关联</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim config</span><br><span class="line">Host example</span><br><span class="line">    Hostname github.com</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/example</span><br></pre></td></tr></table></figure>
+<h1 id="在git服务器上添加公钥"><a href="#在git服务器上添加公钥" class="headerlink" title="在git服务器上添加公钥"></a>在git服务器上添加公钥</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat example.pub</span><br></pre></td></tr></table></figure>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T example</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -409,6 +422,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+        </div>
+      
 
       
       
@@ -418,8 +439,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/12/JSBridge-Learning/" rel="next" title="JSBridge Learning">
-                <i class="fa fa-chevron-left"></i> JSBridge Learning
+              <a href="/2019/05/11/7z-error-codes/" rel="next" title="7z 解压文件名乱码">
+                <i class="fa fa-chevron-left"></i> 7z 解压文件名乱码
               </a>
             
           </div>
@@ -427,10 +448,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/24/Android-traceview/" rel="prev" title="Android traceview 原理分析">
-                Android traceview 原理分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -481,8 +498,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -551,6 +577,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#创建ssh-key-并且重命名"><span class="nav-number">1.</span> <span class="nav-text">创建ssh-key 并且重命名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将ssh-key添加到ssh-agent"><span class="nav-number">2.</span> <span class="nav-text">将ssh-key添加到ssh agent</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置，将不同账号与ssh-key关联"><span class="nav-number">3.</span> <span class="nav-text">配置，将不同账号与ssh-key关联</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在git服务器上添加公钥"><span class="nav-number">4.</span> <span class="nav-text">在git服务器上添加公钥</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number">5.</span> <span class="nav-text">测试</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -703,9 +746,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/";
-    this.page.identifier = "2019/04/18/Kotlin-tutorial-1/";
-    this.page.title = 'Kotlin tutorial-1';
+    this.page.url = "https://loveaiinfo.github.io/2019/05/13/ssh-github-multiaccount/";
+    this.page.identifier = "2019/05/13/ssh-github-multiaccount/";
+    this.page.title = '使用SSH配置多个github账号';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
