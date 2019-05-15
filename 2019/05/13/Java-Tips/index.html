@@ -96,14 +96,18 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Kotlin tutorial-1">
-<meta property="og:url" content="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/index.html">
+  <meta name="description" content="可变参数变长参数是 Java 的一个语法糖，本质上还是基于数组的实现：12345void Foo(String... args);void Foo(String[] args);// Method signature([Ljava/lang/String;)V // public void foo(String[] args) 注意事项：  可变参数只能作为函数的最后一个参数，但其前面可以有也可以">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 知识点">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/13/Java-Tips/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
+<meta property="og:description" content="可变参数变长参数是 Java 的一个语法糖，本质上还是基于数组的实现：12345void Foo(String... args);void Foo(String[] args);// Method signature([Ljava/lang/String;)V // public void foo(String[] args) 注意事项：  可变参数只能作为函数的最后一个参数，但其前面可以有也可以">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-18T06:55:33.329Z">
+<meta property="og:updated_time" content="2019-05-14T08:59:01.864Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kotlin tutorial-1">
+<meta name="twitter:title" content="Java 知识点">
+<meta name="twitter:description" content="可变参数变长参数是 Java 的一个语法糖，本质上还是基于数组的实现：12345void Foo(String... args);void Foo(String[] args);// Method signature([Ljava/lang/String;)V // public void foo(String[] args) 注意事项：  可变参数只能作为函数的最后一个参数，但其前面可以有也可以">
 
 
 
@@ -111,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/">
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/13/Java-Tips/">
 
 
 
@@ -121,7 +125,7 @@
   };
 </script>
 
-  <title>Kotlin tutorial-1 | LOVEAI.INFO</title>
+  <title>Java 知识点 | LOVEAI.INFO</title>
   
 
 
@@ -297,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/13/Java-Tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liu Jun">
@@ -314,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kotlin tutorial-1
+          <h1 class="post-title" itemprop="name headline">Java 知识点
 
               
             
@@ -340,9 +344,25 @@
                 
               
 
-              <time title="Created: 2019-04-18 14:55:33" itemprop="dateCreated datePublished" datetime="2019-04-18T14:55:33+08:00">2019-04-18</time>
+              <time title="Created: 2019-05-13 11:06:28" itemprop="dateCreated datePublished" datetime="2019-05-13T11:06:28+08:00">2019-05-13</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-14 16:59:01" itemprop="dateModified" datetime="2019-05-14T16:59:01+08:00">2019-05-14</time>
+              
             
           </span>
 
@@ -359,8 +379,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/04/18/Kotlin-tutorial-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/Kotlin-tutorial-1/" itemprop="commentCount"></span>
+                <a href="/2019/05/13/Java-Tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/13/Java-Tips/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -388,7 +408,19 @@
       
 
       
-        
+        <h1 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h1><p>变长参数是 Java 的一个语法糖，本质上还是基于数组的实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Foo</span><span class="params">(String... args)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Foo</span><span class="params">(String[] args)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Method signature</span></span><br><span class="line">([Ljava/lang/String;)V <span class="comment">// public void foo(String[] args)</span></span><br></pre></td></tr></table></figure></p>
+<p>注意事项：</p>
+<ul>
+<li>可变参数只能作为函数的最后一个参数，但其前面可以有也可以没有任何其他参数</li>
+<li>由于可变参数必须是最后一个参数，所以一个函数最多只能有一个可变参数</li>
+<li>Java的可变参数，会被编译器转型为一个数组</li>
+</ul>
+<h1 id="关键字-transient"><a href="#关键字-transient" class="headerlink" title="关键字 transient"></a>关键字 transient</h1><ul>
+<li>一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。</li>
+<li>transient关键字只能修饰变量，而不能修饰方法和类。注意，本地变量是不能被transient关键字修饰的。变量如果是用户自定义类变量，则该类需要实现Serializable接口。</li>
+<li>被transient关键字修饰的变量不再能被序列化，一个静态变量不管是否被transient修饰，均不能被序列化。</li>
+</ul>
+
       
     </div>
 
@@ -409,6 +441,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
 
       
       
@@ -418,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/12/JSBridge-Learning/" rel="next" title="JSBridge Learning">
-                <i class="fa fa-chevron-left"></i> JSBridge Learning
+              <a href="/2019/05/13/ssh-github-multiaccount/" rel="next" title="使用SSH配置多个github账号">
+                <i class="fa fa-chevron-left"></i> 使用SSH配置多个github账号
               </a>
             
           </div>
@@ -428,8 +466,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/24/Android-traceview/" rel="prev" title="Android traceview 原理分析">
-                Android traceview 原理分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/13/android-progressbar-circle/" rel="prev" title="android progressbar circle">
+                android progressbar circle <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -481,8 +519,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -557,6 +604,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可变参数"><span class="nav-number">1.</span> <span class="nav-text">可变参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关键字-transient"><span class="nav-number">2.</span> <span class="nav-text">关键字 transient</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -709,9 +773,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/";
-    this.page.identifier = "2019/04/18/Kotlin-tutorial-1/";
-    this.page.title = 'Kotlin tutorial-1';
+    this.page.url = "https://loveaiinfo.github.io/2019/05/13/Java-Tips/";
+    this.page.identifier = "2019/05/13/Java-Tips/";
+    this.page.title = 'Java 知识点';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
