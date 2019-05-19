@@ -96,14 +96,18 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Kotlin tutorial-1">
-<meta property="og:url" content="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/index.html">
+  <meta name="description" content="Class12345// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/Class.javapublic final class Class&amp;lt;T&amp;gt; implements Serializable, AnnotatedElement, GenericDeclaration, Typ">
+<meta name="keywords" content="android,classloader">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android ClassLoader">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/15/Android-ClassLoader/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
+<meta property="og:description" content="Class12345// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/Class.javapublic final class Class&amp;lt;T&amp;gt; implements Serializable, AnnotatedElement, GenericDeclaration, Typ">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-18T06:55:33.329Z">
+<meta property="og:updated_time" content="2019-05-15T08:37:46.293Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kotlin tutorial-1">
+<meta name="twitter:title" content="Android ClassLoader">
+<meta name="twitter:description" content="Class12345// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/Class.javapublic final class Class&amp;lt;T&amp;gt; implements Serializable, AnnotatedElement, GenericDeclaration, Typ">
 
 
 
@@ -111,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/">
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/15/Android-ClassLoader/">
 
 
 
@@ -121,7 +125,7 @@
   };
 </script>
 
-  <title>Kotlin tutorial-1 | LOVEAI.INFO</title>
+  <title>Android ClassLoader | LOVEAI.INFO</title>
   
 
 
@@ -297,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/15/Android-ClassLoader/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liu Jun">
@@ -314,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kotlin tutorial-1
+          <h1 class="post-title" itemprop="name headline">Android ClassLoader
 
               
             
@@ -340,9 +344,13 @@
                 
               
 
-              <time title="Created: 2019-04-18 14:55:33" itemprop="dateCreated datePublished" datetime="2019-04-18T14:55:33+08:00">2019-04-18</time>
+              <time title="Created: 2019-05-15 10:38:54 / Modified: 16:37:46" itemprop="dateCreated datePublished" datetime="2019-05-15T10:38:54+08:00">2019-05-15</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -359,8 +367,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/04/18/Kotlin-tutorial-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/18/Kotlin-tutorial-1/" itemprop="commentCount"></span>
+                <a href="/2019/05/15/Android-ClassLoader/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/15/Android-ClassLoader/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -388,7 +396,13 @@
       
 
       
-        
+        <h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/Class.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Class</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Serializable</span>, <span class="title">AnnotatedElement</span>, <span class="title">GenericDeclaration</span>, <span class="title">Type</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">native</span> Class&lt;?&gt; classForName(String className, <span class="keyword">boolean</span> shouldInitialize,</span><br><span class="line">        ClassLoader classLoader) <span class="keyword">throws</span> ClassNotFoundException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="VMClassLoader"><a href="#VMClassLoader" class="headerlink" title="VMClassLoader"></a>VMClassLoader</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/VMClassLoader.java</span></span><br><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VMClassLoader</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">native</span> <span class="keyword">static</span> Class <span class="title">findLoadedClass</span><span class="params">(ClassLoader cl,String name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="BootClassLoader"><a href="#BootClassLoader" class="headerlink" title="BootClassLoader"></a>BootClassLoader</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/ClassLoader.java#762</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BootClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/ClassLoader.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoader</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="BaseDexClassLoader"><a href="#BaseDexClassLoader" class="headerlink" title="BaseDexClassLoader"></a>BaseDexClassLoader</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/dalvik/src/main/java/dalvik/system/BaseDexClassLoader.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseDexClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DexPathList pathList;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="DexPathList"><a href="#DexPathList" class="headerlink" title="DexPathList"></a>DexPathList</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/dalvik/src/main/java/dalvik/system/DexPathList.java</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -409,6 +423,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/classloader/" rel="tag"># classloader</a>
+          
+        </div>
+      
 
       
       
@@ -418,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/12/JSBridge-Learning/" rel="next" title="JSBridge Learning">
-                <i class="fa fa-chevron-left"></i> JSBridge Learning
+              <a href="/2019/05/13/android-progressbar-circle/" rel="next" title="android progressbar circle">
+                <i class="fa fa-chevron-left"></i> android progressbar circle
               </a>
             
           </div>
@@ -427,10 +449,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/24/Android-traceview/" rel="prev" title="Android traceview 原理分析">
-                Android traceview 原理分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -481,8 +499,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -559,6 +586,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Class"><span class="nav-number">1.</span> <span class="nav-text">Class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VMClassLoader"><span class="nav-number">2.</span> <span class="nav-text">VMClassLoader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BootClassLoader"><span class="nav-number">3.</span> <span class="nav-text">BootClassLoader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ClassLoader"><span class="nav-number">4.</span> <span class="nav-text">ClassLoader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BaseDexClassLoader"><span class="nav-number">5.</span> <span class="nav-text">BaseDexClassLoader</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DexPathList"><span class="nav-number">6.</span> <span class="nav-text">DexPathList</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -711,9 +755,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/";
-    this.page.identifier = "2019/04/18/Kotlin-tutorial-1/";
-    this.page.title = 'Kotlin tutorial-1';
+    this.page.url = "https://loveaiinfo.github.io/2019/05/15/Android-ClassLoader/";
+    this.page.identifier = "2019/05/15/Android-ClassLoader/";
+    this.page.title = 'Android ClassLoader';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
