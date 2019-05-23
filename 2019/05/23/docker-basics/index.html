@@ -96,13 +96,18 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LOVEAI.INFO">
-<meta property="og:url" content="https://loveaiinfo.github.io/page/2/index.html">
+  <meta name="description" content="常用参数12345678910docker run \    --rm \    -it \    -e USER_ID=1001 \    -e GROUP_ID=1002 \    -v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro \    -v /home/liujun.sun/a">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker 基础">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/23/docker-basics/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
+<meta property="og:description" content="常用参数12345678910docker run \    --rm \    -it \    -e USER_ID=1001 \    -e GROUP_ID=1002 \    -v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro \    -v /home/liujun.sun/a">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-23T07:19:10.831Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LOVEAI.INFO">
+<meta name="twitter:title" content="docker 基础">
+<meta name="twitter:description" content="常用参数12345678910docker run \    --rm \    -it \    -e USER_ID=1001 \    -e GROUP_ID=1002 \    -v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro \    -v /home/liujun.sun/a">
 
 
 
@@ -110,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/page/2/">
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/23/docker-basics/">
 
 
 
@@ -120,7 +125,7 @@
   };
 </script>
 
-  <title>LOVEAI.INFO</title>
+  <title>docker 基础 | LOVEAI.INFO</title>
   
 
 
@@ -179,8 +184,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -280,9 +284,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -297,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/12/JSBridge-Learning/">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/23/docker-basics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liu Jun">
@@ -314,10 +318,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/12/JSBridge-Learning/" class="post-title-link" itemprop="url">JSBridge Learning</a>
+          <h1 class="post-title" itemprop="name headline">docker 基础
+
               
             
           </h1>
@@ -342,24 +344,12 @@
                 
               
 
-              <time title="Created: 2019-04-12 16:42:26" itemprop="dateCreated datePublished" datetime="2019-04-12T16:42:26+08:00">2019-04-12</time>
+              <time title="Created: 2019-05-23 11:14:28 / Modified: 15:19:10" itemprop="dateCreated datePublished" datetime="2019-05-23T11:14:28+08:00">2019-05-23</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-18 11:50:59" itemprop="dateModified" datetime="2019-04-18T11:50:59+08:00">2019-04-18</time>
               
             
           </span>
@@ -377,8 +367,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/04/12/JSBridge-Learning/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/12/JSBridge-Learning/" itemprop="commentCount"></span>
+                <a href="/2019/05/23/docker-basics/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/23/docker-basics/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -406,11 +396,14 @@
       
 
       
-        
-          
-            
-          
-        
+        <h1 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    --rm \</span><br><span class="line">    -it \</span><br><span class="line">    -e USER_ID=1001 \</span><br><span class="line">    -e GROUP_ID=1002 \</span><br><span class="line">    -v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro \</span><br><span class="line">    -v /home/liujun.sun/aosp-6.0.1_r80/aosp:/aosp \</span><br><span class="line">    -v /home/liujun.sun/aosp-6.0.1_r80/ccache:/tmp/ccache \</span><br><span class="line">    kylemanna/aosp:6.0-marshmallow \</span><br><span class="line">    bash run.sh docker</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[-v|--volume[=[[HOST-DIR:]CONTAINER-DIR[:OPTIONS]]]]</span><br><span class="line">          Create a bind mount. If you specify, -v /HOST-DIR:/CONTAINER-DIR, Docker</span><br><span class="line">          bind mounts /HOST-DIR in the host to /CONTAINER-DIR in the Docker</span><br><span class="line">          container.</span><br><span class="line">-v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro</span><br><span class="line">        ro:read-only mode</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-e Set environment variables</span><br><span class="line">-i, --interactive=true|false</span><br><span class="line">          Keep STDIN open even if not attached. The default is false.</span><br><span class="line">          保证容器中STDIN是开启的</span><br><span class="line">-t, --tty=true|false</span><br><span class="line">          Allocate a pseudo-TTY. The default is false.</span><br><span class="line">          告诉Docker为要创建的容器分配一个伪tty终端。这样，新创建的容器才能提供一个交互式shell。</span><br><span class="line">--rm true|false</span><br><span class="line">    Automatically remove the container when it exits. The default is false.</span><br></pre></td></tr></table></figure>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
+<li>删除所有容器<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm `docker ps -a -q`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
       
     </div>
 
@@ -431,190 +424,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-11 16:42:26" itemprop="dateCreated datePublished" datetime="2019-04-11T16:42:26+08:00">2019-04-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-24 16:12:04" itemprop="dateModified" datetime="2019-04-24T16:12:04+08:00">2019-04-24</time>
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/docker/" rel="tag"># docker</a>
           
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/04/11/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/11/hello-world/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/15/Android-ClassLoader/" rel="next" title="Android ClassLoader">
+                <i class="fa fa-chevron-left"></i> Android ClassLoader
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -624,18 +463,22 @@
   </article>
 
 
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -655,8 +498,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -735,6 +587,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用参数"><span class="nav-number">1.</span> <span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -863,6 +732,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
 
   
 
@@ -881,9 +754,28 @@
   <script id="dsq-count-scr" src="https://https-loveaiinfo-github-io.disqus.com/count.js" async></script>
 
 
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://loveaiinfo.github.io/2019/05/23/docker-basics/";
+    this.page.identifier = "2019/05/23/docker-basics/";
+    this.page.title = 'docker 基础';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-loveaiinfo-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
 
 
 
+
+
+  
 
 
   
