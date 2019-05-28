@@ -96,14 +96,18 @@
 
 
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="JSBridge Learning">
-<meta property="og:url" content="https://loveaiinfo.github.io/2019/04/12/JSBridge-Learning/index.html">
+  <meta name="description" content="虚继承共享虚基类,典型的例子iostream clang 输出内存布局1clang -cc1 -fdump-record-layouts -stdlib=libc++ vinherit.cpp 12345678910111213141516class A&amp;#123;public:    int a;&amp;#125;;class B:virtual public A&amp;#123;&amp;#125;;class">
+<meta name="keywords" content="c++,arm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++ 继承">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/27/c-inherit/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
+<meta property="og:description" content="虚继承共享虚基类,典型的例子iostream clang 输出内存布局1clang -cc1 -fdump-record-layouts -stdlib=libc++ vinherit.cpp 12345678910111213141516class A&amp;#123;public:    int a;&amp;#125;;class B:virtual public A&amp;#123;&amp;#125;;class">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-18T03:50:59.248Z">
+<meta property="og:updated_time" content="2019-05-28T08:14:26.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JSBridge Learning">
+<meta name="twitter:title" content="c++ 继承">
+<meta name="twitter:description" content="虚继承共享虚基类,典型的例子iostream clang 输出内存布局1clang -cc1 -fdump-record-layouts -stdlib=libc++ vinherit.cpp 12345678910111213141516class A&amp;#123;public:    int a;&amp;#125;;class B:virtual public A&amp;#123;&amp;#125;;class">
 
 
 
@@ -111,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/2019/04/12/JSBridge-Learning/">
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/27/c-inherit/">
 
 
 
@@ -121,7 +125,7 @@
   };
 </script>
 
-  <title>JSBridge Learning | LOVEAI.INFO</title>
+  <title>c++ 继承 | LOVEAI.INFO</title>
   
 
 
@@ -297,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/12/JSBridge-Learning/">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/27/c-inherit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liu Jun">
@@ -314,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JSBridge Learning
+          <h1 class="post-title" itemprop="name headline">c++ 继承
 
               
             
@@ -340,7 +344,7 @@
                 
               
 
-              <time title="Created: 2019-04-12 16:42:26" itemprop="dateCreated datePublished" datetime="2019-04-12T16:42:26+08:00">2019-04-12</time>
+              <time title="Created: 2019-05-27 09:46:12" itemprop="dateCreated datePublished" datetime="2019-05-27T09:46:12+08:00">2019-05-27</time>
             
 
             
@@ -357,7 +361,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-18 11:50:59" itemprop="dateModified" datetime="2019-04-18T11:50:59+08:00">2019-04-18</time>
+                <time title="Modified: 2019-05-28 16:14:26" itemprop="dateModified" datetime="2019-05-28T16:14:26+08:00">2019-05-28</time>
               
             
           </span>
@@ -375,8 +379,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/04/12/JSBridge-Learning/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/12/JSBridge-Learning/" itemprop="commentCount"></span>
+                <a href="/2019/05/27/c-inherit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/27/c-inherit/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -404,7 +408,14 @@
       
 
       
-        
+        <h1 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h1><p>共享虚基类,典型的例子iostream</p>
+<p>clang 输出内存布局<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clang -cc1 -fdump-record-layouts -stdlib=libc++ vinherit.cpp</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    D d;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(d) &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 12</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>_ZTV is a prefix for vtable,<br>_ZTS is a prefix for type-string (name)<br>_ZTI is for type-info.</p>
+<p>VTT<br>virtual thunk to<br>no-virtual thunk to</p>
+<p>typeinfo<br>vtable pointer = vtable + 0x10 (64bit)</p>
+<h1 id="imp-cxa-pure-virtual"><a href="#imp-cxa-pure-virtual" class="headerlink" title="imp_cxa_pure_virtual"></a><strong>imp_</strong>cxa_pure_virtual</h1><h1 id="destructor"><a href="#destructor" class="headerlink" title="destructor"></a>destructor</h1><p>D2 is the “base object destructor”. It destroys the object itself, as well as data members and non-virtual base classes.<br>D1 is the “complete object destructor”. It additionally destroys virtual base classes.<br>D0 is the “deleting object destructor”. It does everything the complete object destructor does, plus it calls operator delete to actually free the memory.</p>
+
       
     </div>
 
@@ -425,6 +436,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+            <a href="/tags/arm/" rel="tag"># arm</a>
+          
+        </div>
+      
 
       
       
@@ -434,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/05/24/android-unicode-string/" rel="next" title="android unicode 字符串">
+                <i class="fa fa-chevron-left"></i> android unicode 字符串
               </a>
             
           </div>
@@ -443,10 +462,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/18/Kotlin-tutorial-1/" rel="prev" title="Kotlin tutorial-1">
-                Kotlin tutorial-1 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -497,8 +512,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -589,6 +613,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#虚继承"><span class="nav-number">1.</span> <span class="nav-text">虚继承</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#imp-cxa-pure-virtual"><span class="nav-number">2.</span> <span class="nav-text">imp_cxa_pure_virtual</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#destructor"><span class="nav-number">3.</span> <span class="nav-text">destructor</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -741,9 +782,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://loveaiinfo.github.io/2019/04/12/JSBridge-Learning/";
-    this.page.identifier = "2019/04/12/JSBridge-Learning/";
-    this.page.title = 'JSBridge Learning';
+    this.page.url = "https://loveaiinfo.github.io/2019/05/27/c-inherit/";
+    this.page.identifier = "2019/05/27/c-inherit/";
+    this.page.title = 'c++ 继承';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
