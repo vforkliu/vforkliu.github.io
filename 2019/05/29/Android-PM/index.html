@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="问题描述在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。 原因使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。 解决方法 使用python重命名先解压，然后使用如下代码重命名1234567# -*- encoding:utf-8 -*-import">
-<meta name="keywords" content="7z,code page">
+  <meta name="description" content="相关源码http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.javahttp://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_">
+<meta name="keywords" content="android security">
 <meta property="og:type" content="article">
-<meta property="og:title" content="7z 解压文件名乱码">
-<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/11/7z-error-codes/index.html">
+<meta property="og:title" content="Android 安装源码分析">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/29/Android-PM/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
-<meta property="og:description" content="问题描述在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。 原因使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。 解决方法 使用python重命名先解压，然后使用如下代码重命名1234567# -*- encoding:utf-8 -*-import">
+<meta property="og:description" content="相关源码http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.javahttp://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-11T15:56:00.166Z">
+<meta property="og:updated_time" content="2019-05-29T04:46:35.482Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="7z 解压文件名乱码">
-<meta name="twitter:description" content="问题描述在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。 原因使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。 解决方法 使用python重命名先解压，然后使用如下代码重命名1234567# -*- encoding:utf-8 -*-import">
+<meta name="twitter:title" content="Android 安装源码分析">
+<meta name="twitter:description" content="相关源码http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.javahttp://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/11/7z-error-codes/">
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/29/Android-PM/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>7z 解压文件名乱码 | LOVEAI.INFO</title>
+  <title>Android 安装源码分析 | LOVEAI.INFO</title>
   
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/11/7z-error-codes/">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/29/Android-PM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liu Jun">
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">7z 解压文件名乱码
+          <h1 class="post-title" itemprop="name headline">Android 安装源码分析
 
               
             
@@ -344,7 +344,7 @@
                 
               
 
-              <time title="Created: 2019-05-11 23:12:27 / Modified: 23:56:00" itemprop="dateCreated datePublished" datetime="2019-05-11T23:12:27+08:00">2019-05-11</time>
+              <time title="Created: 2019-05-29 10:11:32 / Modified: 12:46:35" itemprop="dateCreated datePublished" datetime="2019-05-29T10:11:32+08:00">2019-05-29</time>
             
 
             
@@ -367,8 +367,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/11/7z-error-codes/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/7z-error-codes/" itemprop="commentCount"></span>
+                <a href="/2019/05/29/Android-PM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/29/Android-PM/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -396,19 +396,11 @@
       
 
       
-        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。</p>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
-<li>使用python重命名<br>先解压，然后使用如下代码重命名<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- encoding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    names = os.listdir(<span class="string">"."</span>)</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        new_name = name.encode(<span class="string">"cp437"</span>).decode(<span class="string">"gbk"</span>)</span><br><span class="line">        os.rename(name,new_name)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>在Windows下python对文件名编码使用cp437或者utf8，name 这个字符串是经过cp437解码得到的unicode。<br>unicode 转为 bytes 采用encode<br>bytes 转为 unicode 采用decode</p>
-<ul>
-<li>在7z压缩时使用utf8编码文件名<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z a -tzip -mcu examples.zip examples/</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="代码页"><a href="#代码页" class="headerlink" title="代码页"></a>代码页</h1><p>在Windows 10 Pro 上默认的代码页是cp437 这个代码页不能表示中文字符<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准输出的编码</span></span><br><span class="line">sys.stdout.encoding</span><br><span class="line"><span class="comment"># 系统本地化设置的编码</span></span><br><span class="line">locale.getpreferredencoding()</span><br></pre></td></tr></table></figure></p>
-<p>代码页这个东西太神奇了，还是采用mac或者linux吧。</p>
+        <h1 id="相关源码"><a href="#相关源码" class="headerlink" title="相关源码"></a>相关源码</h1><p><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java</a><br><a href="http://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_shell_command" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_shell_command</a><br><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/content/pm/PackageManager.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/content/pm/PackageManager.java</a><br><a href="http://androidxref.com/6.0.1_r10/xref/libcore/luni/src/main/java/org/apache/harmony/security/utils/JarUtils.java#68" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/libcore/luni/src/main/java/org/apache/harmony/security/utils/JarUtils.java#68</a></p>
+<h1 id="SignatureSpi"><a href="#SignatureSpi" class="headerlink" title="SignatureSpi"></a>SignatureSpi</h1><p><a href="http://androidxref.com/6.0.1_r10/xref/external/bouncycastle/bcprov/src/main/java/org/bouncycastle/jcajce/provider/asymmetric/rsa/DigestSignatureSpi.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/external/bouncycastle/bcprov/src/main/java/org/bouncycastle/jcajce/provider/asymmetric/rsa/DigestSignatureSpi.java</a><br><a href="http://androidxref.com/9.0.0_r3/xref/external/conscrypt/common/src/main/java/org/conscrypt/OpenSSLSignature.java" target="_blank" rel="noopener">http://androidxref.com/9.0.0_r3/xref/external/conscrypt/common/src/main/java/org/conscrypt/OpenSSLSignature.java</a><br><a href="http://androidxref.com/6.0.1_r10/xref/external/bouncycastle/bcprov/src/main/java/org/bouncycastle/jcajce/provider/asymmetric/dsa/DSASigner.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/external/bouncycastle/bcprov/src/main/java/org/bouncycastle/jcajce/provider/asymmetric/dsa/DSASigner.java</a><br><a href="http://androidxref.com/6.0.1_r10/xref/external/conscrypt/src/main/java/org/conscrypt/OpenSSLSignatureRawRSA.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/external/conscrypt/src/main/java/org/conscrypt/OpenSSLSignatureRawRSA.java</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">installPackageLI</span><span class="params">(InstallArgs args, PackageInstalledInfo res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// collectCertificates</span></span><br><span class="line">    <span class="comment">// collectManifestDigest</span></span><br><span class="line">    pp.collectCertificates(pkg, parseFlags);</span><br><span class="line">    pp.collectManifestDigest(pkg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Call Stack<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">java.security.Signature.verify(&lt;Xposed&gt;:-1)</span><br><span class="line">org.apache.harmony.security.utils.JarUtils.verifySignature(JarUtils.java:224)</span><br><span class="line">at java.util.jar.JarVerifier.verifyCertificate(JarVerifier.java:294)</span><br><span class="line">at java.util.jar.JarVerifier.readCertificates(JarVerifier.java:268)</span><br><span class="line">at java.util.jar.StrictJarFile.&lt;init&gt;(StrictJarFile.java:75)</span><br><span class="line">at android.content.pm.PackageParser.collectCertificates(PackageParser.java:1073)</span><br><span class="line">at android.content.pm.PackageParser.collectCertificates(PackageParser.java:1058)</span><br><span class="line">at com.android.server.pm.PackageManagerService.installPackageLI(PackageManagerService.java:12508)</span><br><span class="line">at com.android.server.pm.PackageManagerService.-wrap25(PackageManagerService.java:-1)</span><br><span class="line">at com.android.server.pm.PackageManagerService$9.run(PackageManagerService.java:10410)</span><br><span class="line">at android.os.Handler.handleCallback(Handler.java:739)</span><br><span class="line">at android.os.Handler.dispatchMessage(Handler.java:95)</span><br><span class="line">at android.os.Looper.loop(Looper.java:148)</span><br><span class="line">at android.os.HandlerThread.run(HandlerThread.java:61)</span><br><span class="line">at com.android.server.ServiceThread.run(ServiceThread.java:46)</span><br></pre></td></tr></table></figure></p>
+<h1 id="核心破解"><a href="#核心破解" class="headerlink" title="核心破解"></a>核心破解</h1><p>com.android.org.conscrypt.OpenSSLSignature.engineVerify</p>
 
       
     </div>
@@ -432,9 +424,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/7z/" rel="tag"># 7z</a>
-          
-            <a href="/tags/code-page/" rel="tag"># code page</a>
+            <a href="/tags/android-security/" rel="tag"># android security</a>
           
         </div>
       
@@ -447,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/24/javascript-basic-syntax/" rel="next" title="javascript basic syntax">
-                <i class="fa fa-chevron-left"></i> javascript basic syntax
+              <a href="/2019/05/27/c-inherit/" rel="next" title="c++ 继承">
+                <i class="fa fa-chevron-left"></i> c++ 继承
               </a>
             
           </div>
@@ -457,8 +447,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/13/ssh-github-multiaccount/" rel="prev" title="使用SSH配置多个github账号">
-                使用SSH配置多个github账号 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/29/LeetCode-0050-pow/" rel="prev" title="LeetCode-0050-pow">
+                LeetCode-0050-pow <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -626,7 +616,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码页"><span class="nav-number">4.</span> <span class="nav-text">代码页</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#相关源码"><span class="nav-number">1.</span> <span class="nav-text">相关源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SignatureSpi"><span class="nav-number">2.</span> <span class="nav-text">SignatureSpi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心破解"><span class="nav-number">3.</span> <span class="nav-text">核心破解</span></a></li></ol></div>
             
 
           </div>
@@ -784,9 +774,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://loveaiinfo.github.io/2019/05/11/7z-error-codes/";
-    this.page.identifier = "2019/05/11/7z-error-codes/";
-    this.page.title = '7z 解压文件名乱码';
+    this.page.url = "https://loveaiinfo.github.io/2019/05/29/Android-PM/";
+    this.page.identifier = "2019/05/29/Android-PM/";
+    this.page.title = 'Android 安装源码分析';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
