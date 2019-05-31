@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="简单类的虚拟继承代码 Multi-Inherit Simple Exampleview raw1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374//#include &amp;lt">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ Virtual Inherit">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/index.html">
+<meta property="og:site_name" content="LOVEAI.INFO">
+<meta property="og:description" content="简单类的虚拟继承代码 Multi-Inherit Simple Exampleview raw1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374//#include &amp;lt">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/class_memory_layout_vi_simple.png">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/class_c_constructor.png">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/class_d_constructor.png">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/class_memory_layout_vi_vtbl.png">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/vtable_b.png">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/class_b_constructor_vtable.png">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/vtt_d.png">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/vtable_d.png">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/class_d_constructor_vtable.png">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/class_b_constructor_vtt.png">
+<meta property="og:updated_time" content="2019-05-31T10:31:05.650Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++ Virtual Inherit">
+<meta name="twitter:description" content="简单类的虚拟继承代码 Multi-Inherit Simple Exampleview raw1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374//#include &amp;lt">
+<meta name="twitter:image" content="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/class_memory_layout_vi_simple.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>C++ Virtual Inherit | LOVEAI.INFO</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-86517450-3"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-86517450-3');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LOVEAI.INFO</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liu Jun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LOVEAI.INFO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++ Virtual Inherit
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-31 14:13:47 / Modified: 18:31:05" itemprop="dateCreated datePublished" datetime="2019-05-31T14:13:47+08:00">2019-05-31</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/05/31/C-Virtual-Inherit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/31/C-Virtual-Inherit/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简单类的虚拟继承"><a href="#简单类的虚拟继承" class="headerlink" title="简单类的虚拟继承"></a>简单类的虚拟继承</h1><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><figcaption><span> Multi-Inherit Simple Example</span><a href="/downloads/code/multi-inherit-virtual-simple/jni/virtual_multi_inherit_simple.cpp">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#include &lt;iostream&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;android/log.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="comment">//using namespace std;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A(<span class="keyword">int</span> a = <span class="number">0</span>):m_a(<span class="number">0</span>){<span class="built_in">printf</span>(<span class="string">"A::constructor()"</span>);}</span><br><span class="line">    ~A(){ <span class="built_in">printf</span>(<span class="string">"A::destructor()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::foo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hoo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::hoo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">goo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::goo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">    <span class="comment">// std::string m_name;</span></span><br><span class="line">    </span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B(<span class="keyword">int</span> b = <span class="number">0</span>):m_b(b){<span class="built_in">printf</span>(<span class="string">"B::constructor()"</span>);}</span><br><span class="line">     ~B(){<span class="built_in">printf</span>(<span class="string">"B::destructor()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::foo()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">hoo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::hoo()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">ioo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::ioo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    C(<span class="keyword">int</span> c = <span class="number">0</span>):m_c(<span class="number">0</span>){<span class="built_in">printf</span>(<span class="string">"C::constructor()"</span>);}</span><br><span class="line">     ~C(){<span class="built_in">printf</span>(<span class="string">"C::destructor()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"C::foo()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">joo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"C::joo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_c;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    D(<span class="keyword">int</span> d = <span class="number">0</span>):m_d(d){<span class="built_in">printf</span>(<span class="string">"D::constructor()"</span>);}</span><br><span class="line">     ~D(){<span class="built_in">printf</span>(<span class="string">"D::destructor"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"D::foo()"</span>);}</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_d;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span>{</span><br><span class="line">    A a;</span><br><span class="line">    B b;</span><br><span class="line">    C c;</span><br><span class="line">    D d;</span><br><span class="line"></span><br><span class="line">   a.foo();</span><br><span class="line">   b.foo();</span><br><span class="line">   c.foo();</span><br><span class="line">   d.foo();</span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of a:" &lt;&lt; sizeof(a) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of b:" &lt;&lt; sizeof(b) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of c:" &lt;&lt; sizeof(c) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of d:" &lt;&lt; sizeof(d) &lt;&lt; endl;</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof a:%d"</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof b:%d"</span>,<span class="keyword">sizeof</span>(b));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof c:%d"</span>,<span class="keyword">sizeof</span>(c));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof d:%d"</span>,<span class="keyword">sizeof</span>(d));</span><br><span class="line"></span><br><span class="line">   B* pd = <span class="keyword">new</span> D(<span class="number">1</span>);</span><br><span class="line">   pd-&gt;foo();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h2 id="内存布局"><a href="#内存布局" class="headerlink" title="内存布局"></a>内存布局</h2><img src="/2019/05/31/C-Virtual-Inherit/class_memory_layout_vi_simple.png" title="virtual inherit without virtual function">
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><h3 id="类C的构造函数"><a href="#类C的构造函数" class="headerlink" title="类C的构造函数"></a>类C的构造函数</h3><img src="/2019/05/31/C-Virtual-Inherit/class_c_constructor.png" title="class C constructor">
+<h3 id="类D的构造函数"><a href="#类D的构造函数" class="headerlink" title="类D的构造函数"></a>类D的构造函数</h3><img src="/2019/05/31/C-Virtual-Inherit/class_d_constructor.png" title="class D constructor">
+<h1 id="带虚函数的虚拟继承"><a href="#带虚函数的虚拟继承" class="headerlink" title="带虚函数的虚拟继承"></a>带虚函数的虚拟继承</h1><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><figcaption><span> Multi-Inherit VTable Example</span><a href="/downloads/code/multi-inherit-virtual-vtbl/jni/virtual_multi_inherit_vtbl.cpp">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#include &lt;iostream&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;android/log.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="comment">//using namespace std;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A(<span class="keyword">int</span> a = <span class="number">0</span>):m_a(<span class="number">0</span>){<span class="built_in">printf</span>(<span class="string">"A::constructor()"</span>);}</span><br><span class="line">    <span class="keyword">virtual</span> ~A(){ <span class="built_in">printf</span>(<span class="string">"A::destructor()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::foo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hoo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::hoo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">goo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::goo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">    <span class="comment">// std::string m_name;</span></span><br><span class="line">    </span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B(<span class="keyword">int</span> b = <span class="number">0</span>):m_b(b){<span class="built_in">printf</span>(<span class="string">"B::constructor()"</span>);}</span><br><span class="line">    <span class="keyword">virtual</span> ~B(){<span class="built_in">printf</span>(<span class="string">"B::destructor()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::foo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hoo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::hoo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">ioo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::ioo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    C(<span class="keyword">int</span> c = <span class="number">0</span>):m_c(<span class="number">0</span>){<span class="built_in">printf</span>(<span class="string">"C::constructor()"</span>);}</span><br><span class="line">    <span class="keyword">virtual</span> ~C(){<span class="built_in">printf</span>(<span class="string">"C::destructor()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"C::foo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">joo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"C::joo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_c;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    D(<span class="keyword">int</span> d = <span class="number">0</span>):m_d(d){<span class="built_in">printf</span>(<span class="string">"D::constructor()"</span>);}</span><br><span class="line">    <span class="keyword">virtual</span> ~D(){<span class="built_in">printf</span>(<span class="string">"D::destructor"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"D::foo()"</span>);}</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_d;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span>{</span><br><span class="line">    A a;</span><br><span class="line">    B b;</span><br><span class="line">    C c;</span><br><span class="line">    D d;</span><br><span class="line"></span><br><span class="line">   a.foo();</span><br><span class="line">   b.foo();</span><br><span class="line">   c.foo();</span><br><span class="line">   d.foo();</span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of a:" &lt;&lt; sizeof(a) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of b:" &lt;&lt; sizeof(b) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of c:" &lt;&lt; sizeof(c) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of d:" &lt;&lt; sizeof(d) &lt;&lt; endl;</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof a:%d"</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof b:%d"</span>,<span class="keyword">sizeof</span>(b));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof c:%d"</span>,<span class="keyword">sizeof</span>(c));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof d:%d"</span>,<span class="keyword">sizeof</span>(d));</span><br><span class="line"></span><br><span class="line">   B* pd = <span class="keyword">new</span> D(<span class="number">1</span>);</span><br><span class="line">   pd-&gt;foo();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h2 id="内存布局-1"><a href="#内存布局-1" class="headerlink" title="内存布局"></a>内存布局</h2><img src="/2019/05/31/C-Virtual-Inherit/class_memory_layout_vi_vtbl.png" title="virtual inherit with virtual function">
+<h2 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h2><h3 id="类B的虚函数表"><a href="#类B的虚函数表" class="headerlink" title="类B的虚函数表"></a>类B的虚函数表</h3><img src="/2019/05/31/C-Virtual-Inherit/vtable_b.png" title="class B virtual method table">
+<p>0x8 : offset vbase<br>0x0 : offset to this<br>0x0 : typeinfo</p>
+<h3 id="类B的构造函数"><a href="#类B的构造函数" class="headerlink" title="类B的构造函数"></a>类B的构造函数</h3><img src="/2019/05/31/C-Virtual-Inherit/class_b_constructor_vtable.png" title="class B constructor">
+<p>+0xC 是类B的虚函数表地址<br>+0x34 也是类B的虚函数表地址  用于覆盖base class的vptr</p>
+<h3 id="VTT-Virtual-Table-Table"><a href="#VTT-Virtual-Table-Table" class="headerlink" title="VTT(Virtual Table Table)"></a>VTT(Virtual Table Table)</h3><img src="/2019/05/31/C-Virtual-Inherit/vtt_d.png" title="class D VTT">
+<h3 id="Class-D-virtual-method-table"><a href="#Class-D-virtual-method-table" class="headerlink" title="Class D virtual method table"></a>Class D virtual method table</h3><img src="/2019/05/31/C-Virtual-Inherit/vtable_d.png" title="class D vtable">
+<h3 id="Class-D-constructor"><a href="#Class-D-constructor" class="headerlink" title="Class D constructor"></a>Class D constructor</h3><img src="/2019/05/31/C-Virtual-Inherit/class_d_constructor_vtable.png" title="class D constructor">
+<p>执行步骤</p>
+<ul>
+<li>执行 A的构造函数  this + 0x14  offset to object d</li>
+<li>执行 B的构造函数  this + 0x00  注意这个B的构造函数 是隐式生成的，在这里面不会执行A的构造函数</li>
+<li>执行 C的构造函数  this + 0x08  </li>
+<li>覆盖 B的vptr   [this+0x00] = vtbl_d + 0x0c    0x5c98  可对比class D的虚函数表</li>
+<li>覆盖 A的vptr   [this+0x14] = vtbl_d + 0x50    0x5cdc</li>
+<li>覆盖 C的vptr   [this+0x08] = vtbl_d + 0x2c    0x5cb8</li>
+</ul>
+<h3 id="Class-B-constructor-隐式"><a href="#Class-B-constructor-隐式" class="headerlink" title="Class B constructor(隐式)"></a>Class B constructor(隐式)</h3><img src="/2019/05/31/C-Virtual-Inherit/class_b_constructor_vtt.png" title="class B constructor for VTT">
+<p>执行步骤</p>
+<ul>
+<li>vptr = construction for vtable B-in-D + 0x0C</li>
+<li>vbase ptr 计算：vptr - 0xC 的位置存放了this指针与虚基类的偏移量(vbase offset to this) value=0x14</li>
+<li>vbase vptr = construction for vtable B-in-D + 0x34</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://xr1s.me/2018/03/13/the-way-to-dynamic-dispatch-vtable/" target="_blank" rel="noopener">https://xr1s.me/2018/03/13/the-way-to-dynamic-dispatch-vtable/</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/31/C-Virtual-Method-Table/" rel="next" title="C++ Virtual Method Table">
+                <i class="fa fa-chevron-left"></i> C++ Virtual Method Table
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Liu Jun</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简单类的虚拟继承"><span class="nav-number">1.</span> <span class="nav-text">简单类的虚拟继承</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">1.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存布局"><span class="nav-number">1.2.</span> <span class="nav-text">内存布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">1.3.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类C的构造函数"><span class="nav-number">1.3.1.</span> <span class="nav-text">类C的构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类D的构造函数"><span class="nav-number">1.3.2.</span> <span class="nav-text">类D的构造函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带虚函数的虚拟继承"><span class="nav-number">2.</span> <span class="nav-text">带虚函数的虚拟继承</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存布局-1"><span class="nav-number">2.2.</span> <span class="nav-text">内存布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数-1"><span class="nav-number">2.3.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类B的虚函数表"><span class="nav-number">2.3.1.</span> <span class="nav-text">类B的虚函数表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类B的构造函数"><span class="nav-number">2.3.2.</span> <span class="nav-text">类B的构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VTT-Virtual-Table-Table"><span class="nav-number">2.3.3.</span> <span class="nav-text">VTT(Virtual Table Table)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-D-virtual-method-table"><span class="nav-number">2.3.4.</span> <span class="nav-text">Class D virtual method table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-D-constructor"><span class="nav-number">2.3.5.</span> <span class="nav-text">Class D constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-B-constructor-隐式"><span class="nav-number">2.3.6.</span> <span class="nav-text">Class B constructor(隐式)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liu Jun</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://https-loveaiinfo-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/";
+    this.page.identifier = "2019/05/31/C-Virtual-Inherit/";
+    this.page.title = 'C++ Virtual Inherit';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-loveaiinfo-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

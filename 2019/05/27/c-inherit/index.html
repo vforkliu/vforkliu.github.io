@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="LOVEAI.INFO">
 <meta property="og:description" content="12345678910111213141516171819202122232425262728export NDK_ROOT=~/android-ndk-r18b$&amp;#123;NDK_ROOT&amp;#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang  --target=x86_64-none-linux-android  --gcc-toolch">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-30T13:46:42.064Z">
+<meta property="og:updated_time" content="2019-05-31T07:42:20.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++ 继承">
 <meta name="twitter:description" content="12345678910111213141516171819202122232425262728export NDK_ROOT=~/android-ndk-r18b$&amp;#123;NDK_ROOT&amp;#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang  --target=x86_64-none-linux-android  --gcc-toolch">
@@ -361,7 +361,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-30 21:46:42" itemprop="dateModified" datetime="2019-05-30T21:46:42+08:00">2019-05-30</time>
+                <time title="Modified: 2019-05-31 15:42:20" itemprop="dateModified" datetime="2019-05-31T15:42:20+08:00">2019-05-31</time>
               
             
           </span>
@@ -416,7 +416,7 @@
 <h1 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h1><p>共享虚基类,典型的例子iostream</p>
 <p>clang 输出内存布局<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clang -cc1 -fdump-record-layouts -stdlib=libc++ vinherit.cpp</span><br><span class="line">clang -cc1 -emit-llvm -fdump-record-layouts -stdlib=libc++ normal_multi_inherit.cpp</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    D d;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(d) &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 12</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>clang -cc1 -emit-llvm -fdump-record-layouts -stdlib=libc++ normal_multi_inherit_simple.cpp</p>
+<p>clang++ -cc1 -emit-llvm -fdump-record-layouts -stdlib=libc++ normal_multi_inherit_simple.cpp</p>
 <p>_ZTV is a prefix for vtable,<br>_ZTS is a prefix for type-string (name)<br>_ZTI is for type-info.</p>
 <p>VTT<br>virtual thunk to<br>no-virtual thunk to</p>
 <p>typeinfo<br>vtable pointer = vtable + 0x10 (64bit)</p>
@@ -547,7 +547,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
