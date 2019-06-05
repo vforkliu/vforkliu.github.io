@@ -297,6 +297,177 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/05/Debug-Android-Framework-with-Android-Studio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liu Jun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LOVEAI.INFO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/05/Debug-Android-Framework-with-Android-Studio/" class="post-title-link" itemprop="url">Debug Android Framework with Android Studio</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-05 09:53:06 / Modified: 10:02:39" itemprop="dateCreated datePublished" datetime="2019-06-05T09:53:06+08:00">2019-06-05</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/06/05/Debug-Android-Framework-with-Android-Studio/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/05/Debug-Android-Framework-with-Android-Studio/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在阅读Android Framework代码时，有时需要动态调试加深理解，或者想调试某个API的实现原理（如startActivity）时，希望可以使用Android Studio调试，且可以对应到源码的每一行，故需要搭建一个调试环境。</p>
+<h1 id="可选方案"><a href="#可选方案" class="headerlink" title="可选方案"></a>可选方案</h1><h2 id="模拟器"><a href="#模拟器" class="headerlink" title="模拟器"></a>模拟器</h2><p>下载并编译某个版本的源码，得到相应的image，加载进模拟器，然后将对应的源码导入到Android Studio。Android源码本身提供了一个工具，可以生成一个Android Studio工程。</p>
+<h2 id="Google-真机"><a href="#Google-真机" class="headerlink" title="Google 真机"></a>Google 真机</h2><p>需要有一台Google系手机，查看该手机的版本去下载对应的源码，利用Android源码里的工具生成Android Studio工程文件，导入到Android Studio。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>上面两个方法网上有一些教程，本人没有试过，不知道是否真的可行。由于这两个方案有几个缺点，故而未使用。</p>
+<ul>
+<li>本人不喜欢使用模拟器作为开发和调试环境。</li>
+<li>下载一份Android源码时间太久，至少需要100G的硬盘空间。</li>
+<li>不能在Windows系统调试。</li>
+</ul>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>本节描述笔者使用的方法，该方法占用空间小、搭建时间短，可以在Windows系统上使用。本方法要求具备一台Google系手机，当然其他手机也可以，前提是该手机的框架层代码未被手机厂商修改过。</p>
+<p>在Android Studio里如果想查看某个函数（如startActivity）的实现，可以右键跳转到源文件，前提是你下载了对应版本的源码。这里的源码是指android sdk某个版本号（如android-27）的源码。但是在调试的时候，报告源码不匹配，就是说与手机里那一份代码不一样，导致函数的行号对不上。<br>下面介绍制作一个android-27的源码包方法</p>
+<h2 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h2><p>查看手机的Build Number，在设置里查看。笔者手机的Build Number是OPM1.171019.016，然后在Google源码官网上比对对应的Branch Name，通过比较发现对应的Branch Name是android-8.1.0_r10。</p>
+<h2 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd android-sdk-source-code</span><br><span class="line">mkdir –p frameworks/base</span><br><span class="line">git clone --depth 1 https://android.googlesource.com/platform/frameworks/base -b android-8.1.0_r10 frameworks/base</span><br><span class="line">git clone --depth 1 https://android.googlesource.com/platform/libcore -b android-8.1.0_r10</span><br><span class="line">git clone --depth 1 https://android.googlesource.com/platform/development -b android-8.1.0_r10</span><br></pre></td></tr></table></figure>
+<h2 id="创建source-properties"><a href="#创建source-properties" class="headerlink" title="创建source.properties"></a>创建source.properties</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -e "Pkg.UserSrc=false\nPkg.Revision=1\nAndroidVersion.ApiLevel=27" &gt; source.properties</span><br></pre></td></tr></table></figure>
+<h2 id="修改脚本"><a href="#修改脚本" class="headerlink" title="修改脚本"></a>修改脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat development/build/tools/mk_sources_zip.py | sed -e 's/TOP_FOLDER = .*/TOP_FOLDER = "android-27"/' &gt; my_mk_sources_zip.py</span><br></pre></td></tr></table></figure>
+<h2 id="打包源码android-27-sources-zip"><a href="#打包源码android-27-sources-zip" class="headerlink" title="打包源码android-27-sources.zip"></a>打包源码android-27-sources.zip</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python my_mk_sources_zip.py -z source.properties android-27-sources.zip</span><br></pre></td></tr></table></figure>
+<h2 id="替换android-sdk并重启Android-Studio"><a href="#替换android-sdk并重启Android-Studio" class="headerlink" title="替换android-sdk并重启Android Studio"></a>替换android-sdk并重启Android Studio</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip android-27-sources.zip -d $&#123;ANDROID_HOME&#125;/sources</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/02/Android-Source-Code-Read-startService/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1870,162 +2041,6 @@ _data.writeInt(userId);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/24/android-binder-detail/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/24/android-binder-detail/" class="post-title-link" itemprop="url">android binder 详解</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-24 09:50:01 / Modified: 10:12:57" itemprop="dateCreated datePublished" datetime="2019-05-24T09:50:01+08:00">2019-05-24</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/24/android-binder-detail/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/24/android-binder-detail/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.zhihu.com/question/39440766/answer/89210950" target="_blank" rel="noopener">为什么 Android 要采用 Binder 作为 IPC 机制？</a><br><a href="https://www.zhihu.com/question/41003297/answer/89328987?from=profile_answer_card" target="_blank" rel="noopener">Android源码的Binder权限是如何控制？</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2072,7 +2087,7 @@ _data.writeInt(userId);
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2131,7 +2146,9 @@ _data.writeInt(userId);
                     
                       
                     
-                    <span class="site-state-item-count">22</span>
+                      
+                    
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

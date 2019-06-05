@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="相关源码 Unicode.h Unicode.cpp String8.h String8.cpp String16.h String16.cpp SharedBuffer.h SharedBuffer.cpp  String16123456789101112131415// http://androidxref.com/6.0.1_r10/xref/system/core/libutils/Str">
-<meta name="keywords" content="android,unicode">
+  <meta name="description" content="背景在阅读Android Framework代码时，有时需要动态调试加深理解，或者想调试某个API的实现原理（如startActivity）时，希望可以使用Android Studio调试，且可以对应到源码的每一行，故需要搭建一个调试环境。 可选方案模拟器下载并编译某个版本的源码，得到相应的image，加载进模拟器，然后将对应的源码导入到Android Studio。Android源码本身提供了一">
+<meta name="keywords" content="android develop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android unicode 字符串">
-<meta property="og:url" content="https://loveaiinfo.github.io/2019/05/24/android-unicode-string/index.html">
+<meta property="og:title" content="Debug Android Framework with Android Studio">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/06/05/Debug-Android-Framework-with-Android-Studio/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
-<meta property="og:description" content="相关源码 Unicode.h Unicode.cpp String8.h String8.cpp String16.h String16.cpp SharedBuffer.h SharedBuffer.cpp  String16123456789101112131415// http://androidxref.com/6.0.1_r10/xref/system/core/libutils/Str">
+<meta property="og:description" content="背景在阅读Android Framework代码时，有时需要动态调试加深理解，或者想调试某个API的实现原理（如startActivity）时，希望可以使用Android Studio调试，且可以对应到源码的每一行，故需要搭建一个调试环境。 可选方案模拟器下载并编译某个版本的源码，得到相应的image，加载进模拟器，然后将对应的源码导入到Android Studio。Android源码本身提供了一">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-24T05:17:44.848Z">
+<meta property="og:updated_time" content="2019-06-05T02:02:39.286Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android unicode 字符串">
-<meta name="twitter:description" content="相关源码 Unicode.h Unicode.cpp String8.h String8.cpp String16.h String16.cpp SharedBuffer.h SharedBuffer.cpp  String16123456789101112131415// http://androidxref.com/6.0.1_r10/xref/system/core/libutils/Str">
+<meta name="twitter:title" content="Debug Android Framework with Android Studio">
+<meta name="twitter:description" content="背景在阅读Android Framework代码时，有时需要动态调试加深理解，或者想调试某个API的实现原理（如startActivity）时，希望可以使用Android Studio调试，且可以对应到源码的每一行，故需要搭建一个调试环境。 可选方案模拟器下载并编译某个版本的源码，得到相应的image，加载进模拟器，然后将对应的源码导入到Android Studio。Android源码本身提供了一">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/2019/05/24/android-unicode-string/">
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/06/05/Debug-Android-Framework-with-Android-Studio/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>android unicode 字符串 | LOVEAI.INFO</title>
+  <title>Debug Android Framework with Android Studio | LOVEAI.INFO</title>
   
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/24/android-unicode-string/">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/05/Debug-Android-Framework-with-Android-Studio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liu Jun">
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">android unicode 字符串
+          <h1 class="post-title" itemprop="name headline">Debug Android Framework with Android Studio
 
               
             
@@ -344,7 +344,7 @@
                 
               
 
-              <time title="Created: 2019-05-24 13:05:38 / Modified: 13:17:44" itemprop="dateCreated datePublished" datetime="2019-05-24T13:05:38+08:00">2019-05-24</time>
+              <time title="Created: 2019-06-05 09:53:06 / Modified: 10:02:39" itemprop="dateCreated datePublished" datetime="2019-06-05T09:53:06+08:00">2019-06-05</time>
             
 
             
@@ -367,8 +367,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/24/android-unicode-string/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/24/android-unicode-string/" itemprop="commentCount"></span>
+                <a href="/2019/06/05/Debug-Android-Framework-with-Android-Studio/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/05/Debug-Android-Framework-with-Android-Studio/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -396,18 +396,23 @@
       
 
       
-        <h1 id="相关源码"><a href="#相关源码" class="headerlink" title="相关源码"></a>相关源码</h1><ul>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/Unicode.h" target="_blank" rel="noopener">Unicode.h</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/Unicode.cpp" target="_blank" rel="noopener">Unicode.cpp</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/String8.h" target="_blank" rel="noopener">String8.h</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/String8.cpp" target="_blank" rel="noopener">String8.cpp</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/String16.h" target="_blank" rel="noopener">String16.h</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/String16.cpp" target="_blank" rel="noopener">String16.cpp</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/SharedBuffer.h" target="_blank" rel="noopener">SharedBuffer.h</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/SharedBuffer.cpp" target="_blank" rel="noopener">SharedBuffer.cpp</a></li>
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在阅读Android Framework代码时，有时需要动态调试加深理解，或者想调试某个API的实现原理（如startActivity）时，希望可以使用Android Studio调试，且可以对应到源码的每一行，故需要搭建一个调试环境。</p>
+<h1 id="可选方案"><a href="#可选方案" class="headerlink" title="可选方案"></a>可选方案</h1><h2 id="模拟器"><a href="#模拟器" class="headerlink" title="模拟器"></a>模拟器</h2><p>下载并编译某个版本的源码，得到相应的image，加载进模拟器，然后将对应的源码导入到Android Studio。Android源码本身提供了一个工具，可以生成一个Android Studio工程。</p>
+<h2 id="Google-真机"><a href="#Google-真机" class="headerlink" title="Google 真机"></a>Google 真机</h2><p>需要有一台Google系手机，查看该手机的版本去下载对应的源码，利用Android源码里的工具生成Android Studio工程文件，导入到Android Studio。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>上面两个方法网上有一些教程，本人没有试过，不知道是否真的可行。由于这两个方案有几个缺点，故而未使用。</p>
+<ul>
+<li>本人不喜欢使用模拟器作为开发和调试环境。</li>
+<li>下载一份Android源码时间太久，至少需要100G的硬盘空间。</li>
+<li>不能在Windows系统调试。</li>
 </ul>
-<h1 id="String16"><a href="#String16" class="headerlink" title="String16"></a>String16</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/system/core/libutils/String16.cpp#allocFromUTF8</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> char16_t* <span class="title">allocFromUTF8</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* u8str, <span class="keyword">size_t</span> u8len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">ssize_t</span> u16len = utf8_to_utf16_length(u8cur, u8len);</span><br><span class="line">    utf8_to_utf16(u8cur, u8len, u16str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> android&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//! This is a string holding UTF-16 characters.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">String16</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char16_t</span>*     mString;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>本节描述笔者使用的方法，该方法占用空间小、搭建时间短，可以在Windows系统上使用。本方法要求具备一台Google系手机，当然其他手机也可以，前提是该手机的框架层代码未被手机厂商修改过。</p>
+<p>在Android Studio里如果想查看某个函数（如startActivity）的实现，可以右键跳转到源文件，前提是你下载了对应版本的源码。这里的源码是指android sdk某个版本号（如android-27）的源码。但是在调试的时候，报告源码不匹配，就是说与手机里那一份代码不一样，导致函数的行号对不上。<br>下面介绍制作一个android-27的源码包方法</p>
+<h2 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h2><p>查看手机的Build Number，在设置里查看。笔者手机的Build Number是OPM1.171019.016，然后在Google源码官网上比对对应的Branch Name，通过比较发现对应的Branch Name是android-8.1.0_r10。</p>
+<h2 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd android-sdk-source-code</span><br><span class="line">mkdir –p frameworks/base</span><br><span class="line">git clone --depth 1 https://android.googlesource.com/platform/frameworks/base -b android-8.1.0_r10 frameworks/base</span><br><span class="line">git clone --depth 1 https://android.googlesource.com/platform/libcore -b android-8.1.0_r10</span><br><span class="line">git clone --depth 1 https://android.googlesource.com/platform/development -b android-8.1.0_r10</span><br></pre></td></tr></table></figure>
+<h2 id="创建source-properties"><a href="#创建source-properties" class="headerlink" title="创建source.properties"></a>创建source.properties</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -e "Pkg.UserSrc=false\nPkg.Revision=1\nAndroidVersion.ApiLevel=27" &gt; source.properties</span><br></pre></td></tr></table></figure>
+<h2 id="修改脚本"><a href="#修改脚本" class="headerlink" title="修改脚本"></a>修改脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat development/build/tools/mk_sources_zip.py | sed -e 's/TOP_FOLDER = .*/TOP_FOLDER = "android-27"/' &gt; my_mk_sources_zip.py</span><br></pre></td></tr></table></figure>
+<h2 id="打包源码android-27-sources-zip"><a href="#打包源码android-27-sources-zip" class="headerlink" title="打包源码android-27-sources.zip"></a>打包源码android-27-sources.zip</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python my_mk_sources_zip.py -z source.properties android-27-sources.zip</span><br></pre></td></tr></table></figure>
+<h2 id="替换android-sdk并重启Android-Studio"><a href="#替换android-sdk并重启Android-Studio" class="headerlink" title="替换android-sdk并重启Android Studio"></a>替换android-sdk并重启Android Studio</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip android-27-sources.zip -d $&#123;ANDROID_HOME&#125;/sources</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -430,9 +435,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag"># android</a>
-          
-            <a href="/tags/unicode/" rel="tag"># unicode</a>
+            <a href="/tags/android-develop/" rel="tag"># android develop</a>
           
         </div>
       
@@ -445,8 +448,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/24/android-smart-pointer/" rel="next" title="android 智能指针">
-                <i class="fa fa-chevron-left"></i> android 智能指针
+              <a href="/2019/06/02/Android-Source-Code-Read-startService/" rel="next" title="Android 源码分析:startService">
+                <i class="fa fa-chevron-left"></i> Android 源码分析:startService
               </a>
             
           </div>
@@ -454,10 +457,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/27/c-inherit/" rel="prev" title="c++ 继承">
-                c++ 继承 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -632,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#相关源码"><span class="nav-number">1.</span> <span class="nav-text">相关源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String16"><span class="nav-number">2.</span> <span class="nav-text">String16</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可选方案"><span class="nav-number">2.</span> <span class="nav-text">可选方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟器"><span class="nav-number">2.1.</span> <span class="nav-text">模拟器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-真机"><span class="nav-number">2.2.</span> <span class="nav-text">Google 真机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">2.3.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法"><span class="nav-number">3.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#版本号"><span class="nav-number">3.1.</span> <span class="nav-text">版本号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载源码"><span class="nav-number">3.2.</span> <span class="nav-text">下载源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建source-properties"><span class="nav-number">3.3.</span> <span class="nav-text">创建source.properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改脚本"><span class="nav-number">3.4.</span> <span class="nav-text">修改脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包源码android-27-sources-zip"><span class="nav-number">3.5.</span> <span class="nav-text">打包源码android-27-sources.zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换android-sdk并重启Android-Studio"><span class="nav-number">3.6.</span> <span class="nav-text">替换android-sdk并重启Android Studio</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -790,9 +789,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://loveaiinfo.github.io/2019/05/24/android-unicode-string/";
-    this.page.identifier = "2019/05/24/android-unicode-string/";
-    this.page.title = 'android unicode 字符串';
+    this.page.url = "https://loveaiinfo.github.io/2019/06/05/Debug-Android-Framework-with-Android-Studio/";
+    this.page.identifier = "2019/06/05/Debug-Android-Framework-with-Android-Studio/";
+    this.page.title = 'Debug Android Framework with Android Studio';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
