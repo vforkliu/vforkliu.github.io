@@ -297,6 +297,212 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/02/Android-Source-Code-Read-startService/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liu Jun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LOVEAI.INFO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/02/Android-Source-Code-Read-startService/" class="post-title-link" itemprop="url">Android 源码分析:startService</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-02 10:15:33" itemprop="dateCreated datePublished" datetime="2019-06-02T10:15:33+08:00">2019-06-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-03 16:40:04" itemprop="dateModified" datetime="2019-06-03T16:40:04+08:00">2019-06-03</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/06/02/Android-Source-Code-Read-startService/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/02/Android-Source-Code-Read-startService/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><blockquote>
+<p>W ActivityManager: Background start not allowed: service Intent</p>
+</blockquote>
+<h1 id="Source-Files"><a href="#Source-Files" class="headerlink" title="Source Files"></a>Source Files</h1><ul>
+<li><a href="http://androidxref.com/8.0.0_r4/xref/frameworks/base/core/java/android/app/ContextImpl.java" target="_blank" rel="noopener">http://androidxref.com/8.0.0_r4/xref/frameworks/base/core/java/android/app/ContextImpl.java</a></li>
+<li><a href="http://androidxref.com/8.0.0_r4/xref/frameworks/base/core/java/android/app/ActivityManager.java#getService" target="_blank" rel="noopener">http://androidxref.com/8.0.0_r4/xref/frameworks/base/core/java/android/app/ActivityManager.java#getService</a></li>
+<li><a href="http://androidxref.com/8.0.0_r4/xref/frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java" target="_blank" rel="noopener">http://androidxref.com/8.0.0_r4/xref/frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java</a></li>
+</ul>
+<h1 id="Client-gt-AMS"><a href="#Client-gt-AMS" class="headerlink" title="Client =&gt; AMS"></a>Client =&gt; AMS</h1><h2 id="startService"><a href="#startService" class="headerlink" title="startService"></a>startService</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ContextImpl.java</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ComponentName <span class="title">startService</span><span class="params">(Intent service)</span> </span>&#123;</span><br><span class="line">    warnIfCallingFromSystemProcess();</span><br><span class="line">    <span class="keyword">return</span> startServiceCommon(service, <span class="keyword">false</span>, mUser);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> ComponentName <span class="title">startForegroundService</span><span class="params">(Intent service)</span> </span>&#123;</span><br><span class="line">    warnIfCallingFromSystemProcess();</span><br><span class="line">    <span class="keyword">return</span> startServiceCommon(service, <span class="keyword">true</span>, mUser);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="startServiceCommon"><a href="#startServiceCommon" class="headerlink" title="startServiceCommon"></a>startServiceCommon</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> ComponentName <span class="title">startServiceCommon</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    Intent service, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">boolean</span> requireForeground,</span></span></span><br><span class="line"><span class="function"><span class="params">    UserHandle user)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    ComponentName cn = ActivityManager.getService().startService(</span><br><span class="line">        mMainThread.getApplicationThread(),</span><br><span class="line">        service,</span><br><span class="line">        service.resolveTypeIfNeeded(getContentResolver()),</span><br><span class="line">        requireForeground,</span><br><span class="line">        getOpPackageName(),</span><br><span class="line">        user.getIdentifier()</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="getService"><a href="#getService" class="headerlink" title="getService"></a>getService</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ActivityManager</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IActivityManager <span class="title">getService</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> IActivityManagerSingleton.get();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton&lt;IActivityManager&gt; IActivityManagerSingleton =</span><br><span class="line">    <span class="keyword">new</span> Singleton&lt;IActivityManager&gt;() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">protected</span> IActivityManager <span class="title">create</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">final</span> IBinder b = ServiceManager.getService(Context.ACTIVITY_SERVICE);</span><br><span class="line">            <span class="keyword">final</span> IActivityManager am = IActivityManager.Stub.asInterface(b);</span><br><span class="line">            <span class="keyword">return</span> am;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="ActivityManagerService"><a href="#ActivityManagerService" class="headerlink" title="ActivityManagerService"></a>ActivityManagerService</h1><h2 id="startService-1"><a href="#startService-1" class="headerlink" title="startService"></a>startService</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ComponentName <span class="title">startService</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    IApplicationThread caller, </span></span></span><br><span class="line"><span class="function"><span class="params">    Intent service,</span></span></span><br><span class="line"><span class="function"><span class="params">    String resolvedType, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">boolean</span> requireForeground, </span></span></span><br><span class="line"><span class="function"><span class="params">    String callingPackage, </span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> userId)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> callingPid = Binder.getCallingPid();</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> callingUid = Binder.getCallingUid();</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">long</span> origId = Binder.clearCallingIdentity();</span><br><span class="line">    ComponentName res;</span><br><span class="line">    res = mServices.startServiceLocked(caller, </span><br><span class="line">        service,</span><br><span class="line">        resolvedType, </span><br><span class="line">        callingPid, </span><br><span class="line">        callingUid,</span><br><span class="line">        requireForeground, </span><br><span class="line">        callingPackage, </span><br><span class="line">        userId);                   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ActivityManager.getService().broadcastIntent(<br>                    mMainThread.getApplicationThread(), // caller<br>                    intent,                             // intent<br>                    resolvedType,                       // resolvedType<br>                    null,                               // resultTo<br>                    Activity.RESULT_OK,                 // resultCode<br>                    null,                               // resultData<br>                    null,                               // map<br>                    null,                               // requiredPermissions<br>                    AppOpsManager.OP_NONE,              // appOp<br>                    null,                               // options<br>                    false,                              // serialized<br>                    false,                              // stick<br>                    getUserId()<br>                    );</p>
+<p>_data.writeInterfaceToken(“android.app.IActivityManager”);<br>          _data.writeStrongBinder((caller != null) ? caller.asBinder() : null);<br>          if (intent != null) {<br>            _data.writeInt(1);<br>            intent.writeToParcel(_data, 0);<br>          } else {</p>
+<pre><code>  _data.writeInt(0);
+} 
+_data.writeString(resolvedType);
+_data.writeStrongBinder((resultTo != null) ? resultTo.asBinder() : null);
+_data.writeInt(resultCode);
+_data.writeString(resultData);
+if (map != null) {
+  _data.writeInt(1);
+  map.writeToParcel(_data, 0);
+} else {
+
+  _data.writeInt(0);
+} 
+_data.writeStringArray(requiredPermissions);
+_data.writeInt(appOp);
+if (options != null) {
+  _data.writeInt(1);
+  options.writeToParcel(_data, 0);
+} else {
+
+  _data.writeInt(0);
+} 
+_data.writeInt(serialized ? 1 : 0);
+_data.writeInt(sticky ? 1 : 0);
+_data.writeInt(userId);
+</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Client" class="headerlink" title="AMS =&gt; Client"></a>AMS =&gt; Client</h1><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1275,7 +1481,7 @@
       
         
           
-            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">export NDK_ROOT=~/android-ndk-r18b</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span></span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/x86_64-linux-android</span><br><span class="line">  -pie -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span></span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-x86_64</span><br><span class="line">  -pie hello.c.o -o hello</span><br><span class="line"></span><br><span class="line"><span class="meta">  $</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang \</span></span><br><span class="line">  --target=armv7-none-linux-androideabi \</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9 \</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot \</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/arm-linux-androideabi \</span><br><span class="line">  -pie \</span><br><span class="line">  -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span></span><br><span class="line">  --target=armv7-none-linux-androideabi</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9/...</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-arm</span><br><span class="line">  -pie hello.c.o -o hello</span><br></pre></td></tr></table></figure>
+            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">export NDK_ROOT=~/android-ndk-r18b</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/x86_64-linux-android</span><br><span class="line">  -pie -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-x86_64</span><br><span class="line">  -pie hello.c.o -o hello</span><br><span class="line"></span><br><span class="line"><span class="meta">  $</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang \</span><br><span class="line">  --target=armv7-none-linux-androideabi \</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9 \</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot \</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/arm-linux-androideabi \</span><br><span class="line">  -pie \</span><br><span class="line">  -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=armv7-none-linux-androideabi</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9/...</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-arm</span><br><span class="line">  -pie hello.c.o -o hello</span><br></pre></td></tr></table></figure>
 <h1 id="简单多继承"><a href="#简单多继承" class="headerlink" title="简单多继承"></a>简单多继承</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_d;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>clang -cc1 -emit-llvm -fdump-record-layouts -stdlib=libc++ normal_multi_inherit_simple.cpp</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class A</span><br><span class="line">         0 |   int m_a</span><br><span class="line">           | [sizeof=4, dsize=4, align=4,</span><br><span class="line">           |  nvsize=4, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class B</span><br><span class="line">         0 |   class A (base)</span><br><span class="line">         0 |     int m_a</span><br><span class="line">         4 |   int m_b</span><br><span class="line">           | [sizeof=8, dsize=8, align=4,</span><br><span class="line">           |  nvsize=8, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class C</span><br><span class="line">         0 |   class A (base)</span><br><span class="line">         0 |     int m_a</span><br><span class="line">         4 |   int m_c</span><br><span class="line">           | [sizeof=8, dsize=8, align=4,</span><br><span class="line">           |  nvsize=8, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class D</span><br><span class="line">         0 |   class B (base)</span><br><span class="line">         0 |     class A (base)</span><br><span class="line">         0 |       int m_a</span><br><span class="line">         4 |     int m_b</span><br><span class="line">         8 |   class C (base)</span><br><span class="line">         8 |     class A (base)</span><br><span class="line">         8 |       int m_a</span><br><span class="line">        12 |     int m_c</span><br><span class="line">        16 |   int m_d</span><br><span class="line">           | [sizeof=20, dsize=20, align=4,</span><br><span class="line">           |  nvsize=20, nvalign=4]</span><br></pre></td></tr></table></figure>
@@ -1820,180 +2026,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/23/build-android-source/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/23/build-android-source/" class="post-title-link" itemprop="url">Android 源码开发</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-23 15:20:41" itemprop="dateCreated datePublished" datetime="2019-05-23T15:20:41+08:00">2019-05-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-24 09:48:27" itemprop="dateModified" datetime="2019-05-24T09:48:27+08:00">2019-05-24</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/23/build-android-source/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/23/build-android-source/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="准备开发环境"><a href="#准备开发环境" class="headerlink" title="准备开发环境"></a>准备开发环境</h1><p>使用docker-aosp搭建</p>
-<h1 id="编译步骤"><a href="#编译步骤" class="headerlink" title="编译步骤"></a>编译步骤</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">source build/envsetup.sh </span><br><span class="line">including device/asus/deb/vendorsetup.sh</span><br><span class="line">including device/asus/flo/vendorsetup.sh</span><br><span class="line">including device/asus/fugu/vendorsetup.sh</span><br><span class="line">including device/generic/mini-emulator-arm64/vendorsetup.sh</span><br><span class="line">including device/generic/mini-emulator-armv7-a-neon/vendorsetup.sh</span><br><span class="line">including device/generic/mini-emulator-mips/vendorsetup.sh</span><br><span class="line">including device/generic/mini-emulator-x86/vendorsetup.sh</span><br><span class="line">including device/generic/mini-emulator-x86_64/vendorsetup.sh</span><br><span class="line">including device/htc/flounder/vendorsetup.sh</span><br><span class="line">including device/huawei/angler/vendorsetup.sh</span><br><span class="line">including device/lge/bullhead/vendorsetup.sh</span><br><span class="line">including device/lge/hammerhead/vendorsetup.sh</span><br><span class="line">including device/moto/shamu/vendorsetup.sh</span><br><span class="line">including sdk/bash_completion/adb.bash</span><br></pre></td></tr></table></figure>
-<ul>
-<li>lunch<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">lunch</span><br><span class="line">You\'re building on Linux</span><br><span class="line"></span><br><span class="line">Lunch menu... pick a combo:</span><br><span class="line">     1. aosp_arm-eng</span><br><span class="line">     2. aosp_arm64-eng</span><br><span class="line">     3. aosp_mips-eng</span><br><span class="line">     4. aosp_mips64-eng</span><br><span class="line">     5. aosp_x86-eng</span><br><span class="line">     6. aosp_x86_64-eng</span><br><span class="line">     7. aosp_deb-userdebug</span><br><span class="line">     8. aosp_flo-userdebug</span><br><span class="line">     9. full_fugu-userdebug</span><br><span class="line">     10. aosp_fugu-userdebug</span><br><span class="line">     11. mini_emulator_arm64-userdebug</span><br><span class="line">     12. m_e_arm-userdebug</span><br><span class="line">     13. mini_emulator_mips-userdebug</span><br><span class="line">     14. mini_emulator_x86-userdebug</span><br><span class="line">     15. mini_emulator_x86_64-userdebug</span><br><span class="line">     16. aosp_flounder-userdebug</span><br><span class="line">     17. aosp_angler-userdebug</span><br><span class="line">     18. aosp_bullhead-userdebug</span><br><span class="line">     19. aosp_hammerhead-userdebug</span><br><span class="line">     20. aosp_hammerhead_fp-userdebug</span><br><span class="line">     21. aosp_shamu-userdebug</span><br><span class="line"></span><br><span class="line">Which would you like? [aosp_arm-eng] </span><br><span class="line"></span><br><span class="line">============================================</span><br><span class="line">PLATFORM_VERSION_CODENAME=REL</span><br><span class="line">PLATFORM_VERSION=6.0.1</span><br><span class="line">TARGET_PRODUCT=aosp_arm</span><br><span class="line">TARGET_BUILD_VARIANT=eng</span><br><span class="line">TARGET_BUILD_TYPE=release</span><br><span class="line">TARGET_BUILD_APPS=</span><br><span class="line">TARGET_ARCH=arm</span><br><span class="line">TARGET_ARCH_VARIANT=armv7-a</span><br><span class="line">TARGET_CPU_VARIANT=generic</span><br><span class="line">TARGET_2ND_ARCH=</span><br><span class="line">TARGET_2ND_ARCH_VARIANT=</span><br><span class="line">TARGET_2ND_CPU_VARIANT=</span><br><span class="line">HOST_ARCH=x86_64</span><br><span class="line">HOST_OS=linux</span><br><span class="line">HOST_OS_EXTRA=Linux-4.4.0-33.bm.1-amd64-x86_64-with-Ubuntu-14.04-trusty</span><br><span class="line">HOST_BUILD_TYPE=release</span><br><span class="line">BUILD_ID=MOB31Z</span><br><span class="line">OUT_DIR=out</span><br><span class="line">============================================</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="编译自己的模块"><a href="#编译自己的模块" class="headerlink" title="编译自己的模块"></a>编译自己的模块</h1><p>一般在external目录下建立自己的模块工程<br>编译命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mmm ./external/HelloWorld</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2040,7 +2072,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2097,7 +2129,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
