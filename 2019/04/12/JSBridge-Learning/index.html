@@ -96,14 +96,18 @@
 
 
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="WebViewWebView 为什么可以执行Javascript代码？WebViewClient 是什么？ addJavascriptInterface Android call JavaScriptloadUrl()evaluateJavascript()JavaScript call AndroidaddJavascriptInterface注解@JavascriptInterface 在an">
+<meta name="keywords" content="jsbridge">
+<meta property="og:type" content="article">
 <meta property="og:title" content="JSBridge Learning">
 <meta property="og:url" content="https://loveaiinfo.github.io/2019/04/12/JSBridge-Learning/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
+<meta property="og:description" content="WebViewWebView 为什么可以执行Javascript代码？WebViewClient 是什么？ addJavascriptInterface Android call JavaScriptloadUrl()evaluateJavascript()JavaScript call AndroidaddJavascriptInterface注解@JavascriptInterface 在an">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-18T03:50:59.248Z">
+<meta property="og:updated_time" content="2019-06-13T03:06:19.985Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSBridge Learning">
+<meta name="twitter:description" content="WebViewWebView 为什么可以执行Javascript代码？WebViewClient 是什么？ addJavascriptInterface Android call JavaScriptloadUrl()evaluateJavascript()JavaScript call AndroidaddJavascriptInterface注解@JavascriptInterface 在an">
 
 
 
@@ -357,7 +361,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-18 11:50:59" itemprop="dateModified" datetime="2019-04-18T11:50:59+08:00">2019-04-18</time>
+                <time title="Modified: 2019-06-13 11:06:19" itemprop="dateModified" datetime="2019-06-13T11:06:19+08:00">2019-06-13</time>
               
             
           </span>
@@ -404,7 +408,21 @@
       
 
       
-        
+        <h1 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h1><p>WebView 为什么可以执行Javascript代码？<br>WebViewClient 是什么？</p>
+<p>addJavascriptInterface</p>
+<h2 id="Android-call-JavaScript"><a href="#Android-call-JavaScript" class="headerlink" title="Android call JavaScript"></a>Android call JavaScript</h2><h3 id="loadUrl"><a href="#loadUrl" class="headerlink" title="loadUrl()"></a>loadUrl()</h3><h3 id="evaluateJavascript"><a href="#evaluateJavascript" class="headerlink" title="evaluateJavascript()"></a>evaluateJavascript()</h3><h2 id="JavaScript-call-Android"><a href="#JavaScript-call-Android" class="headerlink" title="JavaScript call Android"></a>JavaScript call Android</h2><h3 id="addJavascriptInterface"><a href="#addJavascriptInterface" class="headerlink" title="addJavascriptInterface"></a>addJavascriptInterface</h3><pre><code>注解@JavascriptInterface
+</code></pre><p>在android4.2之前有个严重漏洞，Js通过webview获取android对象后，可以调用到其他系统方法，为了避免这个漏洞，在4.2之后，只能调用到<br>@JavascriptInterface注释过的方法。</p>
+<h3 id="shouldOverrideUrlLoading"><a href="#shouldOverrideUrlLoading" class="headerlink" title="shouldOverrideUrlLoading"></a>shouldOverrideUrlLoading</h3><h3 id="onJsPrompt"><a href="#onJsPrompt" class="headerlink" title="onJsPrompt"></a>onJsPrompt</h3><ul>
+<li>onJsAlert</li>
+<li>onJsConfirm</li>
+<li>onJsPrompt</li>
+</ul>
+<p>NativeScript是一个JavaScript V8运行环境的命令转发代理</p>
+<ul>
+<li>Android JavaScript Engine:V8</li>
+<li>iOS JavaScript Engine:JavaScriptCore</li>
+</ul>
+
       
     </div>
 
@@ -424,6 +442,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jsbridge/" rel="tag"># jsbridge</a>
+          
+        </div>
       
 
       
@@ -497,8 +521,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -574,7 +607,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -601,6 +636,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WebView"><span class="nav-number">1.</span> <span class="nav-text">WebView</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-call-JavaScript"><span class="nav-number">1.1.</span> <span class="nav-text">Android call JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#loadUrl"><span class="nav-number">1.1.1.</span> <span class="nav-text">loadUrl()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#evaluateJavascript"><span class="nav-number">1.1.2.</span> <span class="nav-text">evaluateJavascript()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-call-Android"><span class="nav-number">1.2.</span> <span class="nav-text">JavaScript call Android</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#addJavascriptInterface"><span class="nav-number">1.2.1.</span> <span class="nav-text">addJavascriptInterface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shouldOverrideUrlLoading"><span class="nav-number">1.2.2.</span> <span class="nav-text">shouldOverrideUrlLoading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#onJsPrompt"><span class="nav-number">1.2.3.</span> <span class="nav-text">onJsPrompt</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

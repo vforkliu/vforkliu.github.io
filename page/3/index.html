@@ -682,7 +682,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-18 11:50:59" itemprop="dateModified" datetime="2019-04-18T11:50:59+08:00">2019-04-18</time>
+                <time title="Modified: 2019-06-13 11:06:19" itemprop="dateModified" datetime="2019-06-13T11:06:19+08:00">2019-06-13</time>
               
             
           </span>
@@ -731,7 +731,21 @@
       
         
           
-            
+            <h1 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h1><p>WebView 为什么可以执行Javascript代码？<br>WebViewClient 是什么？</p>
+<p>addJavascriptInterface</p>
+<h2 id="Android-call-JavaScript"><a href="#Android-call-JavaScript" class="headerlink" title="Android call JavaScript"></a>Android call JavaScript</h2><h3 id="loadUrl"><a href="#loadUrl" class="headerlink" title="loadUrl()"></a>loadUrl()</h3><h3 id="evaluateJavascript"><a href="#evaluateJavascript" class="headerlink" title="evaluateJavascript()"></a>evaluateJavascript()</h3><h2 id="JavaScript-call-Android"><a href="#JavaScript-call-Android" class="headerlink" title="JavaScript call Android"></a>JavaScript call Android</h2><h3 id="addJavascriptInterface"><a href="#addJavascriptInterface" class="headerlink" title="addJavascriptInterface"></a>addJavascriptInterface</h3><pre><code>注解@JavascriptInterface
+</code></pre><p>在android4.2之前有个严重漏洞，Js通过webview获取android对象后，可以调用到其他系统方法，为了避免这个漏洞，在4.2之后，只能调用到<br>@JavascriptInterface注释过的方法。</p>
+<h3 id="shouldOverrideUrlLoading"><a href="#shouldOverrideUrlLoading" class="headerlink" title="shouldOverrideUrlLoading"></a>shouldOverrideUrlLoading</h3><h3 id="onJsPrompt"><a href="#onJsPrompt" class="headerlink" title="onJsPrompt"></a>onJsPrompt</h3><ul>
+<li>onJsAlert</li>
+<li>onJsConfirm</li>
+<li>onJsPrompt</li>
+</ul>
+<p>NativeScript是一个JavaScript V8运行环境的命令转发代理</p>
+<ul>
+<li>Android JavaScript Engine:V8</li>
+<li>iOS JavaScript Engine:JavaScriptCore</li>
+</ul>
+
           
         
       
@@ -1055,7 +1069,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
