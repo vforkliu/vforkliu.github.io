@@ -297,6 +297,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liu Jun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LOVEAI.INFO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/" class="post-title-link" itemprop="url">Build source code viewer with opengrok based docker</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-17 13:05:10 / Modified: 14:04:26" itemprop="dateCreated datePublished" datetime="2019-06-17T13:05:10+08:00">2019-06-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Install-images"><a href="#Install-images" class="headerlink" title="Install images"></a>Install images</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull opengrok/docker</span><br></pre></td></tr></table></figure>
+<h1 id="Create-opengrok-directory"><a href="#Create-opengrok-directory" class="headerlink" title="Create opengrok directory"></a>Create opengrok directory</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">mkdir opengrok</span><br><span class="line">cd opengrok</span><br><span class="line">mkdir src</span><br><span class="line">mkdir data</span><br></pre></td></tr></table></figure>
+<ul>
+<li>src:opengrok src root</li>
+<li>data:opengrok index file</li>
+</ul>
+<h1 id="Start-docker"><a href="#Start-docker" class="headerlink" title="Start docker"></a>Start docker</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -e REINDEX=0 -v ~/sourceview/src:/opengrok/src -v ~/sourceview/data:/opengrok/data -p 9090:8080 --name opengrok opengrok/docker:latest</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> reindex</span><br><span class="line">docker exec &lt;container&gt; /scripts/index.sh</span><br><span class="line">docker exec opengrok /scripts/index.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> stop container</span><br><span class="line">docker stop opengrok</span><br><span class="line">docker start opengrok</span><br></pre></td></tr></table></figure>
+<h1 id="You-can-get-inside-a-container-using-the-command-below"><a href="#You-can-get-inside-a-container-using-the-command-below" class="headerlink" title="You can get inside a container using the command below"></a>You can get inside a container using the command below</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it &lt;container&gt; bash</span><br></pre></td></tr></table></figure>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://hub.docker.com/r/opengrok/docker/" target="_blank" rel="noopener">https://hub.docker.com/r/opengrok/docker/</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/05/Debug-Android-Framework-with-Android-Studio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1652,7 +1816,7 @@ _data.writeInt(userId);
       
         
           
-            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">export NDK_ROOT=~/android-ndk-r18b</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/x86_64-linux-android</span><br><span class="line">  -pie -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-x86_64</span><br><span class="line">  -pie hello.c.o -o hello</span><br><span class="line"></span><br><span class="line"><span class="meta">  $</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang \</span><br><span class="line">  --target=armv7-none-linux-androideabi \</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9 \</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot \</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/arm-linux-androideabi \</span><br><span class="line">  -pie \</span><br><span class="line">  -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=armv7-none-linux-androideabi</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9/...</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-arm</span><br><span class="line">  -pie hello.c.o -o hello</span><br></pre></td></tr></table></figure>
+            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">export NDK_ROOT=~/android-ndk-r18b</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span></span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/x86_64-linux-android</span><br><span class="line">  -pie -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span></span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-x86_64</span><br><span class="line">  -pie hello.c.o -o hello</span><br><span class="line"></span><br><span class="line"><span class="meta">  $</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang \</span></span><br><span class="line">  --target=armv7-none-linux-androideabi \</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9 \</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot \</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/arm-linux-androideabi \</span><br><span class="line">  -pie \</span><br><span class="line">  -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span></span><br><span class="line">  --target=armv7-none-linux-androideabi</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9/...</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-arm</span><br><span class="line">  -pie hello.c.o -o hello</span><br></pre></td></tr></table></figure>
 <h1 id="简单多继承"><a href="#简单多继承" class="headerlink" title="简单多继承"></a>简单多继承</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_d;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>clang -cc1 -emit-llvm -fdump-record-layouts -stdlib=libc++ normal_multi_inherit_simple.cpp</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class A</span><br><span class="line">         0 |   int m_a</span><br><span class="line">           | [sizeof=4, dsize=4, align=4,</span><br><span class="line">           |  nvsize=4, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class B</span><br><span class="line">         0 |   class A (base)</span><br><span class="line">         0 |     int m_a</span><br><span class="line">         4 |   int m_b</span><br><span class="line">           | [sizeof=8, dsize=8, align=4,</span><br><span class="line">           |  nvsize=8, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class C</span><br><span class="line">         0 |   class A (base)</span><br><span class="line">         0 |     int m_a</span><br><span class="line">         4 |   int m_c</span><br><span class="line">           | [sizeof=8, dsize=8, align=4,</span><br><span class="line">           |  nvsize=8, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class D</span><br><span class="line">         0 |   class B (base)</span><br><span class="line">         0 |     class A (base)</span><br><span class="line">         0 |       int m_a</span><br><span class="line">         4 |     int m_b</span><br><span class="line">         8 |   class C (base)</span><br><span class="line">         8 |     class A (base)</span><br><span class="line">         8 |       int m_a</span><br><span class="line">        12 |     int m_c</span><br><span class="line">        16 |   int m_d</span><br><span class="line">           | [sizeof=20, dsize=20, align=4,</span><br><span class="line">           |  nvsize=20, nvalign=4]</span><br></pre></td></tr></table></figure>
@@ -1872,175 +2036,6 @@ _data.writeInt(userId);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/24/android-smart-pointer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/24/android-smart-pointer/" class="post-title-link" itemprop="url">android 智能指针</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-24 12:55:08" itemprop="dateCreated datePublished" datetime="2019-05-24T12:55:08+08:00">2019-05-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-27 09:37:45" itemprop="dateModified" datetime="2019-05-27T09:37:45+08:00">2019-05-27</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/24/android-smart-pointer/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/24/android-smart-pointer/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="相关源码"><a href="#相关源码" class="headerlink" title="相关源码"></a>相关源码</h1><p><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/StrongPointer.h" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/StrongPointer.h</a><br><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/RefBase.h" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/RefBase.h</a><br><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/RefBase.cpp" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/libutils/RefBase.cpp</a></p>
-<h1 id="StrongPointer"><a href="#StrongPointer" class="headerlink" title="StrongPointer"></a>StrongPointer</h1><h1 id="INITIAL-STRONG-VALUE-为什么不是0"><a href="#INITIAL-STRONG-VALUE-为什么不是0" class="headerlink" title="INITIAL_STRONG_VALUE 为什么不是0"></a>INITIAL_STRONG_VALUE 为什么不是0</h1><p>区分从来没有指针引用该对象，还是没有指针引用该对象<br>如果从来没有调用过，那么mStrong为INITIAL_STRONG_VALUE<br>如果没有指针引用该对象，mStrong = 0</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2087,7 +2082,7 @@ _data.writeInt(userId);
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2150,7 +2145,9 @@ _data.writeInt(userId);
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
