@@ -96,17 +96,20 @@
 
 
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="运行时内存区域 Program Counter Register:程序计数器，线程私有，不会发生OOM的区域。当执行Java方法时，指向正在执行的虚拟机字节码指令的地址，当执行Native方法时，它的值是undefined。 JVM Stacks: Java虚拟机栈。线程私有。存局部变量、对象引用和returnAdress(指向一条字节码指令的地址)。 Native Method Stack: 本">
+<meta name="keywords" content="jvm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://loveaiinfo.github.io/2019/04/11/hello-world/index.html">
+<meta property="og:title" content="JVM:内存区域和内存溢出异常">
+<meta property="og:url" content="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/index.html">
 <meta property="og:site_name" content="LOVEAI.INFO">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="运行时内存区域 Program Counter Register:程序计数器，线程私有，不会发生OOM的区域。当执行Java方法时，指向正在执行的虚拟机字节码指令的地址，当执行Native方法时，它的值是undefined。 JVM Stacks: Java虚拟机栈。线程私有。存局部变量、对象引用和returnAdress(指向一条字节码指令的地址)。 Native Method Stack: 本">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-24T08:12:04.476Z">
+<meta property="og:image" content="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/jvm_heap_oom_hprof.png">
+<meta property="og:updated_time" content="2019-06-21T07:26:56.538Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="JVM:内存区域和内存溢出异常">
+<meta name="twitter:description" content="运行时内存区域 Program Counter Register:程序计数器，线程私有，不会发生OOM的区域。当执行Java方法时，指向正在执行的虚拟机字节码指令的地址，当执行Native方法时，它的值是undefined。 JVM Stacks: Java虚拟机栈。线程私有。存局部变量、对象引用和returnAdress(指向一条字节码指令的地址)。 Native Method Stack: 本">
+<meta name="twitter:image" content="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/jvm_heap_oom_hprof.png">
 
 
 
@@ -114,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/2019/04/11/hello-world/">
+  <link rel="canonical" href="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/">
 
 
 
@@ -124,7 +127,7 @@
   };
 </script>
 
-  <title>Hello World | LOVEAI.INFO</title>
+  <title>JVM:内存区域和内存溢出异常 | LOVEAI.INFO</title>
   
 
 
@@ -300,7 +303,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/11/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liu Jun">
@@ -317,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">JVM:内存区域和内存溢出异常
 
               
             
@@ -343,24 +346,12 @@
                 
               
 
-              <time title="Created: 2019-04-11 16:42:26" itemprop="dateCreated datePublished" datetime="2019-04-11T16:42:26+08:00">2019-04-11</time>
+              <time title="Created: 2019-06-21 14:36:03 / Modified: 15:26:56" itemprop="dateCreated datePublished" datetime="2019-06-21T14:36:03+08:00">2019-06-21</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-24 16:12:04" itemprop="dateModified" datetime="2019-04-24T16:12:04+08:00">2019-04-24</time>
               
             
           </span>
@@ -378,8 +369,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/04/11/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/11/hello-world/" itemprop="commentCount"></span>
+                <a href="/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -407,15 +398,25 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="运行时内存区域"><a href="#运行时内存区域" class="headerlink" title="运行时内存区域"></a>运行时内存区域</h1><ul>
+<li>Program Counter Register:程序计数器，线程私有，不会发生OOM的区域。当执行Java方法时，指向正在执行的虚拟机字节码指令的地址，当执行<br>Native方法时，它的值是undefined。</li>
+<li>JVM Stacks: Java虚拟机栈。线程私有。存局部变量、对象引用和returnAdress(指向一条字节码指令的地址)。</li>
+<li>Native Method Stack: 本地方法栈。Java虚拟机为执行本地方法提供的栈。</li>
+<li>Java Heap: Java堆是垃圾收集器管理的主要区域。线程间共享。</li>
+<li>Method Area: 线程共享区域。存已加载的类型信息、常量、静态变量和即时编译器编译后的代码等数据。</li>
+<li>Runtime Constant Pool: 运行时常量池是方法区的一部分。存编译期生成的各种字面量和符号引用。</li>
+<li>Direct Memory: 不是Java虚拟机运行时数据区的一部分。JDK1.4引入的NIO，使用Native函数库直接分配堆外内存。</li>
+</ul>
+<h1 id="对象访问"><a href="#对象访问" class="headerlink" title="对象访问"></a>对象访问</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Java VM Stack: \”Object obj\” 是一个reference类型数据，存放在Java栈的本地变量表中。</li>
+<li>Java VM Heap: \”new Object()\” 是一个对象实例，存放在Java堆上。</li>
+<li>Java Method Area: 对象的类型、父类、实现的接口和方法存在方法区。</li>
+</ul>
+<h1 id="实战：OOM"><a href="#实战：OOM" class="headerlink" title="实战：OOM"></a>实战：OOM</h1><h2 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h2><figure class="highlight java"><figcaption><span> Java Heap OOM Example</span><a href="/downloads/code/jvm/HeapOOM.java">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * java -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError HeapOOM</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">HeapOOM</span></span>{</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">OOMObject</span></span>{</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line">    List&lt;OOMObject&gt; list = <span class="keyword">new</span> ArrayList&lt;OOMObject&gt;();</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>){</span><br><span class="line">      list.add(<span class="keyword">new</span> OOMObject());</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line"> }</span><br></pre></td></tr></table></figure>
+<p>编译<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac HeapOOM.java</span><br></pre></td></tr></table></figure></p>
+<p>运行参数<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">java -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError HeapOOM</span><br><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">Dumping heap to java_pid83007.hprof ...</span><br><span class="line">Heap dump file created [27583183 bytes in 0.102 secs]</span><br><span class="line">Exception in thread "main" java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:3210)</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:3181)</span><br><span class="line">	at java.util.ArrayList.grow(ArrayList.java:265)</span><br><span class="line">	at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:239)</span><br><span class="line">	at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:231)</span><br><span class="line">	at java.util.ArrayList.add(ArrayList.java:462)</span><br><span class="line">	at HeapOOM.main(HeapOOM.java:16)</span><br></pre></td></tr></table></figure></p>
+<p>Android Studio 分析 hprof<br><img src="/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/jvm_heap_oom_hprof.png" title="Android Studio分析hprof"></p>
 
       
     </div>
@@ -437,6 +438,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/jvm/" rel="tag"># jvm</a>
+          
+        </div>
+      
 
       
       
@@ -446,15 +453,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/" rel="next" title="Build source code viewer with opengrok based docker">
+                <i class="fa fa-chevron-left"></i> Build source code viewer with opengrok based docker
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/12/JSBridge-Learning/" rel="prev" title="JSBridge Learning">
-                JSBridge Learning <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -635,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运行时内存区域"><span class="nav-number">1.</span> <span class="nav-text">运行时内存区域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象访问"><span class="nav-number">2.</span> <span class="nav-text">对象访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战：OOM"><span class="nav-number">3.</span> <span class="nav-text">实战：OOM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#堆溢出"><span class="nav-number">3.1.</span> <span class="nav-text">堆溢出</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -793,9 +800,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://loveaiinfo.github.io/2019/04/11/hello-world/";
-    this.page.identifier = "2019/04/11/hello-world/";
-    this.page.title = 'Hello World';
+    this.page.url = "https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/";
+    this.page.identifier = "2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/";
+    this.page.title = 'JVM:内存区域和内存溢出异常';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');

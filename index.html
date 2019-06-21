@@ -297,6 +297,180 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liu Jun">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LOVEAI.INFO">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/" class="post-title-link" itemprop="url">JVM:内存区域和内存溢出异常</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-21 14:36:03 / Modified: 15:26:56" itemprop="dateCreated datePublished" datetime="2019-06-21T14:36:03+08:00">2019-06-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="运行时内存区域"><a href="#运行时内存区域" class="headerlink" title="运行时内存区域"></a>运行时内存区域</h1><ul>
+<li>Program Counter Register:程序计数器，线程私有，不会发生OOM的区域。当执行Java方法时，指向正在执行的虚拟机字节码指令的地址，当执行<br>Native方法时，它的值是undefined。</li>
+<li>JVM Stacks: Java虚拟机栈。线程私有。存局部变量、对象引用和returnAdress(指向一条字节码指令的地址)。</li>
+<li>Native Method Stack: 本地方法栈。Java虚拟机为执行本地方法提供的栈。</li>
+<li>Java Heap: Java堆是垃圾收集器管理的主要区域。线程间共享。</li>
+<li>Method Area: 线程共享区域。存已加载的类型信息、常量、静态变量和即时编译器编译后的代码等数据。</li>
+<li>Runtime Constant Pool: 运行时常量池是方法区的一部分。存编译期生成的各种字面量和符号引用。</li>
+<li>Direct Memory: 不是Java虚拟机运行时数据区的一部分。JDK1.4引入的NIO，使用Native函数库直接分配堆外内存。</li>
+</ul>
+<h1 id="对象访问"><a href="#对象访问" class="headerlink" title="对象访问"></a>对象访问</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Java VM Stack: \”Object obj\” 是一个reference类型数据，存放在Java栈的本地变量表中。</li>
+<li>Java VM Heap: \”new Object()\” 是一个对象实例，存放在Java堆上。</li>
+<li>Java Method Area: 对象的类型、父类、实现的接口和方法存在方法区。</li>
+</ul>
+<h1 id="实战：OOM"><a href="#实战：OOM" class="headerlink" title="实战：OOM"></a>实战：OOM</h1><h2 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h2><figure class="highlight java"><figcaption><span> Java Heap OOM Example</span><a href="/downloads/code/jvm/HeapOOM.java">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * java -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError HeapOOM</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">HeapOOM</span></span>{</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">OOMObject</span></span>{</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line">    List&lt;OOMObject&gt; list = <span class="keyword">new</span> ArrayList&lt;OOMObject&gt;();</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>){</span><br><span class="line">      list.add(<span class="keyword">new</span> OOMObject());</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line"> }</span><br></pre></td></tr></table></figure>
+<p>编译<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac HeapOOM.java</span><br></pre></td></tr></table></figure></p>
+<p>运行参数<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">java -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError HeapOOM</span><br><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">Dumping heap to java_pid83007.hprof ...</span><br><span class="line">Heap dump file created [27583183 bytes in 0.102 secs]</span><br><span class="line">Exception in thread "main" java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:3210)</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:3181)</span><br><span class="line">	at java.util.ArrayList.grow(ArrayList.java:265)</span><br><span class="line">	at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:239)</span><br><span class="line">	at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:231)</span><br><span class="line">	at java.util.ArrayList.add(ArrayList.java:462)</span><br><span class="line">	at HeapOOM.main(HeapOOM.java:16)</span><br></pre></td></tr></table></figure></p>
+<p>Android Studio 分析 hprof<br><img src="/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/jvm_heap_oom_hprof.png" title="Android Studio分析hprof"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1816,7 +1990,7 @@ _data.writeInt(userId);
       
         
           
-            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">export NDK_ROOT=~/android-ndk-r18b</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span></span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/x86_64-linux-android</span><br><span class="line">  -pie -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span></span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-x86_64</span><br><span class="line">  -pie hello.c.o -o hello</span><br><span class="line"></span><br><span class="line"><span class="meta">  $</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang \</span></span><br><span class="line">  --target=armv7-none-linux-androideabi \</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9 \</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot \</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/arm-linux-androideabi \</span><br><span class="line">  -pie \</span><br><span class="line">  -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span></span><br><span class="line">  --target=armv7-none-linux-androideabi</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9/...</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-arm</span><br><span class="line">  -pie hello.c.o -o hello</span><br></pre></td></tr></table></figure>
+            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">export NDK_ROOT=~/android-ndk-r18b</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/x86_64-linux-android</span><br><span class="line">  -pie -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-x86_64</span><br><span class="line">  -pie hello.c.o -o hello</span><br><span class="line"></span><br><span class="line"><span class="meta">  $</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang \</span><br><span class="line">  --target=armv7-none-linux-androideabi \</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9 \</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot \</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/arm-linux-androideabi \</span><br><span class="line">  -pie \</span><br><span class="line">  -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=armv7-none-linux-androideabi</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9/...</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-arm</span><br><span class="line">  -pie hello.c.o -o hello</span><br></pre></td></tr></table></figure>
 <h1 id="简单多继承"><a href="#简单多继承" class="headerlink" title="简单多继承"></a>简单多继承</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_d;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>clang -cc1 -emit-llvm -fdump-record-layouts -stdlib=libc++ normal_multi_inherit_simple.cpp</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class A</span><br><span class="line">         0 |   int m_a</span><br><span class="line">           | [sizeof=4, dsize=4, align=4,</span><br><span class="line">           |  nvsize=4, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class B</span><br><span class="line">         0 |   class A (base)</span><br><span class="line">         0 |     int m_a</span><br><span class="line">         4 |   int m_b</span><br><span class="line">           | [sizeof=8, dsize=8, align=4,</span><br><span class="line">           |  nvsize=8, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class C</span><br><span class="line">         0 |   class A (base)</span><br><span class="line">         0 |     int m_a</span><br><span class="line">         4 |   int m_c</span><br><span class="line">           | [sizeof=8, dsize=8, align=4,</span><br><span class="line">           |  nvsize=8, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class D</span><br><span class="line">         0 |   class B (base)</span><br><span class="line">         0 |     class A (base)</span><br><span class="line">         0 |       int m_a</span><br><span class="line">         4 |     int m_b</span><br><span class="line">         8 |   class C (base)</span><br><span class="line">         8 |     class A (base)</span><br><span class="line">         8 |       int m_a</span><br><span class="line">        12 |     int m_c</span><br><span class="line">        16 |   int m_d</span><br><span class="line">           | [sizeof=20, dsize=20, align=4,</span><br><span class="line">           |  nvsize=20, nvalign=4]</span><br></pre></td></tr></table></figure>
@@ -1829,172 +2003,6 @@ _data.writeInt(userId);
 <p>VTT<br>virtual thunk to<br>no-virtual thunk to</p>
 <p>typeinfo<br>vtable pointer = vtable + 0x10 (64bit)</p>
 <h1 id="imp-cxa-pure-virtual"><a href="#imp-cxa-pure-virtual" class="headerlink" title="imp_cxa_pure_virtual"></a><strong>imp_</strong>cxa_pure_virtual</h1><h1 id="destructor"><a href="#destructor" class="headerlink" title="destructor"></a>destructor</h1><p>D2 is the “base object destructor”. It destroys the object itself, as well as data members and non-virtual base classes.<br>D1 is the “complete object destructor”. It additionally destroys virtual base classes.<br>D0 is the “deleting object destructor”. It does everything the complete object destructor does, plus it calls operator delete to actually free the memory.</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/24/android-unicode-string/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/24/android-unicode-string/" class="post-title-link" itemprop="url">android unicode 字符串</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-24 13:05:38 / Modified: 13:17:44" itemprop="dateCreated datePublished" datetime="2019-05-24T13:05:38+08:00">2019-05-24</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/24/android-unicode-string/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/24/android-unicode-string/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="相关源码"><a href="#相关源码" class="headerlink" title="相关源码"></a>相关源码</h1><ul>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/Unicode.h" target="_blank" rel="noopener">Unicode.h</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/Unicode.cpp" target="_blank" rel="noopener">Unicode.cpp</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/String8.h" target="_blank" rel="noopener">String8.h</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/String8.cpp" target="_blank" rel="noopener">String8.cpp</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/String16.h" target="_blank" rel="noopener">String16.h</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/String16.cpp" target="_blank" rel="noopener">String16.cpp</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/SharedBuffer.h" target="_blank" rel="noopener">SharedBuffer.h</a></li>
-<li><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/SharedBuffer.cpp" target="_blank" rel="noopener">SharedBuffer.cpp</a></li>
-</ul>
-<h1 id="String16"><a href="#String16" class="headerlink" title="String16"></a>String16</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/system/core/libutils/String16.cpp#allocFromUTF8</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> char16_t* <span class="title">allocFromUTF8</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* u8str, <span class="keyword">size_t</span> u8len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">ssize_t</span> u16len = utf8_to_utf16_length(u8cur, u8len);</span><br><span class="line">    utf8_to_utf16(u8cur, u8len, u16str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> android&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//! This is a string holding UTF-16 characters.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">String16</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char16_t</span>*     mString;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -2082,7 +2090,7 @@ _data.writeInt(userId);
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2147,7 +2155,9 @@ _data.writeInt(userId);
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
