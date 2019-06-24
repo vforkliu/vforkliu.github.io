@@ -96,13 +96,16 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LOVEAI.INFO">
-<meta property="og:url" content="https://loveaiinfo.github.io/page/3/index.html">
-<meta property="og:site_name" content="LOVEAI.INFO">
+  <meta name="description" content="Focus on User Growth">
+<meta property="og:type" content="website">
+<meta property="og:title" content="vforkliu">
+<meta property="og:url" content="https://vforkliu.github.io/page/3/index.html">
+<meta property="og:site_name" content="vforkliu">
+<meta property="og:description" content="Focus on User Growth">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LOVEAI.INFO">
+<meta name="twitter:title" content="vforkliu">
+<meta name="twitter:description" content="Focus on User Growth">
 
 
 
@@ -110,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/page/3/">
+  <link rel="canonical" href="https://vforkliu.github.io/page/3/">
 
 
 
@@ -120,20 +123,20 @@
   };
 </script>
 
-  <title>LOVEAI.INFO</title>
+  <title>vforkliu</title>
   
 
 
 
 
-  <script async src="//www.googletagmanager.com/gtag/js?id=UA-86517450-3"></script>
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-142615370-1"></script>
   <script>
     var host = window.location.hostname;
     if (host !== "localhost" || !true) {
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'UA-86517450-3');
+      gtag('config', 'UA-142615370-1');
     }
   </script>
 
@@ -191,10 +194,14 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">LOVEAI.INFO</span>
+        <span class="site-title">vforkliu</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
+      
+        <p class="site-subtitle">Personal Tech Blog</p>
+      
     
     
   </div>
@@ -297,16 +304,184 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/24/javascript-basic-syntax/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/11/7z-error-codes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/11/7z-error-codes/" class="post-title-link" itemprop="url">7z 解压文件名乱码</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-11 23:12:27 / Modified: 23:56:00" itemprop="dateCreated datePublished" datetime="2019-05-11T23:12:27+08:00">2019-05-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/05/11/7z-error-codes/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/11/7z-error-codes/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在Windows 7中文版系统上使用7z压缩一些文件后，然后在Windows 10 Pro英文版系统上解压，发现凡是文件名中包含中文，最后都是乱码。</p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
+<li>使用python重命名<br>先解压，然后使用如下代码重命名<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- encoding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    names = os.listdir(<span class="string">"."</span>)</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        new_name = name.encode(<span class="string">"cp437"</span>).decode(<span class="string">"gbk"</span>)</span><br><span class="line">        os.rename(name,new_name)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在Windows下python对文件名编码使用cp437或者utf8，name 这个字符串是经过cp437解码得到的unicode。<br>unicode 转为 bytes 采用encode<br>bytes 转为 unicode 采用decode</p>
+<ul>
+<li>在7z压缩时使用utf8编码文件名<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z a -tzip -mcu examples.zip examples/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="代码页"><a href="#代码页" class="headerlink" title="代码页"></a>代码页</h1><p>在Windows 10 Pro 上默认的代码页是cp437 这个代码页不能表示中文字符<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准输出的编码</span></span><br><span class="line">sys.stdout.encoding</span><br><span class="line"><span class="comment"># 系统本地化设置的编码</span></span><br><span class="line">locale.getpreferredencoding()</span><br></pre></td></tr></table></figure></p>
+<p>代码页这个东西太神奇了，还是采用mac或者linux吧。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/04/24/javascript-basic-syntax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -448,16 +623,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/24/hacking-android-app-with-frida/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/04/24/hacking-android-app-with-frida/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -613,16 +788,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/24/Android-traceview/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/04/24/Android-traceview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -785,16 +960,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/18/Kotlin-tutorial-1/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/04/18/Kotlin-tutorial-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -936,16 +1111,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/12/JSBridge-Learning/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/04/12/JSBridge-Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -1117,16 +1292,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/04/11/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/04/11/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -1313,8 +1488,8 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">Liu Jun</p>
-              <div class="site-description motion-element" itemprop="description"></div>
+              <p class="site-author-name" itemprop="name">LIU JUN</p>
+              <div class="site-description motion-element" itemprop="description">Focus on User Growth</div>
           </div>
 
           
@@ -1324,7 +1499,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1391,7 +1566,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -1437,7 +1614,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Liu Jun</span>
+  <span class="author" itemprop="copyrightHolder">LIU JUN</span>
 
   
 
@@ -1561,7 +1738,7 @@
 
   
   
-  <script id="dsq-count-scr" src="https://https-loveaiinfo-github-io.disqus.com/count.js" async></script>
+  <script id="dsq-count-scr" src="https://https-vforkliu-github-io.disqus.com/count.js" async></script>
 
 
 

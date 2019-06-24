@@ -96,13 +96,16 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LOVEAI.INFO">
-<meta property="og:url" content="https://loveaiinfo.github.io/index.html">
-<meta property="og:site_name" content="LOVEAI.INFO">
+  <meta name="description" content="Focus on User Growth">
+<meta property="og:type" content="website">
+<meta property="og:title" content="vforkliu">
+<meta property="og:url" content="https://vforkliu.github.io/index.html">
+<meta property="og:site_name" content="vforkliu">
+<meta property="og:description" content="Focus on User Growth">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LOVEAI.INFO">
+<meta name="twitter:title" content="vforkliu">
+<meta name="twitter:description" content="Focus on User Growth">
 
 
 
@@ -110,7 +113,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/">
+  <link rel="canonical" href="https://vforkliu.github.io/">
 
 
 
@@ -120,20 +123,20 @@
   };
 </script>
 
-  <title>LOVEAI.INFO</title>
+  <title>vforkliu</title>
   
 
 
 
 
-  <script async src="//www.googletagmanager.com/gtag/js?id=UA-86517450-3"></script>
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-142615370-1"></script>
   <script>
     var host = window.location.hostname;
     if (host !== "localhost" || !true) {
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'UA-86517450-3');
+      gtag('config', 'UA-142615370-1');
     }
   </script>
 
@@ -191,10 +194,14 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">LOVEAI.INFO</span>
+        <span class="site-title">vforkliu</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
+      
+        <p class="site-subtitle">Personal Tech Blog</p>
+      
     
     
   </div>
@@ -297,16 +304,203 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/21/Android-ART-Image-File-Format/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/21/Android-ART-Image-File-Format/" class="post-title-link" itemprop="url">Android ART:Image File Format</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-21 19:52:41" itemprop="dateCreated datePublished" datetime="2019-06-21T19:52:41+08:00">2019-06-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-23 11:35:05" itemprop="dateModified" datetime="2019-06-23T11:35:05+08:00">2019-06-23</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/06/21/Android-ART-Image-File-Format/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/21/Android-ART-Image-File-Format/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>备注：基于Android 8.1.0 分析。</p>
+<h1 id="文件格式定义"><a href="#文件格式定义" class="headerlink" title="文件格式定义"></a>文件格式定义</h1><p>art/runtime/image.h<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint8_t</span> magic_[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">uint8_t</span> version_[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Required base address for mapping the image.</span></span><br><span class="line"><span class="keyword">uint32_t</span> image_begin_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Image size, not page aligned.</span></span><br><span class="line"><span class="keyword">uint32_t</span> image_size_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Checksum of the oat file we link to for load time sanity check.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_checksum_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Start address for oat file. Will be before oat_data_begin_ for .so files.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_file_begin_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Required oat address expected by image Method::GetCode() pointers.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_data_begin_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// End of oat data address range for this image file.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_data_end_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// End of oat file address range. will be after oat_data_end_ for</span></span><br><span class="line"><span class="comment">// .so files. Used for positioning a following alloc spaces.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_file_end_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Boot image begin and end (app image headers only).</span></span><br><span class="line"><span class="keyword">uint32_t</span> boot_image_begin_;</span><br><span class="line"><span class="keyword">uint32_t</span> boot_image_size_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Boot oat begin and end (app image headers only).</span></span><br><span class="line"><span class="keyword">uint32_t</span> boot_oat_begin_;</span><br><span class="line"><span class="keyword">uint32_t</span> boot_oat_size_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> We should probably insert a boot image checksum for app images.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The total delta that this image has been patched.</span></span><br><span class="line"><span class="keyword">int32_t</span> patch_delta_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Absolute address of an Object[] of objects needed to reinitialize from an image.</span></span><br><span class="line"><span class="keyword">uint32_t</span> image_roots_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Pointer size, this affects the size of the ArtMethods.</span></span><br><span class="line"><span class="keyword">uint32_t</span> pointer_size_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Boolean (0 or 1) to denote if the image was compiled with --compile-pic option</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">uint32_t</span> compile_pic_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Boolean (0 or 1) to denote if the image can be mapped at a random address, this only refers to</span></span><br><span class="line"><span class="comment">// the .art file. Currently, app oat files do not depend on their app image. There are no pointers</span></span><br><span class="line"><span class="comment">// from the app oat code to the app image.</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">uint32_t</span> is_pic_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Image section sizes/offsets correspond to the uncompressed form.</span></span><br><span class="line">ImageSection sections_[kSectionCount];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Image methods, may be inside of the boot image for app images.</span></span><br><span class="line"><span class="keyword">uint64_t</span> image_methods_[kImageMethodsCount];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Storage method for the image, the image may be compressed.</span></span><br><span class="line">StorageMode storage_mode_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Data size for the image data excluding the bitmap and the header. For compressed images, this</span></span><br><span class="line"><span class="comment">// is the compressed size in the file.</span></span><br><span class="line"><span class="keyword">uint32_t</span> data_size_;</span><br></pre></td></tr></table></figure></p>
+<p>以一个实际例子对每个字段进行说明</p>
+<img src="/2019/06/21/Android-ART-Image-File-Format/boot-framwork-art-header.png" title="boot-framework.art文件头">
+<ul>
+<li>magic_:0x61 0x72 0x74 0x0A</li>
+<li><p>version_:0x30 0x34 0x36 0x00 版本号为046<br>art/runtime/image.cc</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">uint8_t</span> ImageHeader::kImageMagic[] = &#123; <span class="string">'a'</span>, <span class="string">'r'</span>, <span class="string">'t'</span>, <span class="string">'\n'</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">uint8_t</span> ImageHeader::kImageVersion[] = &#123; <span class="string">'0'</span>, <span class="string">'4'</span>, <span class="string">'6'</span>, <span class="string">'\0'</span> &#125;;  <span class="comment">// Hash-based methods array.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>image_begin_: image映射到内存的开始地址 </p>
+</li>
+<li>image_size_: image文件大小</li>
+<li>oat_checksum_:0x41B78898</li>
+<li>oat_file_begin_:0x70a5c000</li>
+<li>oat_data_begin_:0x70a5d000</li>
+<li>oat_data_end_:0x7126eef0</li>
+<li>oat_file_end_:0x71273000</li>
+<li>boot_image_begin_:0x00000000</li>
+<li>boot_image_size_:0x00000000</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -342,12 +536,24 @@
                 
               
 
-              <time title="Created: 2019-06-21 14:36:03 / Modified: 15:26:56" itemprop="dateCreated datePublished" datetime="2019-06-21T14:36:03+08:00">2019-06-21</time>
+              <time title="Created: 2019-06-21 14:36:03" itemprop="dateCreated datePublished" datetime="2019-06-21T14:36:03+08:00">2019-06-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-24 11:15:00" itemprop="dateModified" datetime="2019-06-24T11:15:00+08:00">2019-06-24</time>
               
             
           </span>
@@ -414,7 +620,7 @@
 <h1 id="实战：OOM"><a href="#实战：OOM" class="headerlink" title="实战：OOM"></a>实战：OOM</h1><h2 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h2><figure class="highlight java"><figcaption><span> Java Heap OOM Example</span><a href="/downloads/code/jvm/HeapOOM.java">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * java -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError HeapOOM</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">HeapOOM</span></span>{</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">OOMObject</span></span>{</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line">    List&lt;OOMObject&gt; list = <span class="keyword">new</span> ArrayList&lt;OOMObject&gt;();</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>){</span><br><span class="line">      list.add(<span class="keyword">new</span> OOMObject());</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line"> }</span><br></pre></td></tr></table></figure>
 <p>编译<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac HeapOOM.java</span><br></pre></td></tr></table></figure></p>
 <p>运行参数<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">java -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError HeapOOM</span><br><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">Dumping heap to java_pid83007.hprof ...</span><br><span class="line">Heap dump file created [27583183 bytes in 0.102 secs]</span><br><span class="line">Exception in thread "main" java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:3210)</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:3181)</span><br><span class="line">	at java.util.ArrayList.grow(ArrayList.java:265)</span><br><span class="line">	at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:239)</span><br><span class="line">	at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:231)</span><br><span class="line">	at java.util.ArrayList.add(ArrayList.java:462)</span><br><span class="line">	at HeapOOM.main(HeapOOM.java:16)</span><br></pre></td></tr></table></figure></p>
-<p>Android Studio 分析 hprof<br><img src="/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/jvm_heap_oom_hprof.png" title="Android Studio分析hprof"></p>
+<p>Android Studio 分析 hprof<br>{ % asset_img jvm_heap_oom_hprof.png Android Studio分析hprof %}</p>
 
           
         
@@ -471,16 +677,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -635,16 +841,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/05/Debug-Android-Framework-with-Android-Studio/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/05/Debug-Android-Framework-with-Android-Studio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -806,16 +1012,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/02/Android-Source-Code-Read-startService/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/02/Android-Source-Code-Read-startService/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -1012,16 +1218,16 @@ _data.writeInt(userId);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Inherit/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/31/C-Virtual-Inherit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -1199,16 +1405,16 @@ _data.writeInt(userId);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/31/C-Virtual-Method-Table/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/31/C-Virtual-Method-Table/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -1398,16 +1604,16 @@ _data.writeInt(userId);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/31/Markdown-User-Guide/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/31/Markdown-User-Guide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -1562,16 +1768,16 @@ _data.writeInt(userId);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/29/LeetCode-0050-pow/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/29/LeetCode-0050-pow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -1719,16 +1925,16 @@ _data.writeInt(userId);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/29/Android-PM/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/29/Android-PM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -1864,186 +2070,6 @@ _data.writeInt(userId);
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/05/27/c-inherit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/27/c-inherit/" class="post-title-link" itemprop="url">c++ 继承</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-27 09:46:12" itemprop="dateCreated datePublished" datetime="2019-05-27T09:46:12+08:00">2019-05-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-05-31 15:42:20" itemprop="dateModified" datetime="2019-05-31T15:42:20+08:00">2019-05-31</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/27/c-inherit/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/27/c-inherit/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">export NDK_ROOT=~/android-ndk-r18b</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/x86_64-linux-android</span><br><span class="line">  -pie -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=x86_64-none-linux-android</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/x86_64-4.9/prebuilt/linux-x86_64</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-x86_64</span><br><span class="line">  -pie hello.c.o -o hello</span><br><span class="line"></span><br><span class="line"><span class="meta">  $</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang \</span><br><span class="line">  --target=armv7-none-linux-androideabi \</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9 \</span><br><span class="line">  --sysroot=$&#123;NDK_ROOT&#125;/sysroot \</span><br><span class="line">  -isystem $&#123;NDK_ROOT&#125;/sysroot/usr/include/arm-linux-androideabi \</span><br><span class="line">  -pie \</span><br><span class="line">  -o  hello.c.o -c hello.c</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span>&#123;NDK_ROOT&#125;/toolchains/llvm/prebuilt/linux-x86_64/bin/clang</span><br><span class="line">  --target=armv7-none-linux-androideabi</span><br><span class="line">  --gcc-toolchain=$&#123;NDK_ROOT&#125;/toolchains/arm-linux-androideabi-4.9/...</span><br><span class="line">  --sysroot  $&#123;NDK_ROOT&#125;/platforms/android-21/arch-arm</span><br><span class="line">  -pie hello.c.o -o hello</span><br></pre></td></tr></table></figure>
-<h1 id="简单多继承"><a href="#简单多继承" class="headerlink" title="简单多继承"></a>简单多继承</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">public</span> A&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_d;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>clang -cc1 -emit-llvm -fdump-record-layouts -stdlib=libc++ normal_multi_inherit_simple.cpp</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class A</span><br><span class="line">         0 |   int m_a</span><br><span class="line">           | [sizeof=4, dsize=4, align=4,</span><br><span class="line">           |  nvsize=4, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class B</span><br><span class="line">         0 |   class A (base)</span><br><span class="line">         0 |     int m_a</span><br><span class="line">         4 |   int m_b</span><br><span class="line">           | [sizeof=8, dsize=8, align=4,</span><br><span class="line">           |  nvsize=8, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class C</span><br><span class="line">         0 |   class A (base)</span><br><span class="line">         0 |     int m_a</span><br><span class="line">         4 |   int m_c</span><br><span class="line">           | [sizeof=8, dsize=8, align=4,</span><br><span class="line">           |  nvsize=8, nvalign=4]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class D</span><br><span class="line">         0 |   class B (base)</span><br><span class="line">         0 |     class A (base)</span><br><span class="line">         0 |       int m_a</span><br><span class="line">         4 |     int m_b</span><br><span class="line">         8 |   class C (base)</span><br><span class="line">         8 |     class A (base)</span><br><span class="line">         8 |       int m_a</span><br><span class="line">        12 |     int m_c</span><br><span class="line">        16 |   int m_d</span><br><span class="line">           | [sizeof=20, dsize=20, align=4,</span><br><span class="line">           |  nvsize=20, nvalign=4]</span><br></pre></td></tr></table></figure>
-<h1 id="带虚函数的多继承"><a href="#带虚函数的多继承" class="headerlink" title="带虚函数的多继承"></a>带虚函数的多继承</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class A</span><br><span class="line">         0 |   (A vtable pointer)</span><br><span class="line">         8 |   int m_a</span><br><span class="line">           | [sizeof=16, dsize=12, align=8,</span><br><span class="line">           |  nvsize=12, nvalign=8]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class B</span><br><span class="line">         0 |   class A (primary base)</span><br><span class="line">         0 |     (A vtable pointer)</span><br><span class="line">         8 |     int m_a</span><br><span class="line">        12 |   int m_b</span><br><span class="line">           | [sizeof=16, dsize=16, align=8,</span><br><span class="line">           |  nvsize=16, nvalign=8]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class C</span><br><span class="line">         0 |   class A (primary base)</span><br><span class="line">         0 |     (A vtable pointer)</span><br><span class="line">         8 |     int m_a</span><br><span class="line">        12 |   int m_c</span><br><span class="line">           | [sizeof=16, dsize=16, align=8,</span><br><span class="line">           |  nvsize=16, nvalign=8]</span><br><span class="line"></span><br><span class="line">*** Dumping AST Record Layout</span><br><span class="line">         0 | class D</span><br><span class="line">         0 |   class B (primary base)</span><br><span class="line">         0 |     class A (primary base)</span><br><span class="line">         0 |       (A vtable pointer)</span><br><span class="line">         8 |       int m_a</span><br><span class="line">        12 |     int m_b</span><br><span class="line">        16 |   class C (base)</span><br><span class="line">        16 |     class A (primary base)</span><br><span class="line">        16 |       (A vtable pointer)</span><br><span class="line">        24 |       int m_a</span><br><span class="line">        28 |     int m_c</span><br><span class="line">        32 |   int m_d</span><br><span class="line">           | [sizeof=40, dsize=36, align=8,</span><br><span class="line">           |  nvsize=36, nvalign=8]</span><br></pre></td></tr></table></figure>
-<h1 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h1><p>共享虚基类,典型的例子iostream</p>
-<p>clang 输出内存布局<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clang -cc1 -fdump-record-layouts -stdlib=libc++ vinherit.cpp</span><br><span class="line">clang -cc1 -emit-llvm -fdump-record-layouts -stdlib=libc++ normal_multi_inherit.cpp</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">virtual</span> <span class="keyword">public</span> A&#123;&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    D d;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(d) &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 12</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>clang++ -cc1 -emit-llvm -fdump-record-layouts -stdlib=libc++ normal_multi_inherit_simple.cpp</p>
-<p>_ZTV is a prefix for vtable,<br>_ZTS is a prefix for type-string (name)<br>_ZTI is for type-info.</p>
-<p>VTT<br>virtual thunk to<br>no-virtual thunk to</p>
-<p>typeinfo<br>vtable pointer = vtable + 0x10 (64bit)</p>
-<h1 id="imp-cxa-pure-virtual"><a href="#imp-cxa-pure-virtual" class="headerlink" title="imp_cxa_pure_virtual"></a><strong>imp_</strong>cxa_pure_virtual</h1><h1 id="destructor"><a href="#destructor" class="headerlink" title="destructor"></a>destructor</h1><p>D2 is the “base object destructor”. It destroys the object itself, as well as data members and non-virtual base classes.<br>D1 is the “complete object destructor”. It additionally destroys virtual base classes.<br>D0 is the “deleting object destructor”. It does everything the complete object destructor does, plus it calls operator delete to actually free the memory.</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2079,8 +2105,8 @@ _data.writeInt(userId);
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">Liu Jun</p>
-              <div class="site-description motion-element" itemprop="description"></div>
+              <p class="site-author-name" itemprop="name">LIU JUN</p>
+              <div class="site-description motion-element" itemprop="description">Focus on User Growth</div>
           </div>
 
           
@@ -2090,7 +2116,7 @@ _data.writeInt(userId);
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2157,7 +2183,9 @@ _data.writeInt(userId);
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -2203,7 +2231,7 @@ _data.writeInt(userId);
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Liu Jun</span>
+  <span class="author" itemprop="copyrightHolder">LIU JUN</span>
 
   
 
@@ -2327,7 +2355,7 @@ _data.writeInt(userId);
 
   
   
-  <script id="dsq-count-scr" src="https://https-loveaiinfo-github-io.disqus.com/count.js" async></script>
+  <script id="dsq-count-scr" src="https://https-vforkliu-github-io.disqus.com/count.js" async></script>
 
 
 

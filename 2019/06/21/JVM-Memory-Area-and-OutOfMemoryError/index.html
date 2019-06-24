@@ -100,16 +100,14 @@
 <meta name="keywords" content="jvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM:内存区域和内存溢出异常">
-<meta property="og:url" content="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/index.html">
-<meta property="og:site_name" content="LOVEAI.INFO">
+<meta property="og:url" content="https://vforkliu.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/index.html">
+<meta property="og:site_name" content="vforkliu">
 <meta property="og:description" content="运行时内存区域 Program Counter Register:程序计数器，线程私有，不会发生OOM的区域。当执行Java方法时，指向正在执行的虚拟机字节码指令的地址，当执行Native方法时，它的值是undefined。 JVM Stacks: Java虚拟机栈。线程私有。存局部变量、对象引用和returnAdress(指向一条字节码指令的地址)。 Native Method Stack: 本">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/jvm_heap_oom_hprof.png">
-<meta property="og:updated_time" content="2019-06-21T07:26:56.538Z">
+<meta property="og:updated_time" content="2019-06-24T03:15:00.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM:内存区域和内存溢出异常">
 <meta name="twitter:description" content="运行时内存区域 Program Counter Register:程序计数器，线程私有，不会发生OOM的区域。当执行Java方法时，指向正在执行的虚拟机字节码指令的地址，当执行Native方法时，它的值是undefined。 JVM Stacks: Java虚拟机栈。线程私有。存局部变量、对象引用和returnAdress(指向一条字节码指令的地址)。 Native Method Stack: 本">
-<meta name="twitter:image" content="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/jvm_heap_oom_hprof.png">
 
 
 
@@ -117,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/">
+  <link rel="canonical" href="https://vforkliu.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/">
 
 
 
@@ -127,20 +125,20 @@
   };
 </script>
 
-  <title>JVM:内存区域和内存溢出异常 | LOVEAI.INFO</title>
+  <title>JVM:内存区域和内存溢出异常 | vforkliu</title>
   
 
 
 
 
-  <script async src="//www.googletagmanager.com/gtag/js?id=UA-86517450-3"></script>
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-142615370-1"></script>
   <script>
     var host = window.location.hostname;
     if (host !== "localhost" || !true) {
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'UA-86517450-3');
+      gtag('config', 'UA-142615370-1');
     }
   </script>
 
@@ -197,10 +195,14 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">LOVEAI.INFO</span>
+        <span class="site-title">vforkliu</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
+      
+        <p class="site-subtitle">Personal Tech Blog</p>
+      
     
     
   </div>
@@ -303,16 +305,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liu Jun">
-      <meta itemprop="description" content>
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LOVEAI.INFO">
+      <meta itemprop="name" content="vforkliu">
     </span>
 
     
@@ -346,12 +348,24 @@
                 
               
 
-              <time title="Created: 2019-06-21 14:36:03 / Modified: 15:26:56" itemprop="dateCreated datePublished" datetime="2019-06-21T14:36:03+08:00">2019-06-21</time>
+              <time title="Created: 2019-06-21 14:36:03" itemprop="dateCreated datePublished" datetime="2019-06-21T14:36:03+08:00">2019-06-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-24 11:15:00" itemprop="dateModified" datetime="2019-06-24T11:15:00+08:00">2019-06-24</time>
               
             
           </span>
@@ -416,7 +430,7 @@
 <h1 id="实战：OOM"><a href="#实战：OOM" class="headerlink" title="实战：OOM"></a>实战：OOM</h1><h2 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h2><figure class="highlight java"><figcaption><span> Java Heap OOM Example</span><a href="/downloads/code/jvm/HeapOOM.java">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * java -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError HeapOOM</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">HeapOOM</span></span>{</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">OOMObject</span></span>{</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line">    List&lt;OOMObject&gt; list = <span class="keyword">new</span> ArrayList&lt;OOMObject&gt;();</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>){</span><br><span class="line">      list.add(<span class="keyword">new</span> OOMObject());</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line"> }</span><br></pre></td></tr></table></figure>
 <p>编译<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac HeapOOM.java</span><br></pre></td></tr></table></figure></p>
 <p>运行参数<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">java -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError HeapOOM</span><br><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">Dumping heap to java_pid83007.hprof ...</span><br><span class="line">Heap dump file created [27583183 bytes in 0.102 secs]</span><br><span class="line">Exception in thread "main" java.lang.OutOfMemoryError: Java heap space</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:3210)</span><br><span class="line">	at java.util.Arrays.copyOf(Arrays.java:3181)</span><br><span class="line">	at java.util.ArrayList.grow(ArrayList.java:265)</span><br><span class="line">	at java.util.ArrayList.ensureExplicitCapacity(ArrayList.java:239)</span><br><span class="line">	at java.util.ArrayList.ensureCapacityInternal(ArrayList.java:231)</span><br><span class="line">	at java.util.ArrayList.add(ArrayList.java:462)</span><br><span class="line">	at HeapOOM.main(HeapOOM.java:16)</span><br></pre></td></tr></table></figure></p>
-<p>Android Studio 分析 hprof<br><img src="/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/jvm_heap_oom_hprof.png" title="Android Studio分析hprof"></p>
+<p>Android Studio 分析 hprof<br>{ % asset_img jvm_heap_oom_hprof.png Android Studio分析hprof %}</p>
 
       
     </div>
@@ -462,6 +476,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/21/Android-ART-Image-File-Format/" rel="prev" title="Android ART:Image File Format">
+                Android ART:Image File Format <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -526,8 +544,8 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">Liu Jun</p>
-              <div class="site-description motion-element" itemprop="description"></div>
+              <p class="site-author-name" itemprop="name">LIU JUN</p>
+              <div class="site-description motion-element" itemprop="description">Focus on User Growth</div>
           </div>
 
           
@@ -537,7 +555,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -604,7 +622,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -667,7 +687,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Liu Jun</span>
+  <span class="author" itemprop="copyrightHolder">LIU JUN</span>
 
   
 
@@ -795,23 +815,41 @@
 
   
   
-  <script id="dsq-count-scr" src="https://https-loveaiinfo-github-io.disqus.com/count.js" async></script>
+  <script id="dsq-count-scr" src="https://https-vforkliu-github-io.disqus.com/count.js" async></script>
 
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://loveaiinfo.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/";
+    this.page.url = "https://vforkliu.github.io/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/";
     this.page.identifier = "2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/";
     this.page.title = 'JVM:内存区域和内存溢出异常';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
-    s.src = 'https://https-loveaiinfo-github-io.disqus.com/embed.js';
+    s.src = 'https://https-vforkliu-github-io.disqus.com/embed.js';
     s.setAttribute('data-timestamp', '' + +new Date());
     (d.head || d.body).appendChild(s);
   }
   
-    loadComments();
+    $(function() {
+      var offsetTop = $('#comments').offset().top - $(window).height();
+      if (offsetTop <= 0) {
+        // load directly when there's no a scrollbar
+        loadComments();
+      } else {
+        $(window).on('scroll.disqus_scroll', function() {
+          // offsetTop may changes because of manually resizing browser window or lazy loading images.
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          var scrollTop = $(window).scrollTop();
+
+          // pre-load comments a bit? (margin or anything else)
+          if (offsetTop - scrollTop < 60) {
+            $(window).off('.disqus_scroll');
+            loadComments();
+          }
+        });
+      }
+    });
   
 </script>
 

@@ -96,18 +96,20 @@
 
 
 
-  <meta name="description" content="常用参数12345678910docker run \    --rm \    -it \    -e USER_ID=1001 \    -e GROUP_ID=1002 \    -v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro \    -v /home/liujun.sun/a">
-<meta name="keywords" content="docker">
+  <meta name="description" content="备注：基于Android 8.1.0 分析。 文件格式定义art/runtime/image.h12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364uint8_t magic_[4];uint8_t version">
+<meta name="keywords" content="android,art">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker 基础">
-<meta property="og:url" content="https://vforkliu.github.io/2019/05/23/docker-basics/index.html">
+<meta property="og:title" content="Android ART:Image File Format">
+<meta property="og:url" content="https://vforkliu.github.io/2019/06/21/Android-ART-Image-File-Format/index.html">
 <meta property="og:site_name" content="vforkliu">
-<meta property="og:description" content="常用参数12345678910docker run \    --rm \    -it \    -e USER_ID=1001 \    -e GROUP_ID=1002 \    -v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro \    -v /home/liujun.sun/a">
+<meta property="og:description" content="备注：基于Android 8.1.0 分析。 文件格式定义art/runtime/image.h12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364uint8_t magic_[4];uint8_t version">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-23T07:19:10.831Z">
+<meta property="og:image" content="https://vforkliu.github.io/2019/06/21/Android-ART-Image-File-Format/boot-framwork-art-header.png">
+<meta property="og:updated_time" content="2019-06-23T03:35:05.470Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker 基础">
-<meta name="twitter:description" content="常用参数12345678910docker run \    --rm \    -it \    -e USER_ID=1001 \    -e GROUP_ID=1002 \    -v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro \    -v /home/liujun.sun/a">
+<meta name="twitter:title" content="Android ART:Image File Format">
+<meta name="twitter:description" content="备注：基于Android 8.1.0 分析。 文件格式定义art/runtime/image.h12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364uint8_t magic_[4];uint8_t version">
+<meta name="twitter:image" content="https://vforkliu.github.io/2019/06/21/Android-ART-Image-File-Format/boot-framwork-art-header.png">
 
 
 
@@ -115,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="https://vforkliu.github.io/2019/05/23/docker-basics/">
+  <link rel="canonical" href="https://vforkliu.github.io/2019/06/21/Android-ART-Image-File-Format/">
 
 
 
@@ -125,7 +127,7 @@
   };
 </script>
 
-  <title>docker 基础 | vforkliu</title>
+  <title>Android ART:Image File Format | vforkliu</title>
   
 
 
@@ -305,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/23/docker-basics/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/21/Android-ART-Image-File-Format/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
@@ -322,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">docker 基础
+          <h1 class="post-title" itemprop="name headline">Android ART:Image File Format
 
               
             
@@ -348,12 +350,24 @@
                 
               
 
-              <time title="Created: 2019-05-23 11:14:28 / Modified: 15:19:10" itemprop="dateCreated datePublished" datetime="2019-05-23T11:14:28+08:00">2019-05-23</time>
+              <time title="Created: 2019-06-21 19:52:41" itemprop="dateCreated datePublished" datetime="2019-06-21T19:52:41+08:00">2019-06-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-23 11:35:05" itemprop="dateModified" datetime="2019-06-23T11:35:05+08:00">2019-06-23</time>
               
             
           </span>
@@ -371,8 +385,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/23/docker-basics/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/23/docker-basics/" itemprop="commentCount"></span>
+                <a href="/2019/06/21/Android-ART-Image-File-Format/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/21/Android-ART-Image-File-Format/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -400,12 +414,25 @@
       
 
       
-        <h1 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    --rm \</span><br><span class="line">    -it \</span><br><span class="line">    -e USER_ID=1001 \</span><br><span class="line">    -e GROUP_ID=1002 \</span><br><span class="line">    -v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro \</span><br><span class="line">    -v /home/liujun.sun/aosp-6.0.1_r80/aosp:/aosp \</span><br><span class="line">    -v /home/liujun.sun/aosp-6.0.1_r80/ccache:/tmp/ccache \</span><br><span class="line">    kylemanna/aosp:6.0-marshmallow \</span><br><span class="line">    bash run.sh docker</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[-v|--volume[=[[HOST-DIR:]CONTAINER-DIR[:OPTIONS]]]]</span><br><span class="line">          Create a bind mount. If you specify, -v /HOST-DIR:/CONTAINER-DIR, Docker</span><br><span class="line">          bind mounts /HOST-DIR in the host to /CONTAINER-DIR in the Docker</span><br><span class="line">          container.</span><br><span class="line">-v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro</span><br><span class="line">        ro:read-only mode</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-e Set environment variables</span><br><span class="line">-i, --interactive=true|false</span><br><span class="line">          Keep STDIN open even if not attached. The default is false.</span><br><span class="line">          保证容器中STDIN是开启的</span><br><span class="line">-t, --tty=true|false</span><br><span class="line">          Allocate a pseudo-TTY. The default is false.</span><br><span class="line">          告诉Docker为要创建的容器分配一个伪tty终端。这样，新创建的容器才能提供一个交互式shell。</span><br><span class="line">--rm true|false</span><br><span class="line">    Automatically remove the container when it exits. The default is false.</span><br></pre></td></tr></table></figure>
-<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
-<li>删除所有容器<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm `docker ps -a -q`</span><br></pre></td></tr></table></figure>
+        <p>备注：基于Android 8.1.0 分析。</p>
+<h1 id="文件格式定义"><a href="#文件格式定义" class="headerlink" title="文件格式定义"></a>文件格式定义</h1><p>art/runtime/image.h<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint8_t</span> magic_[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">uint8_t</span> version_[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Required base address for mapping the image.</span></span><br><span class="line"><span class="keyword">uint32_t</span> image_begin_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Image size, not page aligned.</span></span><br><span class="line"><span class="keyword">uint32_t</span> image_size_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Checksum of the oat file we link to for load time sanity check.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_checksum_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Start address for oat file. Will be before oat_data_begin_ for .so files.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_file_begin_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Required oat address expected by image Method::GetCode() pointers.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_data_begin_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// End of oat data address range for this image file.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_data_end_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// End of oat file address range. will be after oat_data_end_ for</span></span><br><span class="line"><span class="comment">// .so files. Used for positioning a following alloc spaces.</span></span><br><span class="line"><span class="keyword">uint32_t</span> oat_file_end_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Boot image begin and end (app image headers only).</span></span><br><span class="line"><span class="keyword">uint32_t</span> boot_image_begin_;</span><br><span class="line"><span class="keyword">uint32_t</span> boot_image_size_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Boot oat begin and end (app image headers only).</span></span><br><span class="line"><span class="keyword">uint32_t</span> boot_oat_begin_;</span><br><span class="line"><span class="keyword">uint32_t</span> boot_oat_size_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> We should probably insert a boot image checksum for app images.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The total delta that this image has been patched.</span></span><br><span class="line"><span class="keyword">int32_t</span> patch_delta_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Absolute address of an Object[] of objects needed to reinitialize from an image.</span></span><br><span class="line"><span class="keyword">uint32_t</span> image_roots_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Pointer size, this affects the size of the ArtMethods.</span></span><br><span class="line"><span class="keyword">uint32_t</span> pointer_size_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Boolean (0 or 1) to denote if the image was compiled with --compile-pic option</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">uint32_t</span> compile_pic_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Boolean (0 or 1) to denote if the image can be mapped at a random address, this only refers to</span></span><br><span class="line"><span class="comment">// the .art file. Currently, app oat files do not depend on their app image. There are no pointers</span></span><br><span class="line"><span class="comment">// from the app oat code to the app image.</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">uint32_t</span> is_pic_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Image section sizes/offsets correspond to the uncompressed form.</span></span><br><span class="line">ImageSection sections_[kSectionCount];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Image methods, may be inside of the boot image for app images.</span></span><br><span class="line"><span class="keyword">uint64_t</span> image_methods_[kImageMethodsCount];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Storage method for the image, the image may be compressed.</span></span><br><span class="line">StorageMode storage_mode_;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Data size for the image data excluding the bitmap and the header. For compressed images, this</span></span><br><span class="line"><span class="comment">// is the compressed size in the file.</span></span><br><span class="line"><span class="keyword">uint32_t</span> data_size_;</span><br></pre></td></tr></table></figure></p>
+<p>以一个实际例子对每个字段进行说明</p>
+<img src="/2019/06/21/Android-ART-Image-File-Format/boot-framwork-art-header.png" title="boot-framework.art文件头">
+<ul>
+<li>magic_:0x61 0x72 0x74 0x0A</li>
+<li><p>version_:0x30 0x34 0x36 0x00 版本号为046<br>art/runtime/image.cc</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">uint8_t</span> ImageHeader::kImageMagic[] = &#123; <span class="string">'a'</span>, <span class="string">'r'</span>, <span class="string">'t'</span>, <span class="string">'\n'</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">uint8_t</span> ImageHeader::kImageVersion[] = &#123; <span class="string">'0'</span>, <span class="string">'4'</span>, <span class="string">'6'</span>, <span class="string">'\0'</span> &#125;;  <span class="comment">// Hash-based methods array.</span></span><br></pre></td></tr></table></figure>
 </li>
+<li><p>image_begin_: image映射到内存的开始地址 </p>
+</li>
+<li>image_size_: image文件大小</li>
+<li>oat_checksum_:0x41B78898</li>
+<li>oat_file_begin_:0x70a5c000</li>
+<li>oat_data_begin_:0x70a5d000</li>
+<li>oat_data_end_:0x7126eef0</li>
+<li>oat_file_end_:0x71273000</li>
+<li>boot_image_begin_:0x00000000</li>
+<li>boot_image_size_:0x00000000</li>
 </ul>
 
       
@@ -430,7 +457,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/docker/" rel="tag"># docker</a>
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/art/" rel="tag"># art</a>
           
         </div>
       
@@ -443,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/15/Android-ClassLoader/" rel="next" title="Android ClassLoader">
-                <i class="fa fa-chevron-left"></i> Android ClassLoader
+              <a href="/2019/06/21/JVM-Memory-Area-and-OutOfMemoryError/" rel="next" title="JVM:内存区域和内存溢出异常">
+                <i class="fa fa-chevron-left"></i> JVM:内存区域和内存溢出异常
               </a>
             
           </div>
@@ -452,10 +481,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/23/build-android-source/" rel="prev" title="Android 源码开发">
-                Android 源码开发 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -638,7 +663,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用参数"><span class="nav-number">1.</span> <span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件格式定义"><span class="nav-number">1.</span> <span class="nav-text">文件格式定义</span></a></li></ol></div>
             
 
           </div>
@@ -796,9 +821,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://vforkliu.github.io/2019/05/23/docker-basics/";
-    this.page.identifier = "2019/05/23/docker-basics/";
-    this.page.title = 'docker 基础';
+    this.page.url = "https://vforkliu.github.io/2019/06/21/Android-ART-Image-File-Format/";
+    this.page.identifier = "2019/06/21/Android-ART-Image-File-Format/";
+    this.page.title = 'Android ART:Image File Format';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
