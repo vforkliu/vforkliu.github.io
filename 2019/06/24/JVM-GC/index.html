@@ -103,18 +103,18 @@
 
 
 
-  <meta name="description" content="相关源码http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.javahttp://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_">
-<meta name="keywords" content="android security">
+  <meta name="description" content="IntrodutionGarbage Collection需要完成的事情：  哪些内存需要回收 什么时候回收 如何回收Java GC关注的内存包括堆和方法区。  如何判断对象已经死亡引用计数根搜索算法(GC Roots)方法区回收垃圾收集算法标记-清除标记-复制标记-整理分代回收算法#">
+<meta name="keywords" content="jvm,gc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android 安装源码分析">
-<meta property="og:url" content="https://vforkliu.github.io/2019/05/29/Android-PM/index.html">
+<meta property="og:title" content="JVM:Garbage Collection">
+<meta property="og:url" content="https://vforkliu.github.io/2019/06/24/JVM-GC/index.html">
 <meta property="og:site_name" content="vforkliu">
-<meta property="og:description" content="相关源码http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.javahttp://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_">
+<meta property="og:description" content="IntrodutionGarbage Collection需要完成的事情：  哪些内存需要回收 什么时候回收 如何回收Java GC关注的内存包括堆和方法区。  如何判断对象已经死亡引用计数根搜索算法(GC Roots)方法区回收垃圾收集算法标记-清除标记-复制标记-整理分代回收算法#">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-29T04:46:35.482Z">
+<meta property="og:updated_time" content="2019-06-24T07:24:53.534Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android 安装源码分析">
-<meta name="twitter:description" content="相关源码http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.javahttp://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_">
+<meta name="twitter:title" content="JVM:Garbage Collection">
+<meta name="twitter:description" content="IntrodutionGarbage Collection需要完成的事情：  哪些内存需要回收 什么时候回收 如何回收Java GC关注的内存包括堆和方法区。  如何判断对象已经死亡引用计数根搜索算法(GC Roots)方法区回收垃圾收集算法标记-清除标记-复制标记-整理分代回收算法#">
 
 
 
@@ -122,7 +122,7 @@
 
   
   
-  <link rel="canonical" href="https://vforkliu.github.io/2019/05/29/Android-PM/">
+  <link rel="canonical" href="https://vforkliu.github.io/2019/06/24/JVM-GC/">
 
 
 
@@ -132,7 +132,7 @@
   };
 </script>
 
-  <title>Android 安装源码分析 | vforkliu</title>
+  <title>JVM:Garbage Collection | vforkliu</title>
   
 
 
@@ -312,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/29/Android-PM/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/24/JVM-GC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android 安装源码分析
+          <h1 class="post-title" itemprop="name headline">JVM:Garbage Collection
 
               
             
@@ -355,7 +355,7 @@
                 
               
 
-              <time title="Created: 2019-05-29 10:11:32 / Modified: 12:46:35" itemprop="dateCreated datePublished" datetime="2019-05-29T10:11:32+08:00">2019-05-29</time>
+              <time title="Created: 2019-06-24 14:39:26 / Modified: 15:24:53" itemprop="dateCreated datePublished" datetime="2019-06-24T14:39:26+08:00">2019-06-24</time>
             
 
             
@@ -378,8 +378,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/29/Android-PM/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/29/Android-PM/" itemprop="commentCount"></span>
+                <a href="/2019/06/24/JVM-GC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/24/JVM-GC/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -407,11 +407,13 @@
       
 
       
-        <h1 id="相关源码"><a href="#相关源码" class="headerlink" title="相关源码"></a>相关源码</h1><p><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java</a><br><a href="http://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_shell_command" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/adb/commandline.cpp#send_shell_command</a><br><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/content/pm/PackageManager.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/content/pm/PackageManager.java</a><br><a href="http://androidxref.com/6.0.1_r10/xref/libcore/luni/src/main/java/org/apache/harmony/security/utils/JarUtils.java#68" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/libcore/luni/src/main/java/org/apache/harmony/security/utils/JarUtils.java#68</a></p>
-<h1 id="SignatureSpi"><a href="#SignatureSpi" class="headerlink" title="SignatureSpi"></a>SignatureSpi</h1><p><a href="http://androidxref.com/6.0.1_r10/xref/external/bouncycastle/bcprov/src/main/java/org/bouncycastle/jcajce/provider/asymmetric/rsa/DigestSignatureSpi.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/external/bouncycastle/bcprov/src/main/java/org/bouncycastle/jcajce/provider/asymmetric/rsa/DigestSignatureSpi.java</a><br><a href="http://androidxref.com/9.0.0_r3/xref/external/conscrypt/common/src/main/java/org/conscrypt/OpenSSLSignature.java" target="_blank" rel="noopener">http://androidxref.com/9.0.0_r3/xref/external/conscrypt/common/src/main/java/org/conscrypt/OpenSSLSignature.java</a><br><a href="http://androidxref.com/6.0.1_r10/xref/external/bouncycastle/bcprov/src/main/java/org/bouncycastle/jcajce/provider/asymmetric/dsa/DSASigner.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/external/bouncycastle/bcprov/src/main/java/org/bouncycastle/jcajce/provider/asymmetric/dsa/DSASigner.java</a><br><a href="http://androidxref.com/6.0.1_r10/xref/external/conscrypt/src/main/java/org/conscrypt/OpenSSLSignatureRawRSA.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/external/conscrypt/src/main/java/org/conscrypt/OpenSSLSignatureRawRSA.java</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">installPackageLI</span><span class="params">(InstallArgs args, PackageInstalledInfo res)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// collectCertificates</span></span><br><span class="line">    <span class="comment">// collectManifestDigest</span></span><br><span class="line">    pp.collectCertificates(pkg, parseFlags);</span><br><span class="line">    pp.collectManifestDigest(pkg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Call Stack<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">java.security.Signature.verify(&lt;Xposed&gt;:-1)</span><br><span class="line">org.apache.harmony.security.utils.JarUtils.verifySignature(JarUtils.java:224)</span><br><span class="line">at java.util.jar.JarVerifier.verifyCertificate(JarVerifier.java:294)</span><br><span class="line">at java.util.jar.JarVerifier.readCertificates(JarVerifier.java:268)</span><br><span class="line">at java.util.jar.StrictJarFile.&lt;init&gt;(StrictJarFile.java:75)</span><br><span class="line">at android.content.pm.PackageParser.collectCertificates(PackageParser.java:1073)</span><br><span class="line">at android.content.pm.PackageParser.collectCertificates(PackageParser.java:1058)</span><br><span class="line">at com.android.server.pm.PackageManagerService.installPackageLI(PackageManagerService.java:12508)</span><br><span class="line">at com.android.server.pm.PackageManagerService.-wrap25(PackageManagerService.java:-1)</span><br><span class="line">at com.android.server.pm.PackageManagerService$9.run(PackageManagerService.java:10410)</span><br><span class="line">at android.os.Handler.handleCallback(Handler.java:739)</span><br><span class="line">at android.os.Handler.dispatchMessage(Handler.java:95)</span><br><span class="line">at android.os.Looper.loop(Looper.java:148)</span><br><span class="line">at android.os.HandlerThread.run(HandlerThread.java:61)</span><br><span class="line">at com.android.server.ServiceThread.run(ServiceThread.java:46)</span><br></pre></td></tr></table></figure></p>
-<h1 id="核心破解"><a href="#核心破解" class="headerlink" title="核心破解"></a>核心破解</h1><p>com.android.org.conscrypt.OpenSSLSignature.engineVerify</p>
+        <h1 id="Introdution"><a href="#Introdution" class="headerlink" title="Introdution"></a>Introdution</h1><p>Garbage Collection需要完成的事情：</p>
+<ul>
+<li>哪些内存需要回收</li>
+<li>什么时候回收</li>
+<li>如何回收<br>Java GC关注的内存包括堆和方法区。</li>
+</ul>
+<h1 id="如何判断对象已经死亡"><a href="#如何判断对象已经死亡" class="headerlink" title="如何判断对象已经死亡"></a>如何判断对象已经死亡</h1><h2 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h2><h2 id="根搜索算法-GC-Roots"><a href="#根搜索算法-GC-Roots" class="headerlink" title="根搜索算法(GC Roots)"></a>根搜索算法(GC Roots)</h2><h2 id="方法区回收"><a href="#方法区回收" class="headerlink" title="方法区回收"></a>方法区回收</h2><h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h2 id="标记-清除"><a href="#标记-清除" class="headerlink" title="标记-清除"></a>标记-清除</h2><h2 id="标记-复制"><a href="#标记-复制" class="headerlink" title="标记-复制"></a>标记-复制</h2><h2 id="标记-整理"><a href="#标记-整理" class="headerlink" title="标记-整理"></a>标记-整理</h2><h2 id="分代回收算法"><a href="#分代回收算法" class="headerlink" title="分代回收算法"></a>分代回收算法</h2><p>#</p>
 
       
     </div>
@@ -435,7 +437,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android-security/" rel="tag"># android security</a>
+            <a href="/tags/jvm/" rel="tag"># jvm</a>
+          
+            <a href="/tags/gc/" rel="tag"># gc</a>
           
         </div>
       
@@ -448,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/27/c-inherit/" rel="next" title="c++ 继承">
-                <i class="fa fa-chevron-left"></i> c++ 继承
+              <a href="/2019/06/21/Android-ART-Image-File-Format/" rel="next" title="Android ART:Image File Format">
+                <i class="fa fa-chevron-left"></i> Android ART:Image File Format
               </a>
             
           </div>
@@ -457,10 +461,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/29/LeetCode-0050-pow/" rel="prev" title="LeetCode-0050-pow">
-                LeetCode-0050-pow <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -645,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#相关源码"><span class="nav-number">1.</span> <span class="nav-text">相关源码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SignatureSpi"><span class="nav-number">2.</span> <span class="nav-text">SignatureSpi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心破解"><span class="nav-number">3.</span> <span class="nav-text">核心破解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introdution"><span class="nav-number">1.</span> <span class="nav-text">Introdution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何判断对象已经死亡"><span class="nav-number">2.</span> <span class="nav-text">如何判断对象已经死亡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用计数"><span class="nav-number">2.1.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根搜索算法-GC-Roots"><span class="nav-number">2.2.</span> <span class="nav-text">根搜索算法(GC Roots)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法区回收"><span class="nav-number">2.3.</span> <span class="nav-text">方法区回收</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">3.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标记-清除"><span class="nav-number">3.1.</span> <span class="nav-text">标记-清除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标记-复制"><span class="nav-number">3.2.</span> <span class="nav-text">标记-复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标记-整理"><span class="nav-number">3.3.</span> <span class="nav-text">标记-整理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分代回收算法"><span class="nav-number">3.4.</span> <span class="nav-text">分代回收算法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -803,9 +803,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://vforkliu.github.io/2019/05/29/Android-PM/";
-    this.page.identifier = "2019/05/29/Android-PM/";
-    this.page.title = 'Android 安装源码分析';
+    this.page.url = "https://vforkliu.github.io/2019/06/24/JVM-GC/";
+    this.page.identifier = "2019/06/24/JVM-GC/";
+    this.page.title = 'JVM:Garbage Collection';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
