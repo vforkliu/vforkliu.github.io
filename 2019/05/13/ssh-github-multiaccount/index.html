@@ -103,18 +103,18 @@
 
 
 
-  <meta name="description" content="创建ssh-key 并且重命名12cd ~/.sshssh-keygen -t rsa -C &quot;example@example.com&quot; 将ssh-key添加到ssh agent1ssh-add example 配置，将不同账号与ssh-key关联12345vim configHost example    Hostname github.com    PreferredAuthenticatio">
+  <meta name="description" content="创建ssh-key 并且重命名12cd ~/.sshssh-keygen -t rsa -C &quot;example@example.com&quot;  将ssh-key添加到ssh agent1ssh-add example  配置，将不同账号与ssh-key关联12345vim configHost example    Hostname github.com    PreferredAuthenticat">
 <meta name="keywords" content="ssh,github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用SSH配置多个github账号">
 <meta property="og:url" content="https://vforkliu.github.io/2019/05/13/ssh-github-multiaccount/index.html">
 <meta property="og:site_name" content="vforkliu">
-<meta property="og:description" content="创建ssh-key 并且重命名12cd ~/.sshssh-keygen -t rsa -C &quot;example@example.com&quot; 将ssh-key添加到ssh agent1ssh-add example 配置，将不同账号与ssh-key关联12345vim configHost example    Hostname github.com    PreferredAuthenticatio">
+<meta property="og:description" content="创建ssh-key 并且重命名12cd ~/.sshssh-keygen -t rsa -C &quot;example@example.com&quot;  将ssh-key添加到ssh agent1ssh-add example  配置，将不同账号与ssh-key关联12345vim configHost example    Hostname github.com    PreferredAuthenticat">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-05-12T16:16:37.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用SSH配置多个github账号">
-<meta name="twitter:description" content="创建ssh-key 并且重命名12cd ~/.sshssh-keygen -t rsa -C &quot;example@example.com&quot; 将ssh-key添加到ssh agent1ssh-add example 配置，将不同账号与ssh-key关联12345vim configHost example    Hostname github.com    PreferredAuthenticatio">
+<meta name="twitter:description" content="创建ssh-key 并且重命名12cd ~/.sshssh-keygen -t rsa -C &quot;example@example.com&quot;  将ssh-key添加到ssh agent1ssh-add example  配置，将不同账号与ssh-key关联12345vim configHost example    Hostname github.com    PreferredAuthenticat">
 
 
 
@@ -410,10 +410,15 @@
 
       
         <h1 id="创建ssh-key-并且重命名"><a href="#创建ssh-key-并且重命名" class="headerlink" title="创建ssh-key 并且重命名"></a>创建ssh-key 并且重命名</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -C "example@example.com"</span><br></pre></td></tr></table></figure>
+
 <h1 id="将ssh-key添加到ssh-agent"><a href="#将ssh-key添加到ssh-agent" class="headerlink" title="将ssh-key添加到ssh agent"></a>将ssh-key添加到ssh agent</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add example</span><br></pre></td></tr></table></figure>
+
 <h1 id="配置，将不同账号与ssh-key关联"><a href="#配置，将不同账号与ssh-key关联" class="headerlink" title="配置，将不同账号与ssh-key关联"></a>配置，将不同账号与ssh-key关联</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim config</span><br><span class="line">Host example</span><br><span class="line">    Hostname github.com</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/example</span><br></pre></td></tr></table></figure>
+
 <h1 id="在git服务器上添加公钥"><a href="#在git服务器上添加公钥" class="headerlink" title="在git服务器上添加公钥"></a>在git服务器上添加公钥</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat example.pub</span><br></pre></td></tr></table></figure>
+
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T example</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -540,7 +545,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -611,7 +616,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

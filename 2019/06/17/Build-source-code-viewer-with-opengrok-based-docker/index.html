@@ -103,18 +103,18 @@
 
 
 
-  <meta name="description" content="Install images1docker pull opengrok/docker Create opengrok directory12345cd ~mkdir opengrokcd opengrokmkdir srcmkdir data  src:opengrok src root data:opengrok index file  Start docker123456789docker r">
+  <meta name="description" content="Install images1docker pull opengrok/docker  Create opengrok directory12345cd ~mkdir opengrokcd opengrokmkdir srcmkdir data   src:opengrok src root data:opengrok index file  Start docker123456789docker">
 <meta name="keywords" content="opengrok,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Build source code viewer with opengrok based docker">
 <meta property="og:url" content="https://vforkliu.github.io/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/index.html">
 <meta property="og:site_name" content="vforkliu">
-<meta property="og:description" content="Install images1docker pull opengrok/docker Create opengrok directory12345cd ~mkdir opengrokcd opengrokmkdir srcmkdir data  src:opengrok src root data:opengrok index file  Start docker123456789docker r">
+<meta property="og:description" content="Install images1docker pull opengrok/docker  Create opengrok directory12345cd ~mkdir opengrokcd opengrokmkdir srcmkdir data   src:opengrok src root data:opengrok index file  Start docker123456789docker">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-06-17T06:04:26.869Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Build source code viewer with opengrok based docker">
-<meta name="twitter:description" content="Install images1docker pull opengrok/docker Create opengrok directory12345cd ~mkdir opengrokcd opengrokmkdir srcmkdir data  src:opengrok src root data:opengrok index file  Start docker123456789docker r">
+<meta name="twitter:description" content="Install images1docker pull opengrok/docker  Create opengrok directory12345cd ~mkdir opengrokcd opengrokmkdir srcmkdir data   src:opengrok src root data:opengrok index file  Start docker123456789docker">
 
 
 
@@ -410,13 +410,17 @@
 
       
         <h1 id="Install-images"><a href="#Install-images" class="headerlink" title="Install images"></a>Install images</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull opengrok/docker</span><br></pre></td></tr></table></figure>
+
 <h1 id="Create-opengrok-directory"><a href="#Create-opengrok-directory" class="headerlink" title="Create opengrok directory"></a>Create opengrok directory</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">mkdir opengrok</span><br><span class="line">cd opengrok</span><br><span class="line">mkdir src</span><br><span class="line">mkdir data</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>src:opengrok src root</li>
 <li>data:opengrok index file</li>
 </ul>
 <h1 id="Start-docker"><a href="#Start-docker" class="headerlink" title="Start docker"></a>Start docker</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -e REINDEX=0 -v ~/sourceview/src:/opengrok/src -v ~/sourceview/data:/opengrok/data -p 9090:8080 --name opengrok opengrok/docker:latest</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> reindex</span><br><span class="line">docker exec &lt;container&gt; /scripts/index.sh</span><br><span class="line">docker exec opengrok /scripts/index.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> stop container</span><br><span class="line">docker stop opengrok</span><br><span class="line">docker start opengrok</span><br></pre></td></tr></table></figure>
+
 <h1 id="You-can-get-inside-a-container-using-the-command-below"><a href="#You-can-get-inside-a-container-using-the-command-below" class="headerlink" title="You can get inside a container using the command below"></a>You can get inside a container using the command below</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it &lt;container&gt; bash</span><br></pre></td></tr></table></figure>
+
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://hub.docker.com/r/opengrok/docker/" target="_blank" rel="noopener">https://hub.docker.com/r/opengrok/docker/</a></p>
 
       
@@ -544,7 +548,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -615,7 +619,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

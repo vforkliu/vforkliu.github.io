@@ -103,18 +103,18 @@
 
 
 
-  <meta name="description" content="环境安装 frida-server frida-tools12pip3 install fridapip3 install frida-tools   基础用法12frida-ps -Ufrida-trace -U -i &quot;recvfrom&quot; com.android.chrome Javascript example 112345678Java.enumerateLoadedClasses(  &amp;">
+  <meta name="description" content="环境安装 frida-server frida-tools12pip3 install fridapip3 install frida-tools    基础用法12frida-ps -Ufrida-trace -U -i &quot;recvfrom&quot; com.android.chrome  Javascript example 112345678Java.enumerateLoadedClasses(">
 <meta name="keywords" content="android frida">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hacking android app with frida">
 <meta property="og:url" content="https://vforkliu.github.io/2019/04/24/hacking-android-app-with-frida/index.html">
 <meta property="og:site_name" content="vforkliu">
-<meta property="og:description" content="环境安装 frida-server frida-tools12pip3 install fridapip3 install frida-tools   基础用法12frida-ps -Ufrida-trace -U -i &quot;recvfrom&quot; com.android.chrome Javascript example 112345678Java.enumerateLoadedClasses(  &amp;">
+<meta property="og:description" content="环境安装 frida-server frida-tools12pip3 install fridapip3 install frida-tools    基础用法12frida-ps -Ufrida-trace -U -i &quot;recvfrom&quot; com.android.chrome  Javascript example 112345678Java.enumerateLoadedClasses(">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-04-24T10:04:47.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hacking android app with frida">
-<meta name="twitter:description" content="环境安装 frida-server frida-tools12pip3 install fridapip3 install frida-tools   基础用法12frida-ps -Ufrida-trace -U -i &quot;recvfrom&quot; com.android.chrome Javascript example 112345678Java.enumerateLoadedClasses(  &amp;">
+<meta name="twitter:description" content="环境安装 frida-server frida-tools12pip3 install fridapip3 install frida-tools    基础用法12frida-ps -Ufrida-trace -U -i &quot;recvfrom&quot; com.android.chrome  Javascript example 112345678Java.enumerateLoadedClasses(">
 
 
 
@@ -412,12 +412,17 @@
         <h1 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h1><ul>
 <li>frida-server</li>
 <li>frida-tools<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install frida</span><br><span class="line">pip3 install frida-tools</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h1 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frida-ps -U</span><br><span class="line">frida-trace -U -i "recvfrom" com.android.chrome</span><br></pre></td></tr></table></figure>
+
 <h2 id="Javascript-example-1"><a href="#Javascript-example-1" class="headerlink" title="Javascript example 1"></a>Javascript example 1</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Java.enumerateLoadedClasses(</span><br><span class="line">  &#123;</span><br><span class="line">  <span class="string">"onMatch"</span>: <span class="function"><span class="keyword">function</span>(<span class="params">className</span>)</span>&#123; </span><br><span class="line">        <span class="built_in">console</span>.log(className) </span><br><span class="line">    &#125;,</span><br><span class="line">  <span class="string">"onComplete"</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
 <h2 id="Javascript-example-2-chrome-js"><a href="#Javascript-example-2-chrome-js" class="headerlink" title="Javascript example 2:chrome.js"></a>Javascript example 2:chrome.js</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Java.perform(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> Activity = Java.use(<span class="string">"android.app.Activity"</span>);</span><br><span class="line">    Activity.onResume.implementation = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"[*] onResume() got called!"</span>);</span><br><span class="line">        <span class="keyword">this</span>.onResume();</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frida -U -l chrome.js com.android.chrome</span><br></pre></td></tr></table></figure>
+
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://www.frida.re/docs/home/" target="_blank" rel="noopener">https://www.frida.re/docs/home/</a></p>
 
       
@@ -543,7 +548,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -614,7 +619,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

@@ -422,9 +422,13 @@
 <p>在Android Studio里如果想查看某个函数（如startActivity）的实现，可以右键跳转到源文件，前提是你下载了对应版本的源码。这里的源码是指android sdk某个版本号（如android-27）的源码。但是在调试的时候，报告源码不匹配，就是说与手机里那一份代码不一样，导致函数的行号对不上。<br>下面介绍制作一个android-27的源码包方法</p>
 <h2 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h2><p>查看手机的Build Number，在设置里查看。笔者手机的Build Number是OPM1.171019.016，然后在Google源码官网上比对对应的Branch Name，通过比较发现对应的Branch Name是android-8.1.0_r10。</p>
 <h2 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd android-sdk-source-code</span><br><span class="line">mkdir –p frameworks/base</span><br><span class="line">git clone --depth 1 https://android.googlesource.com/platform/frameworks/base -b android-8.1.0_r10 frameworks/base</span><br><span class="line">git clone --depth 1 https://android.googlesource.com/platform/libcore -b android-8.1.0_r10</span><br><span class="line">git clone --depth 1 https://android.googlesource.com/platform/development -b android-8.1.0_r10</span><br></pre></td></tr></table></figure>
+
 <h2 id="创建source-properties"><a href="#创建source-properties" class="headerlink" title="创建source.properties"></a>创建source.properties</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -e "Pkg.UserSrc=false\nPkg.Revision=1\nAndroidVersion.ApiLevel=27" &gt; source.properties</span><br></pre></td></tr></table></figure>
+
 <h2 id="修改脚本"><a href="#修改脚本" class="headerlink" title="修改脚本"></a>修改脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat development/build/tools/mk_sources_zip.py | sed -e 's/TOP_FOLDER = .*/TOP_FOLDER = "android-27"/' &gt; my_mk_sources_zip.py</span><br></pre></td></tr></table></figure>
+
 <h2 id="打包源码android-27-sources-zip"><a href="#打包源码android-27-sources-zip" class="headerlink" title="打包源码android-27-sources.zip"></a>打包源码android-27-sources.zip</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python my_mk_sources_zip.py -z source.properties android-27-sources.zip</span><br></pre></td></tr></table></figure>
+
 <h2 id="替换android-sdk并重启Android-Studio"><a href="#替换android-sdk并重启Android-Studio" class="headerlink" title="替换android-sdk并重启Android Studio"></a>替换android-sdk并重启Android Studio</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip android-27-sources.zip -d $&#123;ANDROID_HOME&#125;/sources</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -549,7 +553,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -620,7 +624,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

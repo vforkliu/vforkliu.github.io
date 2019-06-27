@@ -103,18 +103,18 @@
 
 
 
-  <meta name="description" content="IntrodutionGarbage Collection需要完成的事情：  哪些内存需要回收 什么时候回收 如何回收Java GC关注的内存包括堆和方法区。  如何判断对象已经死亡引用计数根搜索算法(GC Roots)方法区回收垃圾收集算法标记-清除标记-复制标记-整理分代回收算法#">
-<meta name="keywords" content="jvm,gc">
+  <meta name="description" content="概念程序是一系列指令的集合，通常存为可执行文件。进程是程序的执行过程。 进程属性使用ps可以查看系统正在运行的进程。 ps –help显示该命令的用法。 12345678910ps -e -o USER,PID,PPID,GID,NAMEUSER           PID  PPID      GID NAME                        CMD            root">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM:Garbage Collection">
-<meta property="og:url" content="https://vforkliu.github.io/2019/06/24/JVM-GC/index.html">
+<meta property="og:title" content="Linux Process">
+<meta property="og:url" content="https://vforkliu.github.io/2019/06/27/Linux-Process/index.html">
 <meta property="og:site_name" content="vforkliu">
-<meta property="og:description" content="IntrodutionGarbage Collection需要完成的事情：  哪些内存需要回收 什么时候回收 如何回收Java GC关注的内存包括堆和方法区。  如何判断对象已经死亡引用计数根搜索算法(GC Roots)方法区回收垃圾收集算法标记-清除标记-复制标记-整理分代回收算法#">
+<meta property="og:description" content="概念程序是一系列指令的集合，通常存为可执行文件。进程是程序的执行过程。 进程属性使用ps可以查看系统正在运行的进程。 ps –help显示该命令的用法。 12345678910ps -e -o USER,PID,PPID,GID,NAMEUSER           PID  PPID      GID NAME                        CMD            root">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-24T07:24:53.534Z">
+<meta property="og:updated_time" content="2019-06-27T10:39:41.944Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM:Garbage Collection">
-<meta name="twitter:description" content="IntrodutionGarbage Collection需要完成的事情：  哪些内存需要回收 什么时候回收 如何回收Java GC关注的内存包括堆和方法区。  如何判断对象已经死亡引用计数根搜索算法(GC Roots)方法区回收垃圾收集算法标记-清除标记-复制标记-整理分代回收算法#">
+<meta name="twitter:title" content="Linux Process">
+<meta name="twitter:description" content="概念程序是一系列指令的集合，通常存为可执行文件。进程是程序的执行过程。 进程属性使用ps可以查看系统正在运行的进程。 ps –help显示该命令的用法。 12345678910ps -e -o USER,PID,PPID,GID,NAMEUSER           PID  PPID      GID NAME                        CMD            root">
 
 
 
@@ -124,7 +124,7 @@
 
   
   
-  <link rel="canonical" href="https://vforkliu.github.io/2019/06/24/JVM-GC/">
+  <link rel="canonical" href="https://vforkliu.github.io/2019/06/27/Linux-Process/">
 
 
 
@@ -134,7 +134,7 @@
   };
 </script>
 
-  <title>JVM:Garbage Collection | vforkliu</title>
+  <title>Linux Process | vforkliu</title>
   
 
 
@@ -314,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/24/JVM-GC/">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/27/Linux-Process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
@@ -331,7 +331,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JVM:Garbage Collection
+          <h1 class="post-title" itemprop="name headline">Linux Process
 
               
             
@@ -357,7 +357,7 @@
                 
               
 
-              <time title="Created: 2019-06-24 14:39:26 / Modified: 15:24:53" itemprop="dateCreated datePublished" datetime="2019-06-24T14:39:26+08:00">2019-06-24</time>
+              <time title="Created: 2019-06-27 17:34:15 / Modified: 18:39:41" itemprop="dateCreated datePublished" datetime="2019-06-27T17:34:15+08:00">2019-06-27</time>
             
 
             
@@ -380,8 +380,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/06/24/JVM-GC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/24/JVM-GC/" itemprop="commentCount"></span>
+                <a href="/2019/06/27/Linux-Process/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/27/Linux-Process/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -409,13 +409,13 @@
       
 
       
-        <h1 id="Introdution"><a href="#Introdution" class="headerlink" title="Introdution"></a>Introdution</h1><p>Garbage Collection需要完成的事情：</p>
-<ul>
-<li>哪些内存需要回收</li>
-<li>什么时候回收</li>
-<li>如何回收<br>Java GC关注的内存包括堆和方法区。</li>
-</ul>
-<h1 id="如何判断对象已经死亡"><a href="#如何判断对象已经死亡" class="headerlink" title="如何判断对象已经死亡"></a>如何判断对象已经死亡</h1><h2 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h2><h2 id="根搜索算法-GC-Roots"><a href="#根搜索算法-GC-Roots" class="headerlink" title="根搜索算法(GC Roots)"></a>根搜索算法(GC Roots)</h2><h2 id="方法区回收"><a href="#方法区回收" class="headerlink" title="方法区回收"></a>方法区回收</h2><h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h2 id="标记-清除"><a href="#标记-清除" class="headerlink" title="标记-清除"></a>标记-清除</h2><h2 id="标记-复制"><a href="#标记-复制" class="headerlink" title="标记-复制"></a>标记-复制</h2><h2 id="标记-整理"><a href="#标记-整理" class="headerlink" title="标记-整理"></a>标记-整理</h2><h2 id="分代回收算法"><a href="#分代回收算法" class="headerlink" title="分代回收算法"></a>分代回收算法</h2><p>#</p>
+        <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>程序是一系列指令的集合，通常存为可执行文件。进程是程序的执行过程。</p>
+<h1 id="进程属性"><a href="#进程属性" class="headerlink" title="进程属性"></a>进程属性</h1><p>使用ps可以查看系统正在运行的进程。 ps –help显示该命令的用法。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ps -e -o USER,PID,PPID,GID,NAME</span><br><span class="line">USER           PID  PPID      GID NAME                        CMD            </span><br><span class="line">root             1     0        0 init                        init</span><br><span class="line">root             2     0        0 [kthreadd]                  kthreadd</span><br><span class="line">root             3     2        0 [ksoftirqd/0]               ksoftirqd/0</span><br><span class="line">root             5     2        0 [kworker/0:0H]              kworker/0:0H</span><br><span class="line">root             6     2        0 [kworker/u16:0]             kworker/u16:0</span><br><span class="line">root             7     2        0 [rcu_preempt]               rcu_preempt</span><br><span class="line">root             8     2        0 [rcu_sched]                 rcu_sched</span><br><span class="line">root             9     2        0 [rcu_bh]                    rcu_bh</span><br></pre></td></tr></table></figure>
+
+<p>USER: 进程所属用户的ID<br>PID:进程ID<br>PPID:父进程的ID<br>GID:进程组ID<br>NAME:进程名</p>
+<h1 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h1><p>使用fork创建的子进程，父进程应该调用wait函数，等待子进程的退出信息，如果父进程先结束，子进程将变成孤儿进程，过继给init进程，<br>init进程成为它的父进程。</p>
+<h1 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h1><p>进程组包含多个进程，进程组会有一个领导进程(process group leader)，该领导进程的PID将作为进程组的PGID。</p>
 
       
     </div>
@@ -439,9 +439,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/jvm/" rel="tag"># jvm</a>
-          
-            <a href="/tags/gc/" rel="tag"># gc</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
         </div>
       
@@ -454,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/21/Android-ART-Image-File-Format/" rel="next" title="Android ART:Image File Format">
-                <i class="fa fa-chevron-left"></i> Android ART:Image File Format
+              <a href="/2019/06/26/The-Implementation-Details-of-Android-s-force-stop/" rel="next" title="The Implementation Details of Android's force-stop">
+                <i class="fa fa-chevron-left"></i> The Implementation Details of Android's force-stop
               </a>
             
           </div>
@@ -463,10 +461,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/26/The-Implementation-Details-of-Android-s-force-stop/" rel="prev" title="The Implementation Details of Android's force-stop">
-                The Implementation Details of Android's force-stop <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -662,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introdution"><span class="nav-number">1.</span> <span class="nav-text">Introdution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何判断对象已经死亡"><span class="nav-number">2.</span> <span class="nav-text">如何判断对象已经死亡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用计数"><span class="nav-number">2.1.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根搜索算法-GC-Roots"><span class="nav-number">2.2.</span> <span class="nav-text">根搜索算法(GC Roots)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法区回收"><span class="nav-number">2.3.</span> <span class="nav-text">方法区回收</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">3.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标记-清除"><span class="nav-number">3.1.</span> <span class="nav-text">标记-清除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标记-复制"><span class="nav-number">3.2.</span> <span class="nav-text">标记-复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标记-整理"><span class="nav-number">3.3.</span> <span class="nav-text">标记-整理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分代回收算法"><span class="nav-number">3.4.</span> <span class="nav-text">分代回收算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程属性"><span class="nav-number">2.</span> <span class="nav-text">进程属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#孤儿进程"><span class="nav-number">3.</span> <span class="nav-text">孤儿进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程组"><span class="nav-number">4.</span> <span class="nav-text">进程组</span></a></li></ol></div>
             
 
           </div>
@@ -820,9 +814,9 @@
 
 <script>
   var disqus_config = function() {
-    this.page.url = "https://vforkliu.github.io/2019/06/24/JVM-GC/";
-    this.page.identifier = "2019/06/24/JVM-GC/";
-    this.page.title = 'JVM:Garbage Collection';
+    this.page.url = "https://vforkliu.github.io/2019/06/27/Linux-Process/";
+    this.page.identifier = "2019/06/27/Linux-Process/";
+    this.page.title = 'Linux Process';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');

@@ -410,10 +410,14 @@
 
       
         <h1 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">    --rm \</span><br><span class="line">    -it \</span><br><span class="line">    -e USER_ID=1001 \</span><br><span class="line">    -e GROUP_ID=1002 \</span><br><span class="line">    -v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro \</span><br><span class="line">    -v /home/liujun.sun/aosp-6.0.1_r80/aosp:/aosp \</span><br><span class="line">    -v /home/liujun.sun/aosp-6.0.1_r80/ccache:/tmp/ccache \</span><br><span class="line">    kylemanna/aosp:6.0-marshmallow \</span><br><span class="line">    bash run.sh docker</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[-v|--volume[=[[HOST-DIR:]CONTAINER-DIR[:OPTIONS]]]]</span><br><span class="line">          Create a bind mount. If you specify, -v /HOST-DIR:/CONTAINER-DIR, Docker</span><br><span class="line">          bind mounts /HOST-DIR in the host to /CONTAINER-DIR in the Docker</span><br><span class="line">          container.</span><br><span class="line">-v /data00/home/liujun.sun/aosp-6.0.1_r80/build-test.sh:/usr/local/bin/run.sh:ro</span><br><span class="line">        ro:read-only mode</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-e Set environment variables</span><br><span class="line">-i, --interactive=true|false</span><br><span class="line">          Keep STDIN open even if not attached. The default is false.</span><br><span class="line">          保证容器中STDIN是开启的</span><br><span class="line">-t, --tty=true|false</span><br><span class="line">          Allocate a pseudo-TTY. The default is false.</span><br><span class="line">          告诉Docker为要创建的容器分配一个伪tty终端。这样，新创建的容器才能提供一个交互式shell。</span><br><span class="line">--rm true|false</span><br><span class="line">    Automatically remove the container when it exits. The default is false.</span><br></pre></td></tr></table></figure>
+
 <h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><ul>
 <li>删除所有容器<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm `docker ps -a -q`</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 
@@ -540,7 +544,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -611,7 +615,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

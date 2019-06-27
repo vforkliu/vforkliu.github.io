@@ -313,6 +313,350 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/13/android-progressbar-circle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vforkliu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/13/android-progressbar-circle/" class="post-title-link" itemprop="url">android progressbar circle</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-13 14:37:26 / Modified: 17:10:55" itemprop="dateCreated datePublished" datetime="2019-05-13T14:37:26+08:00">2019-05-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/05/13/android-progressbar-circle/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/13/android-progressbar-circle/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">shape</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:shape</span>=<span class="string">[</span>"<span class="attr">rectangle</span>" | "<span class="attr">oval</span>" | "<span class="attr">line</span>" | "<span class="attr">ring</span>"] </span></span><br><span class="line"><span class="tag">    <span class="attr">android:innerRadius</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:innerRadiusRatio</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:thickness</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:thicknessRatio</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:useLevel</span>=<span class="string">"boolean"</span></span></span><br><span class="line"><span class="tag">    &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">corners</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:radius</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:topLeftRadius</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:topRightRadius</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:bottomLeftRadius</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:bottomRightRadius</span>=<span class="string">"integer"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">gradient</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:angle</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:centerX</span>=<span class="string">"float"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:centerY</span>=<span class="string">"float"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:centerColor</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:endColor</span>=<span class="string">"color"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:gradientRadius</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:startColor</span>=<span class="string">"color"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:type</span>=<span class="string">[</span>"<span class="attr">linear</span>" | "<span class="attr">radial</span>" | "<span class="attr">sweep</span>"]</span></span><br><span class="line"><span class="tag">        <span class="attr">android:useLevel</span>=<span class="string">[</span>"<span class="attr">true</span>" | "<span class="attr">false</span>"] /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">padding</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:left</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:top</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:right</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:bottom</span>=<span class="string">"integer"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">size</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:width</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:height</span>=<span class="string">"integer"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">solid</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:color</span>=<span class="string">"color"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">stroke</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:width</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:color</span>=<span class="string">"color"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:dashWidth</span>=<span class="string">"integer"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:dashGap</span>=<span class="string">"integer"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">shape</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>android:innerRadius : 指定圆环内圆的半径</p>
+<p>android:innerRadiusRatio :该值是以比例的形式来指定内圆半径。内圆半径等于该shape的宽除以该值。或者说该值的倒数代表了内圆半径占整个shape宽的比例。默认值是9。当该值等于2的时候，内圆就将占满整个shape，从而我们将看不到圆环。</p>
+<p>android:thickness : 指定圆环的宽窄，也就是内圆与外圆的距离。</p>
+<p>android:thicknessRatio : 以比例的形式来指定圆环的宽窄。其算法与innerRadiusRatio相同。</p>
+<p>android:useLevel :值为true意味着这是一个levelListDrawable（关于levelListDrawable又是另一个话题了）。当我们要画一个圆环是，应当而且必须将该值设为false，否则会看不到画面。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://demonuts.com/circular-progress-bar/" target="_blank" rel="noopener">https://demonuts.com/circular-progress-bar/</a><br><a href="https://medium.com/@evanca/android-tutorial-for-beginners-create-a-pie-chart-with-xml-36e67dabe67f" target="_blank" rel="noopener">https://medium.com/@evanca/android-tutorial-for-beginners-create-a-pie-chart-with-xml-36e67dabe67f</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/13/Java-Tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vforkliu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/13/Java-Tips/" class="post-title-link" itemprop="url">Java 知识点</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-13 11:06:28" itemprop="dateCreated datePublished" datetime="2019-05-13T11:06:28+08:00">2019-05-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-05-14 16:59:01" itemprop="dateModified" datetime="2019-05-14T16:59:01+08:00">2019-05-14</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/05/13/Java-Tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/13/Java-Tips/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h1><p>变长参数是 Java 的一个语法糖，本质上还是基于数组的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Foo</span><span class="params">(String... args)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Foo</span><span class="params">(String[] args)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Method signature</span></span><br><span class="line">([Ljava/lang/String;)V <span class="comment">// public void foo(String[] args)</span></span><br></pre></td></tr></table></figure>
+
+<p>注意事项：</p>
+<ul>
+<li>可变参数只能作为函数的最后一个参数，但其前面可以有也可以没有任何其他参数</li>
+<li>由于可变参数必须是最后一个参数，所以一个函数最多只能有一个可变参数</li>
+<li>Java的可变参数，会被编译器转型为一个数组</li>
+</ul>
+<h1 id="关键字-transient"><a href="#关键字-transient" class="headerlink" title="关键字 transient"></a>关键字 transient</h1><ul>
+<li>一旦变量被transient修饰，变量将不再是对象持久化的一部分，该变量内容在序列化后无法获得访问。</li>
+<li>transient关键字只能修饰变量，而不能修饰方法和类。注意，本地变量是不能被transient关键字修饰的。变量如果是用户自定义类变量，则该类需要实现Serializable接口。</li>
+<li>被transient关键字修饰的变量不再能被序列化，一个静态变量不管是否被transient修饰，均不能被序列化。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/13/ssh-github-multiaccount/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -413,10 +757,15 @@
         
           
             <h1 id="创建ssh-key-并且重命名"><a href="#创建ssh-key-并且重命名" class="headerlink" title="创建ssh-key 并且重命名"></a>创建ssh-key 并且重命名</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ssh-keygen -t rsa -C "example@example.com"</span><br></pre></td></tr></table></figure>
+
 <h1 id="将ssh-key添加到ssh-agent"><a href="#将ssh-key添加到ssh-agent" class="headerlink" title="将ssh-key添加到ssh agent"></a>将ssh-key添加到ssh agent</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add example</span><br></pre></td></tr></table></figure>
+
 <h1 id="配置，将不同账号与ssh-key关联"><a href="#配置，将不同账号与ssh-key关联" class="headerlink" title="配置，将不同账号与ssh-key关联"></a>配置，将不同账号与ssh-key关联</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim config</span><br><span class="line">Host example</span><br><span class="line">    Hostname github.com</span><br><span class="line">    PreferredAuthentications publickey</span><br><span class="line">    IdentityFile ~/.ssh/example</span><br></pre></td></tr></table></figure>
+
 <h1 id="在git服务器上添加公钥"><a href="#在git服务器上添加公钥" class="headerlink" title="在git服务器上添加公钥"></a>在git服务器上添加公钥</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat example.pub</span><br></pre></td></tr></table></figure>
+
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T example</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -576,14 +925,18 @@
 <h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>使用7z压缩文件时，对文件名的编码是采用Windows 系统默认字符集，而不是unicode编码。</p>
 <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><ul>
 <li>使用python重命名<br>先解压，然后使用如下代码重命名<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- encoding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    names = os.listdir(<span class="string">"."</span>)</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        new_name = name.encode(<span class="string">"cp437"</span>).decode(<span class="string">"gbk"</span>)</span><br><span class="line">        os.rename(name,new_name)</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <p>在Windows下python对文件名编码使用cp437或者utf8，name 这个字符串是经过cp437解码得到的unicode。<br>unicode 转为 bytes 采用encode<br>bytes 转为 unicode 采用decode</p>
 <ul>
 <li>在7z压缩时使用utf8编码文件名<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z a -tzip -mcu examples.zip examples/</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-<h1 id="代码页"><a href="#代码页" class="headerlink" title="代码页"></a>代码页</h1><p>在Windows 10 Pro 上默认的代码页是cp437 这个代码页不能表示中文字符<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准输出的编码</span></span><br><span class="line">sys.stdout.encoding</span><br><span class="line"><span class="comment"># 系统本地化设置的编码</span></span><br><span class="line">locale.getpreferredencoding()</span><br></pre></td></tr></table></figure></p>
+<h1 id="代码页"><a href="#代码页" class="headerlink" title="代码页"></a>代码页</h1><p>在Windows 10 Pro 上默认的代码页是cp437 这个代码页不能表示中文字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准输出的编码</span></span><br><span class="line">sys.stdout.encoding</span><br><span class="line"><span class="comment"># 系统本地化设置的编码</span></span><br><span class="line">locale.getpreferredencoding()</span><br></pre></td></tr></table></figure>
+
 <p>代码页这个东西太神奇了，还是采用mac或者linux吧。</p>
 
           
@@ -894,12 +1247,17 @@
             <h1 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h1><ul>
 <li>frida-server</li>
 <li>frida-tools<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install frida</span><br><span class="line">pip3 install frida-tools</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h1 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frida-ps -U</span><br><span class="line">frida-trace -U -i "recvfrom" com.android.chrome</span><br></pre></td></tr></table></figure>
+
 <h2 id="Javascript-example-1"><a href="#Javascript-example-1" class="headerlink" title="Javascript example 1"></a>Javascript example 1</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Java.enumerateLoadedClasses(</span><br><span class="line">  &#123;</span><br><span class="line">  <span class="string">"onMatch"</span>: <span class="function"><span class="keyword">function</span>(<span class="params">className</span>)</span>&#123; </span><br><span class="line">        <span class="built_in">console</span>.log(className) </span><br><span class="line">    &#125;,</span><br><span class="line">  <span class="string">"onComplete"</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
 <h2 id="Javascript-example-2-chrome-js"><a href="#Javascript-example-2-chrome-js" class="headerlink" title="Javascript example 2:chrome.js"></a>Javascript example 2:chrome.js</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Java.perform(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> Activity = Java.use(<span class="string">"android.app.Activity"</span>);</span><br><span class="line">    Activity.onResume.implementation = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"[*] onResume() got called!"</span>);</span><br><span class="line">        <span class="keyword">this</span>.onResume();</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frida -U -l chrome.js com.android.chrome</span><br></pre></td></tr></table></figure>
+
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://www.frida.re/docs/home/" target="_blank" rel="noopener">https://www.frida.re/docs/home/</a></p>
 
           
@@ -1056,23 +1414,35 @@
       
         
           
-            <h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>目标进程需要打开调试开关,android:debuggable=true<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb shell am profile start com.tencent.mm /data/local/tmp/1.trace</span><br><span class="line">adb shell am profile stop com.tencent.mm</span><br><span class="line">adb pull /data/local/tmp/1.trace</span><br><span class="line">~/adt-2014/sdk/tools/traceview 1.trace</span><br></pre></td></tr></table></figure></p>
-<h1 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h1><p><a href="http://androidxref.com/6.0.1_r10/xref/art/runtime/trace.h" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/art/runtime/trace.h</a><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> TracingMode &#123;</span><br><span class="line">  kTracingInactive,</span><br><span class="line">  kMethodTracingActive,</span><br><span class="line">  kSampleProfilingActive,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// File format:</span></span><br><span class="line"><span class="comment">//     header</span></span><br><span class="line"><span class="comment">//     record 0</span></span><br><span class="line"><span class="comment">//     record 1</span></span><br><span class="line"><span class="comment">//     ...</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Header format:</span></span><br><span class="line"><span class="comment">//     u4  magic ('SLOW')</span></span><br><span class="line"><span class="comment">//     u2  version</span></span><br><span class="line"><span class="comment">//     u2  offset to data</span></span><br><span class="line"><span class="comment">//     u8  start date/time in usec</span></span><br><span class="line"><span class="comment">//     u2  record size in bytes (version &gt;= 2 only)</span></span><br><span class="line"><span class="comment">//     ... padding to 32 bytes</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Record format v1:</span></span><br><span class="line"><span class="comment">//     u1  thread ID</span></span><br><span class="line"><span class="comment">//     u4  method ID | method action</span></span><br><span class="line"><span class="comment">//     u4  time delta since start, in usec</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Record format v2:</span></span><br><span class="line"><span class="comment">//     u2  thread ID</span></span><br><span class="line"><span class="comment">//     u4  method ID | method action</span></span><br><span class="line"><span class="comment">//     u4  time delta since start, in usec</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Record format v3:</span></span><br><span class="line"><span class="comment">//     u2  thread ID</span></span><br><span class="line"><span class="comment">//     u4  method ID | method action</span></span><br><span class="line"><span class="comment">//     u4  time delta since start, in usec</span></span><br><span class="line"><span class="comment">//     u4  wall time since start, in usec (when clock == "dual" only)</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 32 bits of microseconds is 70 minutes.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// All values are stored in little-endian order.</span></span><br><span class="line"><span class="keyword">enum</span> TraceAction &#123;</span><br><span class="line">    kTraceMethodEnter = <span class="number">0x00</span>,       <span class="comment">// method entry</span></span><br><span class="line">    kTraceMethodExit = <span class="number">0x01</span>,        <span class="comment">// method exit</span></span><br><span class="line">    kTraceUnroll = <span class="number">0x02</span>,            <span class="comment">// method exited by exception unrolling</span></span><br><span class="line">    <span class="comment">// 0x03 currently unused</span></span><br><span class="line">    kTraceMethodActionMask = <span class="number">0x03</span>,  <span class="comment">// two bits</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+            <h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>目标进程需要打开调试开关,android:debuggable=true</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb shell am profile start com.tencent.mm /data/local/tmp/1.trace</span><br><span class="line">adb shell am profile stop com.tencent.mm</span><br><span class="line">adb pull /data/local/tmp/1.trace</span><br><span class="line">~/adt-2014/sdk/tools/traceview 1.trace</span><br></pre></td></tr></table></figure>
+
+<h1 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h1><p><a href="http://androidxref.com/6.0.1_r10/xref/art/runtime/trace.h" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/art/runtime/trace.h</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> TracingMode &#123;</span><br><span class="line">  kTracingInactive,</span><br><span class="line">  kMethodTracingActive,</span><br><span class="line">  kSampleProfilingActive,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// File format:</span></span><br><span class="line"><span class="comment">//     header</span></span><br><span class="line"><span class="comment">//     record 0</span></span><br><span class="line"><span class="comment">//     record 1</span></span><br><span class="line"><span class="comment">//     ...</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Header format:</span></span><br><span class="line"><span class="comment">//     u4  magic ('SLOW')</span></span><br><span class="line"><span class="comment">//     u2  version</span></span><br><span class="line"><span class="comment">//     u2  offset to data</span></span><br><span class="line"><span class="comment">//     u8  start date/time in usec</span></span><br><span class="line"><span class="comment">//     u2  record size in bytes (version &gt;= 2 only)</span></span><br><span class="line"><span class="comment">//     ... padding to 32 bytes</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Record format v1:</span></span><br><span class="line"><span class="comment">//     u1  thread ID</span></span><br><span class="line"><span class="comment">//     u4  method ID | method action</span></span><br><span class="line"><span class="comment">//     u4  time delta since start, in usec</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Record format v2:</span></span><br><span class="line"><span class="comment">//     u2  thread ID</span></span><br><span class="line"><span class="comment">//     u4  method ID | method action</span></span><br><span class="line"><span class="comment">//     u4  time delta since start, in usec</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Record format v3:</span></span><br><span class="line"><span class="comment">//     u2  thread ID</span></span><br><span class="line"><span class="comment">//     u4  method ID | method action</span></span><br><span class="line"><span class="comment">//     u4  time delta since start, in usec</span></span><br><span class="line"><span class="comment">//     u4  wall time since start, in usec (when clock == "dual" only)</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 32 bits of microseconds is 70 minutes.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// All values are stored in little-endian order.</span></span><br><span class="line"><span class="keyword">enum</span> TraceAction &#123;</span><br><span class="line">    kTraceMethodEnter = <span class="number">0x00</span>,       <span class="comment">// method entry</span></span><br><span class="line">    kTraceMethodExit = <span class="number">0x01</span>,        <span class="comment">// method exit</span></span><br><span class="line">    kTraceUnroll = <span class="number">0x02</span>,            <span class="comment">// method exited by exception unrolling</span></span><br><span class="line">    <span class="comment">// 0x03 currently unused</span></span><br><span class="line">    kTraceMethodActionMask = <span class="number">0x03</span>,  <span class="comment">// two bits</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <h1 id="原理解析"><a href="#原理解析" class="headerlink" title="原理解析"></a>原理解析</h1><p>Android 6.0.1</p>
 <ul>
 <li>服务进程<br><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java#19543" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java#19543</a></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">profileControl</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    String process,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> userId,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">boolean</span> start,</span></span></span><br><span class="line"><span class="function"><span class="params">    ProfilerInfo profilerInfo,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> profileType</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span> <span class="keyword">throws</span> RemoteException</span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    ProcessRecord proc = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (process != <span class="keyword">null</span>)&#123;</span><br><span class="line">        proc = findProcessLocked(process,userId,<span class="string">"profileControl"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">if</span> (start)&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        proc.thread.profileControl(start,profilerInfo,profileType);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>目标进程<br><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#914" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#914</a><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">proilerControl</span><span class="params">(<span class="keyword">boolean</span> start,ProfilerInfo profilerInfo, <span class="keyword">int</span> profileType)</span> </span>&#123;</span><br><span class="line">    sendMessage(H.PROFILER_CONTROL, profilerInfo, start ? <span class="number">1</span> : <span class="number">0</span>, profileType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-<p><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#handleProfilerControl" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#handleProfilerControl</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">handleProfilerControl</span><span class="params">(<span class="keyword">boolean</span> start, ProfilerInfo profilerInfo, <span class="keyword">int</span> profileType)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (start)&#123;</span><br><span class="line">        mProfiler.startProfiling();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        mProfiler.stopProfiling();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#startProfiling" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#startProfiling</a><br><a href="http://androidxref.com/6.0.1_r10/xref/libcore/dalvik/src/main/java/dalvik/system/VMDebug.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/libcore/dalvik/src/main/java/dalvik/system/VMDebug.java</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startProfiling</span><span class="params">()</span></span>&#123;</span><br><span class="line">    VMDebug.startMethodTracing(profileFile, profileFd.getFileDescriptor(),</span><br><span class="line">        <span class="number">8</span> * <span class="number">1024</span> * <span class="number">1024</span>, <span class="number">0</span>, samplingInterval != <span class="number">0</span>, samplingInterval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#handleProfilerControl" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#handleProfilerControl</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">handleProfilerControl</span><span class="params">(<span class="keyword">boolean</span> start, ProfilerInfo profilerInfo, <span class="keyword">int</span> profileType)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (start)&#123;</span><br><span class="line">        mProfiler.startProfiling();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        mProfiler.stopProfiling();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#startProfiling" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/frameworks/base/core/java/android/app/ActivityThread.java#startProfiling</a><br><a href="http://androidxref.com/6.0.1_r10/xref/libcore/dalvik/src/main/java/dalvik/system/VMDebug.java" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/libcore/dalvik/src/main/java/dalvik/system/VMDebug.java</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startProfiling</span><span class="params">()</span></span>&#123;</span><br><span class="line">    VMDebug.startMethodTracing(profileFile, profileFd.getFileDescriptor(),</span><br><span class="line">        <span class="number">8</span> * <span class="number">1024</span> * <span class="number">1024</span>, <span class="number">0</span>, samplingInterval != <span class="number">0</span>, samplingInterval);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>Native</li>
 </ul>
-<p><a href="http://androidxref.com/6.0.1_r10/xref/art/runtime/native/dalvik_system_VMDebug.cc#116" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/art/runtime/native/dalvik_system_VMDebug.cc#116</a><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">VMDebug_startMethodTracingFilename</span><span class="params">(JNIEnv* env, jclass, jstring javaTraceFilename,</span></span></span><br><span class="line"><span class="function"><span class="params">    jint bufferSize, jint flags,</span></span></span><br><span class="line"><span class="function"><span class="params">    jboolean samplingEnabled, jint intervalUs)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://androidxref.com/6.0.1_r10/xref/art/runtime/native/dalvik_system_VMDebug.cc#116" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/art/runtime/native/dalvik_system_VMDebug.cc#116</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">VMDebug_startMethodTracingFilename</span><span class="params">(JNIEnv* env, jclass, jstring javaTraceFilename,</span></span></span><br><span class="line"><span class="function"><span class="params">    jint bufferSize, jint flags,</span></span></span><br><span class="line"><span class="function"><span class="params">    jboolean samplingEnabled, jint intervalUs)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -1393,8 +1763,7 @@
           
             <h1 id="WebView"><a href="#WebView" class="headerlink" title="WebView"></a>WebView</h1><p>WebView 为什么可以执行Javascript代码？<br>WebViewClient 是什么？</p>
 <p>addJavascriptInterface</p>
-<h2 id="Android-call-JavaScript"><a href="#Android-call-JavaScript" class="headerlink" title="Android call JavaScript"></a>Android call JavaScript</h2><h3 id="loadUrl"><a href="#loadUrl" class="headerlink" title="loadUrl()"></a>loadUrl()</h3><h3 id="evaluateJavascript"><a href="#evaluateJavascript" class="headerlink" title="evaluateJavascript()"></a>evaluateJavascript()</h3><h2 id="JavaScript-call-Android"><a href="#JavaScript-call-Android" class="headerlink" title="JavaScript call Android"></a>JavaScript call Android</h2><h3 id="addJavascriptInterface"><a href="#addJavascriptInterface" class="headerlink" title="addJavascriptInterface"></a>addJavascriptInterface</h3><pre><code>注解@JavascriptInterface
-</code></pre><p>在android4.2之前有个严重漏洞，Js通过webview获取android对象后，可以调用到其他系统方法，为了避免这个漏洞，在4.2之后，只能调用到<br>@JavascriptInterface注释过的方法。</p>
+<h2 id="Android-call-JavaScript"><a href="#Android-call-JavaScript" class="headerlink" title="Android call JavaScript"></a>Android call JavaScript</h2><h3 id="loadUrl"><a href="#loadUrl" class="headerlink" title="loadUrl()"></a>loadUrl()</h3><h3 id="evaluateJavascript"><a href="#evaluateJavascript" class="headerlink" title="evaluateJavascript()"></a>evaluateJavascript()</h3><h2 id="JavaScript-call-Android"><a href="#JavaScript-call-Android" class="headerlink" title="JavaScript call Android"></a>JavaScript call Android</h2><h3 id="addJavascriptInterface"><a href="#addJavascriptInterface" class="headerlink" title="addJavascriptInterface"></a>addJavascriptInterface</h3><pre><code>注解@JavascriptInterface</code></pre><p>在android4.2之前有个严重漏洞，Js通过webview获取android对象后，可以调用到其他系统方法，为了避免这个漏洞，在4.2之后，只能调用到<br>@JavascriptInterface注释过的方法。</p>
 <h3 id="shouldOverrideUrlLoading"><a href="#shouldOverrideUrlLoading" class="headerlink" title="shouldOverrideUrlLoading"></a>shouldOverrideUrlLoading</h3><h3 id="onJsPrompt"><a href="#onJsPrompt" class="headerlink" title="onJsPrompt"></a>onJsPrompt</h3><ul>
 <li>onJsAlert</li>
 <li>onJsConfirm</li>
@@ -1574,12 +1943,16 @@
           
             <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
@@ -1668,7 +2041,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1739,7 +2112,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">28</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
