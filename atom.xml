@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>vforkliu</title>
   
-  <subtitle>Personal Tech Blog</subtitle>
+  <subtitle>LIU JUN&#39;s Blog</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://vforkliu.github.io/"/>
-  <updated>2019-06-27T10:39:41.944Z</updated>
+  <updated>2019-06-29T15:47:34.233Z</updated>
   <id>https://vforkliu.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>游戏安全：开篇</title>
+    <link href="https://vforkliu.github.io/2019/06/29/Game-Security-Preface/"/>
+    <id>https://vforkliu.github.io/2019/06/29/Game-Security-Preface/</id>
+    <published>2019-06-29T02:48:49.000Z</published>
+    <updated>2019-06-29T15:47:34.233Z</updated>
+    
+    <content type="html"><![CDATA[<p>笔者曾经在某厂从事网络游戏客户端安全工作8年，涉及到PC端、Android和iOS，包括FPS、MOBA和MMORPG等各种游戏类型。现在的工作不再从事游戏安全相关工作，对游戏安全这个行业既有不舍，也有无赖。为自己立个flag：计划将这8年的游戏安全相关工作经历记录下来，算是给笔者自己留个念想吧，如果能为相关从业者提供一<br>点启发，是我的荣幸。</p><p>先列个大纲，记录下来，看什么时候能完成整个游戏安全系列。</p><ul><li>总体介绍游戏可能面临哪些安全问题，有哪些防御手段，游戏安全这个系统包含哪些方面：不仅仅是客户端。</li><li>介绍在端游第1次分析的透视外挂经历</li><li>在2年端游维护壳过程中的一些趣事：让人记忆深刻的事情。</li><li>详细介绍6年移动游戏客户端安全：笔者见证了移动游戏安全从0到1的过程：<ul><li>从0开始开发一个游戏安全方案走了哪些弯路</li><li>通用游戏外挂的发展历程</li><li>每个重要外挂的防御方法</li><li>移动游戏壳开发中的一些趣事</li><li>Android 上驱动开发</li><li>VirtualApp 原理与检测方法</li></ul></li></ul><p>声明：游戏安全系列文章中的内容仅供参考，肯定有许多错误之处，愿与同行一起探讨。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;笔者曾经在某厂从事网络游戏客户端安全工作8年，涉及到PC端、Android和iOS，包括FPS、MOBA和MMORPG等各种游戏类型。现在的工作不再从事游戏安全相关工作，对游戏安全这个行业既有不舍，也有无赖。为自己立个flag：计划将这8年的游戏安全相关工作经历记录下来，算
+      
+    
+    </summary>
+    
+      <category term="游戏安全" scheme="https://vforkliu.github.io/categories/%E6%B8%B8%E6%88%8F%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="游戏" scheme="https://vforkliu.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+    
+      <category term="安全" scheme="https://vforkliu.github.io/tags/%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux Process</title>
@@ -480,31 +507,6 @@
     
     
       <category term="docker" scheme="https://vforkliu.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android ClassLoader</title>
-    <link href="https://vforkliu.github.io/2019/05/15/Android-ClassLoader/"/>
-    <id>https://vforkliu.github.io/2019/05/15/Android-ClassLoader/</id>
-    <published>2019-05-15T02:38:54.000Z</published>
-    <updated>2019-05-15T08:37:46.293Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/Class.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Class</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Serializable</span>, <span class="title">AnnotatedElement</span>, <span class="title">GenericDeclaration</span>, <span class="title">Type</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">native</span> Class&lt;?&gt; classForName(String className, <span class="keyword">boolean</span> shouldInitialize,</span><br><span class="line">        ClassLoader classLoader) <span class="keyword">throws</span> ClassNotFoundException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="VMClassLoader"><a href="#VMClassLoader" class="headerlink" title="VMClassLoader"></a>VMClassLoader</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/VMClassLoader.java</span></span><br><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VMClassLoader</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">native</span> <span class="keyword">static</span> Class <span class="title">findLoadedClass</span><span class="params">(ClassLoader cl,String name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="BootClassLoader"><a href="#BootClassLoader" class="headerlink" title="BootClassLoader"></a>BootClassLoader</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/ClassLoader.java#762</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BootClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="ClassLoader"><a href="#ClassLoader" class="headerlink" title="ClassLoader"></a>ClassLoader</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/libart/src/main/java/java/lang/ClassLoader.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoader</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="BaseDexClassLoader"><a href="#BaseDexClassLoader" class="headerlink" title="BaseDexClassLoader"></a>BaseDexClassLoader</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/dalvik/src/main/java/dalvik/system/BaseDexClassLoader.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseDexClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DexPathList pathList;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="DexPathList"><a href="#DexPathList" class="headerlink" title="DexPathList"></a>DexPathList</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http://androidxref.com/6.0.1_r10/xref/libcore/dalvik/src/main/java/dalvik/system/DexPathList.java</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Class&quot;&gt;&lt;a href=&quot;#Class&quot; class=&quot;headerlink&quot; title=&quot;Class&quot;&gt;&lt;/a&gt;Class&lt;/h1&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="android" scheme="https://vforkliu.github.io/tags/android/"/>
-    
-      <category term="classloader" scheme="https://vforkliu.github.io/tags/classloader/"/>
     
   </entry>
   

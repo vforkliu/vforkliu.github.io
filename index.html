@@ -56,16 +56,16 @@
 <link rel="stylesheet" href="/css/main.css?v=7.1.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-e.png?v=7.1.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-e.png?v=7.1.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-e.png?v=7.1.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+  <link rel="mask-icon" href="/images/logo-e.svg?v=7.1.0" color="#222">
 
 
 
@@ -103,16 +103,16 @@
 
 
 
-  <meta name="description" content="Focus on User Growth">
+  <meta name="description" content="UG,Reverse Engineering,Android Development">
 <meta property="og:type" content="website">
 <meta property="og:title" content="vforkliu">
 <meta property="og:url" content="https://vforkliu.github.io/index.html">
 <meta property="og:site_name" content="vforkliu">
-<meta property="og:description" content="Focus on User Growth">
+<meta property="og:description" content="UG,Reverse Engineering,Android Development">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vforkliu">
-<meta name="twitter:description" content="Focus on User Growth">
+<meta name="twitter:description" content="UG,Reverse Engineering,Android Development">
 
 
 
@@ -209,7 +209,7 @@
     </div>
     
       
-        <p class="site-subtitle">Personal Tech Blog</p>
+        <p class="site-subtitle">LIU JUN's Blog</p>
       
     
     
@@ -264,6 +264,40 @@
     <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
 
       
       
@@ -313,11 +347,201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/29/Game-Security-Preface/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vforkliu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/29/Game-Security-Preface/" class="post-title-link" itemprop="url">游戏安全：开篇</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-29 10:48:49 / Modified: 23:47:34" itemprop="dateCreated datePublished" datetime="2019-06-29T10:48:49+08:00">2019-06-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/游戏安全/" itemprop="url" rel="index"><span itemprop="name">游戏安全</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/06/29/Game-Security-Preface/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/29/Game-Security-Preface/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>笔者曾经在某厂从事网络游戏客户端安全工作8年，涉及到PC端、Android和iOS，包括FPS、MOBA和MMORPG等各种游戏类型。现在的工作不再从事游戏安全相关工作，对游戏安全这个行业既有不舍，也有无赖。为自己立个flag：计划将这8年的游戏安全相关工作经历记录下来，算是给笔者自己留个念想吧，如果能为相关从业者提供一<br>点启发，是我的荣幸。</p>
+<p>先列个大纲，记录下来，看什么时候能完成整个游戏安全系列。</p>
+<ul>
+<li>总体介绍游戏可能面临哪些安全问题，有哪些防御手段，游戏安全这个系统包含哪些方面：不仅仅是客户端。</li>
+<li>介绍在端游第1次分析的透视外挂经历</li>
+<li>在2年端游维护壳过程中的一些趣事：让人记忆深刻的事情。</li>
+<li>详细介绍6年移动游戏客户端安全：笔者见证了移动游戏安全从0到1的过程：<ul>
+<li>从0开始开发一个游戏安全方案走了哪些弯路</li>
+<li>通用游戏外挂的发展历程</li>
+<li>每个重要外挂的防御方法</li>
+<li>移动游戏壳开发中的一些趣事</li>
+<li>Android 上驱动开发</li>
+<li>VirtualApp 原理与检测方法</li>
+</ul>
+</li>
+</ul>
+<p>声明：游戏安全系列文章中的内容仅供参考，肯定有许多错误之处，愿与同行一起探讨。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/06/27/Linux-Process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -479,7 +703,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -698,7 +922,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -860,7 +1084,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1059,7 +1283,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1262,7 +1486,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1430,7 +1654,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1605,7 +1829,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1814,7 +2038,7 @@ _data.writeInt(userId);</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Clie
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
+      <meta itemprop="description" content="UG,Reverse Engineering,Android Development">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
@@ -1993,223 +2217,11 @@ _data.writeInt(userId);</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Clie
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://vforkliu.github.io/2019/05/31/C-Virtual-Method-Table/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="Focus on User Growth">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vforkliu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/31/C-Virtual-Method-Table/" class="post-title-link" itemprop="url">C++ Virtual Method Table</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-05-31 10:16:42 / Modified: 14:38:20" itemprop="dateCreated datePublished" datetime="2019-05-31T10:16:42+08:00">2019-05-31</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/05/31/C-Virtual-Method-Table/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/31/C-Virtual-Method-Table/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>本文的代码使用android-ndk编译，在armeabi-v7a下研究，基于IDA Pro得出结论。</p>
-<h1 id="简单类继承"><a href="#简单类继承" class="headerlink" title="简单类继承"></a>简单类继承</h1><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><figcaption><span> Multi-Inherit Simple Example</span><a href="/downloads/code/multi-inherit-normal-simple/jni/normal_multi_inherit_simple.cpp">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#include &lt;iostream&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;android/log.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="comment">//using namespace std;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A(<span class="keyword">int</span> a = <span class="number">0</span>):m_a(<span class="number">0</span>){<span class="built_in">printf</span>(<span class="string">"A::constructor()"</span>);}</span><br><span class="line">    ~A(){ <span class="built_in">printf</span>(<span class="string">"A::destructor()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::foo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hoo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::hoo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">goo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::goo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">    <span class="comment">// std::string m_name;</span></span><br><span class="line">    </span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">public</span> A{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B(<span class="keyword">int</span> b = <span class="number">0</span>):m_b(b){<span class="built_in">printf</span>(<span class="string">"B::constructor()"</span>);}</span><br><span class="line">     ~B(){<span class="built_in">printf</span>(<span class="string">"B::destructor()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::foo()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">hoo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::hoo()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">ioo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::ioo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">public</span> A{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    C(<span class="keyword">int</span> c = <span class="number">0</span>):m_c(<span class="number">0</span>){<span class="built_in">printf</span>(<span class="string">"C::constructor()"</span>);}</span><br><span class="line">     ~C(){<span class="built_in">printf</span>(<span class="string">"C::destructor()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"C::foo()"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">joo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"C::joo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_c;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    D(<span class="keyword">int</span> d = <span class="number">0</span>):m_d(d){<span class="built_in">printf</span>(<span class="string">"D::constructor()"</span>);}</span><br><span class="line">     ~D(){<span class="built_in">printf</span>(<span class="string">"D::destructor"</span>);}</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"D::foo()"</span>);}</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_d;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span>{</span><br><span class="line">    A a;</span><br><span class="line">    B b;</span><br><span class="line">    C c;</span><br><span class="line">    D d;</span><br><span class="line"></span><br><span class="line">   a.foo();</span><br><span class="line">   b.foo();</span><br><span class="line">   c.foo();</span><br><span class="line">   d.foo();</span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of a:" &lt;&lt; sizeof(a) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of b:" &lt;&lt; sizeof(b) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of c:" &lt;&lt; sizeof(c) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of d:" &lt;&lt; sizeof(d) &lt;&lt; endl;</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof a:%d"</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof b:%d"</span>,<span class="keyword">sizeof</span>(b));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof c:%d"</span>,<span class="keyword">sizeof</span>(c));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof d:%d"</span>,<span class="keyword">sizeof</span>(d));</span><br><span class="line"></span><br><span class="line">   B* pd = <span class="keyword">new</span> D(<span class="number">1</span>);</span><br><span class="line">   pd-&gt;foo();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
-<h2 id="在IDA中的内存布局"><a href="#在IDA中的内存布局" class="headerlink" title="在IDA中的内存布局"></a>在IDA中的内存布局</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class d memory layout</span><br><span class="line">---------------------</span><br><span class="line">+ 0x00 baseclass_B</span><br><span class="line">+ 0x00    baseclass_A</span><br><span class="line">+ 0x00        m_a</span><br><span class="line">+ 0x04    m_b</span><br><span class="line">+ 0x08 baseclass_C</span><br><span class="line">+ 0x08    baseclass_A</span><br><span class="line">+ 0x08        m_a</span><br><span class="line">+ 0x0C    m_c</span><br><span class="line">+ 0x10 m_d</span><br><span class="line">----------------------</span><br></pre></td></tr></table></figure>
-
-<img src="/2019/05/31/C-Virtual-Method-Table/class_memory_layout_normal_simple.png" title="简单类的内存布局">
-
-
-<h1 id="带有虚函数的类继承"><a href="#带有虚函数的类继承" class="headerlink" title="带有虚函数的类继承"></a>带有虚函数的类继承</h1><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight cpp"><figcaption><span> Multi-Inherit Simple Example</span><a href="/downloads/code/multi-inherit-normal-vtbl/jni/normal_multi_inherit_vtbl.cpp">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#include &lt;iostream&gt;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;android/log.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="comment">//using namespace std;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A(<span class="keyword">int</span> a = <span class="number">0</span>):m_a(<span class="number">0</span>){<span class="built_in">printf</span>(<span class="string">"A::constructor()"</span>);}</span><br><span class="line">    <span class="keyword">virtual</span> ~A(){ <span class="built_in">printf</span>(<span class="string">"A::destructor()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::foo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hoo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::hoo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">goo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"A::goo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_a;</span><br><span class="line">    <span class="comment">// std::string m_name;</span></span><br><span class="line">    </span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">public</span> A{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    B(<span class="keyword">int</span> b = <span class="number">0</span>):m_b(b){<span class="built_in">printf</span>(<span class="string">"B::constructor()"</span>);}</span><br><span class="line">    <span class="keyword">virtual</span> ~B(){<span class="built_in">printf</span>(<span class="string">"B::destructor()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::foo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">hoo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::hoo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">ioo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"B::ioo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_b;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span><span class="keyword">public</span> A{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    C(<span class="keyword">int</span> c = <span class="number">0</span>):m_c(<span class="number">0</span>){<span class="built_in">printf</span>(<span class="string">"C::constructor()"</span>);}</span><br><span class="line">    <span class="keyword">virtual</span> ~C(){<span class="built_in">printf</span>(<span class="string">"C::destructor()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"C::foo()"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">joo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"C::joo()"</span>);}</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_c;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span><span class="keyword">public</span> B,<span class="keyword">public</span> C{</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    D(<span class="keyword">int</span> d = <span class="number">0</span>):m_d(d){<span class="built_in">printf</span>(<span class="string">"D::constructor()"</span>);}</span><br><span class="line">    <span class="keyword">virtual</span> ~D(){<span class="built_in">printf</span>(<span class="string">"D::destructor"</span>);}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>{<span class="built_in">printf</span>(<span class="string">"D::foo()"</span>);}</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> m_d;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span>{</span><br><span class="line">    A a;</span><br><span class="line">    B b;</span><br><span class="line">    C c;</span><br><span class="line">    D d;</span><br><span class="line"></span><br><span class="line">   a.foo();</span><br><span class="line">   b.foo();</span><br><span class="line">   c.foo();</span><br><span class="line">   d.foo();</span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of a:" &lt;&lt; sizeof(a) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of b:" &lt;&lt; sizeof(b) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of c:" &lt;&lt; sizeof(c) &lt;&lt; endl;</span></span><br><span class="line">   <span class="comment">//cout &lt;&lt; "size of d:" &lt;&lt; sizeof(d) &lt;&lt; endl;</span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof a:%d"</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof b:%d"</span>,<span class="keyword">sizeof</span>(b));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof c:%d"</span>,<span class="keyword">sizeof</span>(c));</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"sizeof d:%d"</span>,<span class="keyword">sizeof</span>(d));</span><br><span class="line"></span><br><span class="line">   B* pd = <span class="keyword">new</span> D(<span class="number">1</span>);</span><br><span class="line">   pd-&gt;foo();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
-<h2 id="内存布局"><a href="#内存布局" class="headerlink" title="内存布局"></a>内存布局</h2><img src="/2019/05/31/C-Virtual-Method-Table/class_memory_layout_normal_vtbl.png" title="带有虚函数的内存布局">
-
-<h2 id="虚函数表"><a href="#虚函数表" class="headerlink" title="虚函数表"></a>虚函数表</h2><img src="/2019/05/31/C-Virtual-Method-Table/virtual_method_table.png" title="virtual method table">
-
-<p>从上图看，类A,B,C的虚函数表布局很好理解，子类如果override了父类的虚函数，那么子类的虚函数表里的函数地址就是子类实现的函数。我们只关注<br>类D的虚函数表布局。<br>两个问题：</p>
-<h3 id="为什么有两个析构函数"><a href="#为什么有两个析构函数" class="headerlink" title="为什么有两个析构函数"></a>为什么有两个析构函数</h3><p>对析构函数函数命名的说明</p>
-<blockquote>
-<p>D2 is the “base object destructor”. It destroys the object itself, as well as data members and non-virtual base classes.<br>D1 is the “complete object destructor”. It additionally destroys virtual base classes.<br>D0 is the “deleting object destructor”. It does everything the complete object destructor does, plus it calls operator delete to actually free the memory.</p>
-</blockquote>
-<p>虚析构函数都是成对出现的</p>
-<blockquote>
-<p>The entries for virtual destructors are actually pairs of entries. The first destructor, called the complete object destructor, performs the destruction without calling delete() on the object. The second destructor, called the deleting destructor, calls delete() after destroying the object. </p>
-</blockquote>
-<p>以类D为例说明两个析构函数的差别</p>
-<ul>
-<li><p>_ZN1DD2Ev:栈上的对象析构函的时候调用</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    D d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>_ZN1DD0Ev:堆上的对象析构函的时候调用</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    D* d = <span class="keyword">new</span> D(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">delete</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="non-virtual-thunk是什么"><a href="#non-virtual-thunk是什么" class="headerlink" title="non-virtual-thunk是什么"></a>non-virtual-thunk是什么</h3><img src="/2019/05/31/C-Virtual-Method-Table/d_non_virtual_thunk.png" title="class D non-virtual thunk method">
-<p>在多继承中用于调整this的位置</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    C* d = <span class="keyword">new</span> D(<span class="number">0</span>);   <span class="comment">// d 指向了D object + 0xC的位置，</span></span><br><span class="line">    <span class="keyword">delete</span> d;          <span class="comment">// 执行析构函数的时候利用non-virtual thunk调整回去 -0xC</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><h3 id="类A的构造函数"><a href="#类A的构造函数" class="headerlink" title="类A的构造函数"></a>类A的构造函数</h3><img src="/2019/05/31/C-Virtual-Method-Table/a_constructor.png" title="class A constructor method">
-<p>类A内存布局的第1个4字节存放的是虚函数表指针。</p>
-<h3 id="类B的构造函数"><a href="#类B的构造函数" class="headerlink" title="类B的构造函数"></a>类B的构造函数</h3><img src="/2019/05/31/C-Virtual-Method-Table/b_constructor.png" title="class B constructor method">
-<ul>
-<li><p>先执行父类的构造函数</p>
-</li>
-<li><p>赋值虚函数表指针,覆盖了父类构造函数设置的虚函数表指针</p>
-</li>
-<li><p>初始化m_b</p>
-<p>类C的构造函数与类B相同。</p>
-</li>
-</ul>
-<h3 id="类D的构造函数"><a href="#类D的构造函数" class="headerlink" title="类D的构造函数"></a>类D的构造函数</h3><img src="/2019/05/31/C-Virtual-Method-Table/d_constructor.png" title="class D constructor method">
-
-<ul>
-<li>依次执行B、C的构造函数</li>
-<li>C构造函数的this + 0xC   可以对照D的内存布局</li>
-<li>D类有两个虚函数表指针：vtbl+8,vtbl+0x24</li>
-<li>初始化m_d</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2240,8 +2252,10 @@ _data.writeInt(userId);</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Clie
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="LIU JUN">
+            
               <p class="site-author-name" itemprop="name">LIU JUN</p>
-              <div class="site-description motion-element" itemprop="description">Focus on User Growth</div>
+              <div class="site-description motion-element" itemprop="description">UG,Reverse Engineering,Android Development</div>
           </div>
 
           
@@ -2251,12 +2265,31 @@ _data.writeInt(userId);</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Clie
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
               
 
               
@@ -2265,70 +2298,80 @@ _data.writeInt(userId);</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Clie
                 <div class="site-state-item site-state-tags">
                   
                     
+                      <a href="/tags/">
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">30</span>
-                    <span class="site-state-item-name">tags</span>
                   
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
                 </div>
               
             </nav>
@@ -2345,6 +2388,32 @@ _data.writeInt(userId);</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Clie
 
           
 
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/vforkliu" title="GitHub &rarr; https://github.com/vforkliu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:vforkliu@gmail.com" title="E-Mail &rarr; mailto:vforkliu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
           
 
           
