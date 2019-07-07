@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.forkliu.com/"/>
-  <updated>2019-07-05T02:08:35.244Z</updated>
+  <updated>2019-07-07T02:24:21.558Z</updated>
   <id>https://www.forkliu.com/</id>
   
   <author>
@@ -17,16 +17,55 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Game Security:Time Speeder</title>
+    <title>游戏安全：月影外挂透视功能分析</title>
+    <link href="https://www.forkliu.com/2019/07/06/Game-Security-YueYing-Perspective/"/>
+    <id>https://www.forkliu.com/2019/07/06/Game-Security-YueYing-Perspective/</id>
+    <published>2019-07-06T11:11:28.000Z</published>
+    <updated>2019-07-07T02:24:21.558Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>透视功能是FPS游戏面临的主要威胁之一：它可以始终显示目标的位置，极大地破坏了游戏的乐趣。实现透视涉及到两个关键技术点：目标位置计算和标注目标。</p><h1 id="标注目标"><a href="#标注目标" class="headerlink" title="标注目标"></a>标注目标</h1><p>标注目标一般画一个小方框。本文的月影外挂就是画一个小红方框。<br>月影外挂采用clear函数绘制小红框：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HRESULT <span class="title">Clear</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">　　 DWORD Count,</span></span></span><br><span class="line"><span class="function"><span class="params">　　 <span class="keyword">const</span> D3DRECT *pRects,</span></span></span><br><span class="line"><span class="function"><span class="params">　　 DWORD Flags,</span></span></span><br><span class="line"><span class="function"><span class="params">　　 D3DCOLOR Color,</span></span></span><br><span class="line"><span class="function"><span class="params">　　 <span class="keyword">float</span> Z,</span></span></span><br><span class="line"><span class="function"><span class="params">　　 DWORD Stencil</span></span></span><br><span class="line"><span class="function"><span class="params">　　)</span></span>;</span><br></pre></td></tr></table></figure><p>这是DirectX里的一个函数，参数含义如下：</p><ul><li>Count：说明你要清空的矩形数目。如果要清空的是整个客户区窗口，则设为0； </li><li>pRects：这是一个D3DRECT结构体的一个数组，如果count中设为5，则这个数组中就得有5个元素。 </li><li>Flags：一些标记组合。只有三种标记：D3DCLEAR_STENCIL , D3DCLEAR_TARGET , D3DCLEAR_ZBUFFER。 </li><li>Color：清除目标区域所使用的颜色。 </li><li>Z：设置Z缓冲的Z初始值。小于或等于这个Z初始值的Z值才会被改写，但它的值只能取0到1之间。</li><li>Stencil：设置模板缓冲的初始值。它的取值范围是0到2的n次方减1。其中n是模板缓冲的深度。<img src="/2019/07/06/Game-Security-YueYing-Perspective/dx-clear.png" title="月影调用Clear函数">上图显示了一次Clear调用过程，画一个方框共调用四次。</li></ul><h1 id="目标位置计算"><a href="#目标位置计算" class="headerlink" title="目标位置计算"></a>目标位置计算</h1><p>在3D游戏里每个游戏对象都有一个位置的成员变量，这个变量存放的是世界坐标系下的坐标。在FPS游戏里，为了游戏的流畅度和减小开发难度，敌对阵营所有目标的位置坐标在每时每刻都可以在客户端获取。或者说游戏服务器没有建立起一个三维世界，游戏服务器不知道某个游戏对象是否被遮挡，如果知道，理论下就不会下发这个游戏对象的位置信息。这是网络游戏某些逻辑呈现本地化的重要例子。</p><h2 id="世界坐标转屏幕坐标"><a href="#世界坐标转屏幕坐标" class="headerlink" title="世界坐标转屏幕坐标"></a>世界坐标转屏幕坐标</h2><p>假设已经获取了某个目标的世界坐标，如何将世界坐标转换为屏幕坐标呢？先来看一个关键函数：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">D3DXVECTOR3* <span class="title">D3DXVec3Project</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  _Inout_       D3DXVECTOR3  *pOut,</span></span></span><br><span class="line"><span class="function"><span class="params">  _In_    <span class="keyword">const</span> D3DXVECTOR3  *pV,</span></span></span><br><span class="line"><span class="function"><span class="params">  _In_    <span class="keyword">const</span> D3DVIEWPORT9 *pViewport,</span></span></span><br><span class="line"><span class="function"><span class="params">  _In_    <span class="keyword">const</span> D3DXMATRIX   *pProjection,</span></span></span><br><span class="line"><span class="function"><span class="params">  _In_    <span class="keyword">const</span> D3DXMATRIX   *pView,</span></span></span><br><span class="line"><span class="function"><span class="params">  _In_    <span class="keyword">const</span> D3DXMATRIX   *pWorld</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure><ul><li>pOut 结果向量</li><li>pV 源向量</li><li>pViewport 视口</li><li>pProjection 投影矩阵</li><li>pView 视变换矩阵</li><li>pWord 世界变换矩阵<br>这个函数就可以将世界坐标系的坐标转换为屏幕坐标系的坐标。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">D3DXMATRIX ViewMatrix,ProjectionMatrix;</span><br><span class="line">D3DXVIEWPORT9 ViewPort;</span><br><span class="line">pDevice-&gt;GetTransform(D3DTS_VIEW,&amp;ViewMatrix);</span><br><span class="line">pDevice-&gt;GetTransform(D3DTS_PROJECTION,&amp;ProjectionMatrix);</span><br><span class="line">pDevice-&gt;GetViewPort(&amp;ViewPort);</span><br><span class="line">D3DXVECTOR3 out;  <span class="comment">// 转换后的屏幕坐标</span></span><br><span class="line">D3DXVECTOR3 src;  <span class="comment">// 假设已经获取到目标的世界坐标</span></span><br><span class="line"></span><br><span class="line">D3DXVec3Project(</span><br><span class="line">    &amp;out,</span><br><span class="line">    &amp;src,</span><br><span class="line">    &amp;ViewPort,</span><br><span class="line">    &amp;ProjectionMatrix,</span><br><span class="line">    &amp;ViewMatrix,</span><br><span class="line">    &amp;WorldMatrix);</span><br></pre></td></tr></table></figure></li></ul><h2 id="获取世界坐标"><a href="#获取世界坐标" class="headerlink" title="获取世界坐标"></a>获取世界坐标</h2><img src="/2019/07/06/Game-Security-YueYing-Perspective/dx-find-position.png" title="月影遍历角色坐标"><p>游戏客户端一般会有一个全局指针，保存了所有目标的全部信息。关键点：找到这个全局数据结构的位置。</p><h1 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h1><p>位置防御采用坐标加密：设计一套加密算法，对位置坐标机密，而且可以线上替换加密算法。</p><p>目标标注：根据外挂标注的方法，做对应的检测，比如检测外挂是否调用了某个函数。</p><p>图像识别：通过截屏的方式，将玩家游戏过程的游戏屏幕上传到服务器，可以采用人工标注或图像识别技术检测玩家是否作弊。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;透视功能是FPS游戏面临的主要威胁之一：它可以始终显示目标的位置，极大地破坏了游戏的乐趣。实现透视涉及到两个关键技术点：目标位置计算和标注目
+      
+    
+    </summary>
+    
+      <category term="游戏安全" scheme="https://www.forkliu.com/categories/%E6%B8%B8%E6%88%8F%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="游戏" scheme="https://www.forkliu.com/tags/%E6%B8%B8%E6%88%8F/"/>
+    
+      <category term="安全" scheme="https://www.forkliu.com/tags/%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="透视" scheme="https://www.forkliu.com/tags/%E9%80%8F%E8%A7%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>游戏安全：变速器</title>
     <link href="https://www.forkliu.com/2019/07/02/Game-Security-Time-Speeder/"/>
     <id>https://www.forkliu.com/2019/07/02/Game-Security-Time-Speeder/</id>
     <published>2019-07-02T15:13:58.000Z</published>
-    <updated>2019-07-05T02:08:35.244Z</updated>
+    <updated>2019-07-05T06:03:11.689Z</updated>
     
     <summary type="html">
     
     </summary>
     
+      <category term="游戏安全" scheme="https://www.forkliu.com/categories/%E6%B8%B8%E6%88%8F%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="游戏" scheme="https://www.forkliu.com/tags/%E6%B8%B8%E6%88%8F/"/>
+    
+      <category term="安全" scheme="https://www.forkliu.com/tags/%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="变速器" scheme="https://www.forkliu.com/tags/%E5%8F%98%E9%80%9F%E5%99%A8/"/>
+    
+      <category term="加速器" scheme="https://www.forkliu.com/tags/%E5%8A%A0%E9%80%9F%E5%99%A8/"/>
     
   </entry>
   
@@ -35,16 +74,16 @@
     <link href="https://www.forkliu.com/2019/07/01/Game-Security-Overview/"/>
     <id>https://www.forkliu.com/2019/07/01/Game-Security-Overview/</id>
     <published>2019-07-01T15:28:24.000Z</published>
-    <updated>2019-07-05T02:08:35.244Z</updated>
+    <updated>2019-07-06T15:20:42.100Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本篇文章主要描述网络游戏面临哪些安全问题，出现这些安全问题的本质原因是什么，如何<br>解决这些安全问题。</p><h1 id="网络游戏为什么会有安全问题"><a href="#网络游戏为什么会有安全问题" class="headerlink" title="网络游戏为什么会有安全问题"></a>网络游戏为什么会有安全问题</h1><p>网络游戏面临的大部分安全问题都是因为网络游戏部分逻辑呈现出本地化、单机化的特点导<br>致。如果游戏所有的逻辑，资源都放在服务端是否就可以解决大部分问题呢？答案是确实可<br>以。但是由于网络、机器性能等缘故，现阶段的游戏某些计算逻辑必须放在客户端，才可以<br>实现流畅的游戏体验，客户端里的游戏资源更是放在客户端的。</p><p>如果5G普及，游戏客户端放在服务器运行，用户通过某种代理如浏览器进行游戏（就像现在<br>很多移动的云测试服务），即所谓的云游戏。可能可以解决大部分问题。不过游戏运营商需<br>要承担硬件资源，这样做，如果只是防止外挂，是否划算，需要权衡。</p><p>网络游戏具体面临哪些安全问题呢？</p><h1 id="协议破解"><a href="#协议破解" class="headerlink" title="协议破解"></a>协议破解</h1><p>通过分析游戏协议，可以将游戏里的很多操作自动化，如果完全分析清楚游戏协议，甚至都<br>不需要游戏客户端。当然这种外挂的实现成本比较大。不过这种外挂特别适合打金工作室，<br>因为打金工作室需要运行大量的客户端养号。</p><p>这类问题的解决主要靠一种动态协议的技术：游戏通道的关键数据加密，但解密的密钥是可以<br>在线变化的。当然动态协议本身也提供防止包重放等功能。</p><h1 id="UIC"><a href="#UIC" class="headerlink" title="UIC"></a>UIC</h1><p>用户信息控制，主要解决在游戏世界里，将游戏玩家产生的不当言论进行屏蔽。不当言论比<br>如：政治敏感、谩骂、广告、色情信息等。</p><p>信息过滤主要还是采用特征匹配的方式完成，随着人工智能地发展，应该会引进自然语言识<br>别相关技术。不过据笔者所知，自然语言识别还未大规模运用。</p><p>此类安全问题还包括：色情图片识别，比如玩家头像等。</p><h1 id="资源破解"><a href="#资源破解" class="headerlink" title="资源破解"></a>资源破解</h1><p>比如游戏里的珍贵皮肤、武器等，通过替换资源，自己就可以免费使用这些皮肤、武器等。这<br>类安全问题本身不会给玩家带来收益，但是这些使用资源被替换的玩家，将游戏过程录制成视<br>频，进行传播，会游戏口碑造成极坏地影响。</p><p>还有一种类型，可以给玩家带来极大地收益。比如某个比较难的关卡，通关后可以获得很丰厚<br>的奖励，如果玩家将这个关卡的地图替换为比较简单的地图，就会比较容易通关，毕竟碰撞检测<br>的逻辑都是放在本地的。</p><p>这类问题主要通过文件校验地方式解决。</p><h1 id="按键精灵"><a href="#按键精灵" class="headerlink" title="按键精灵"></a>按键精灵</h1><p>按键精灵是实现自动化操作的主要方法。通过将游戏的某些操作任务，领金币等利用按键精灵自<br>动化，也能为玩家带来极大地收益。这也是打金工作室比较喜欢的方式。</p><p>按键精灵对三消类的游戏也危害极大。</p><p>这类问题主要通过检测按键精灵本身来解决。有行业相关人员采用机器学习地方式将玩家的操作序<br>列进行分析，试图识别出某些操作序列是否是自动化完成的，但效果不好。</p><h1 id="打金工作室"><a href="#打金工作室" class="headerlink" title="打金工作室"></a>打金工作室</h1><p>打金工作室通过各种手段养号、攒游戏里的金币、稀有物品等进行售卖，会严重破坏游戏的经济<br>系统。</p><p>这类问题主要通过数据分析来解决：如账号是有聚集性比如IP地址、机器配置、玩家等级，持有的<br>装备等。</p><h1 id="透视"><a href="#透视" class="headerlink" title="透视"></a>透视</h1><p>这是FPS类游戏主要的作弊方式，实现透视需要解决两个问题：人物坐标计算和人物显示，显示的方<br>式可以拦截每一帧绘制结束时，在将自己的绘制指令插入进去。当然还有通过关闭深度测试等方法。<br>后续会有文章专门分析一款透视外挂的实现方式。</p><p>解决这类问题的主要方法就是坐标加密，不过要与游戏性能取得平衡。</p><h1 id="自动开枪"><a href="#自动开枪" class="headerlink" title="自动开枪"></a>自动开枪</h1><p>简单地讲就是当敌人出现时，自动瞄准自动开枪，这也是FPS类游戏的一大痛点。自动开枪部分是通过<br>模拟按键实现。</p><p>解决这类问题：检测模拟按键类软件。</p><h1 id="无后座"><a href="#无后座" class="headerlink" title="无后座"></a>无后座</h1><p>FPS类游戏的枪械如果无后座力，开枪击杀敌人的准确率将大大提高。</p><p>这类问题主要通过收集开枪时枪械的属性数据，通过后端数据分析来完成检测。</p><h1 id="无烟雾"><a href="#无烟雾" class="headerlink" title="无烟雾"></a>无烟雾</h1><p>FPS类经常会有烟雾弹类的道具，通过外挂，可以无视烟雾。</p><p>这类问题的解决方法与无后座差不多。</p><h1 id="上帝视角"><a href="#上帝视角" class="headerlink" title="上帝视角"></a>上帝视角</h1><p>也可以叫无限视距，这类外挂可以使MOBA类游戏中的所有敌人都在你的视野里，即使敌人在草丛里。之<br>所以可以实现这类外挂，本质上是坐标逻辑的计算放在本地。</p><p>这类外挂的解决方法视外挂的实现方法而定。后续会有文章详细阐述。</p><h1 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h1><p>这并不算外挂的范畴，但也对游戏的生命周期造成极大的危害，最著名的私服莫过于魔兽世界的开源服务器，<br>据本人了解，国内的私服基本上是源码泄漏或者二进制文件泄漏搭建的，很少有通过分析游戏协议，自己动<br>手写游戏服务器。</p><p>解决方法：法律。</p><h1 id="游戏漏洞"><a href="#游戏漏洞" class="headerlink" title="游戏漏洞"></a>游戏漏洞</h1><p>比如某些任务可以无限刷、在MOBA类游戏里通过发送某个数据包直接可以让对方投降，这类安全问题称为游戏<br>漏洞，一旦在线上版本被玩家发现，将造成巨大的损失，及其严重。</p><p>一般会成立游戏漏洞挖掘团队，尽可能提前发现这些危害巨大的漏洞。</p><h1 id="最后的防线"><a href="#最后的防线" class="headerlink" title="最后的防线"></a>最后的防线</h1><p>法律。如果所有的技术手段都无法解决，或者解决成本过高，可以让法务解决。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本篇文章主要描述网络游戏面临哪些安全问题，出现这些安全问题的本质原因是什么，如何解决这些安全问题。</p><h1 id="网络游戏为什么会有安全问题"><a href="#网络游戏为什么会有安全问题" class="headerlink" title="网络游戏为什么会有安全问题"></a>网络游戏为什么会有安全问题</h1><p>网络游戏面临的大部分安全问题都是因为网络游戏部分逻辑呈现出本地化、单机化的特点导致。如果游戏所有的逻辑，资源都放在服务端是否就可以解决大部分问题呢？答案是确实可以。但是由于网络、机器性能等缘故，现阶段的游戏某些计算逻辑必须放在客户端，才可以实现流畅的游戏体验，客户端里的游戏资源更是放在客户端的。</p><p>如果5G普及，游戏客户端放在服务器运行，用户通过某种代理如浏览器进行游戏（就像现在很多移动的云测试服务），即所谓的云游戏。可能可以解决大部分问题。不过游戏运营商需要承担硬件资源，这样做，如果只是防止外挂，是否划算，需要权衡。</p><p>网络游戏具体面临哪些安全问题呢？</p><h1 id="协议破解"><a href="#协议破解" class="headerlink" title="协议破解"></a>协议破解</h1><p>通过分析游戏协议，可以将游戏里的很多操作自动化，如果完全分析清楚游戏协议，甚至都不需要游戏客户端。当然这种外挂的实现成本比较大。不过这种外挂特别适合打金工作室，因为打金工作室需要运行大量的客户端养号。</p><p>这类问题的解决主要靠一种动态协议的技术：游戏通道的关键数据加密，但解密的密钥是可以在线变化的。当然动态协议本身也提供防止包重放等功能。</p><h1 id="UIC"><a href="#UIC" class="headerlink" title="UIC"></a>UIC</h1><p>用户信息控制，主要解决在游戏世界里，将游戏玩家产生的不当言论进行屏蔽。不当言论比如：政治敏感、谩骂、广告、色情信息等。</p><p>信息过滤主要还是采用特征匹配的方式完成，随着人工智能地发展，应该会引进自然语言识别相关技术。不过据笔者所知，自然语言识别还未大规模运用。</p><p>此类安全问题还包括：色情图片识别，比如玩家头像等。</p><h1 id="资源破解"><a href="#资源破解" class="headerlink" title="资源破解"></a>资源破解</h1><p>比如游戏里的珍贵皮肤、武器等，通过替换资源，自己就可以免费使用这些皮肤、武器等。这类安全问题本身不会给玩家带来收益，但是这些使用资源被替换的玩家，将游戏过程录制成视频，进行传播，会游戏口碑造成极坏地影响。</p><p>还有一种类型，可以给玩家带来极大地收益。比如某个比较难的关卡，通关后可以获得很丰厚的奖励，如果玩家将这个关卡的地图替换为比较简单的地图，就会比较容易通关，毕竟碰撞检测的逻辑都是放在本地的。</p><p>这类问题主要通过文件校验地方式解决。</p><h1 id="按键精灵"><a href="#按键精灵" class="headerlink" title="按键精灵"></a>按键精灵</h1><p>按键精灵是实现自动化操作的主要方法。通过将游戏的某些操作任务，领金币等利用按键精灵自动化，也能为玩家带来极大地收益。这也是打金工作室比较喜欢的方式。</p><p>按键精灵对三消类的游戏也危害极大。</p><p>这类问题主要通过检测按键精灵本身来解决。有行业相关人员采用机器学习地方式将玩家的操作序列进行分析，试图识别出某些操作序列是否是自动化完成的，但效果不好。</p><h1 id="打金工作室"><a href="#打金工作室" class="headerlink" title="打金工作室"></a>打金工作室</h1><p>打金工作室通过各种手段养号、攒游戏里的金币、稀有物品等进行售卖，会严重破坏游戏的经济系统。</p><p>这类问题主要通过数据分析来解决：如账号是有聚集性比如IP地址、机器配置、玩家等级，持有的装备等。</p><h1 id="透视"><a href="#透视" class="headerlink" title="透视"></a>透视</h1><p>这是FPS类游戏主要的作弊方式，实现透视需要解决两个问题：人物坐标计算和人物显示，显示的方式可以拦截每一帧绘制结束时，在将自己的绘制指令插入进去。当然还有通过关闭深度测试等方法。后续会有文章专门分析一款透视外挂的实现方式。</p><p>解决这类问题的主要方法就是坐标加密，不过要与游戏性能取得平衡。</p><h1 id="自动开枪"><a href="#自动开枪" class="headerlink" title="自动开枪"></a>自动开枪</h1><p>简单地讲就是当敌人出现时，自动瞄准自动开枪，这也是FPS类游戏的一大痛点。自动开枪部分是通过模拟按键实现。</p><p>解决这类问题：检测模拟按键类软件。</p><h1 id="无后座"><a href="#无后座" class="headerlink" title="无后座"></a>无后座</h1><p>FPS类游戏的枪械如果无后座力，开枪击杀敌人的准确率将大大提高。</p><p>这类问题主要通过收集开枪时枪械的属性数据，通过后端数据分析来完成检测。</p><h1 id="无烟雾"><a href="#无烟雾" class="headerlink" title="无烟雾"></a>无烟雾</h1><p>FPS类经常会有烟雾弹类的道具，通过外挂，可以无视烟雾。</p><p>这类问题的解决方法与无后座差不多。</p><h1 id="上帝视角"><a href="#上帝视角" class="headerlink" title="上帝视角"></a>上帝视角</h1><p>也可以叫无限视距，这类外挂可以使MOBA类游戏中的所有敌人都在你的视野里，即使敌人在草丛里。之所以可以实现这类外挂，本质上是坐标逻辑的计算放在本地。</p><p>这类外挂的解决方法视外挂的实现方法而定。后续会有文章详细阐述。</p><h1 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h1><p>这并不算外挂的范畴，但也对游戏的生命周期造成极大的危害，最著名的私服莫过于魔兽世界的开源服务器，据本人了解，国内的私服基本上是源码泄漏或者二进制文件泄漏搭建的，很少有通过分析游戏协议，自己动手写游戏服务器。</p><p>解决方法：法律。</p><h1 id="游戏漏洞"><a href="#游戏漏洞" class="headerlink" title="游戏漏洞"></a>游戏漏洞</h1><p>比如某些任务可以无限刷、在MOBA类游戏里通过发送某个数据包直接可以让对方投降，这类安全问题称为游戏漏洞，一旦在线上版本被玩家发现，将造成巨大的损失，及其严重。</p><p>一般会成立游戏漏洞挖掘团队，尽可能提前发现这些危害巨大的漏洞。</p><h1 id="最后的防线"><a href="#最后的防线" class="headerlink" title="最后的防线"></a>最后的防线</h1><p>法律。如果所有的技术手段都无法解决，或者解决成本过高，可以让法务解决。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本篇文章主要描述网络游戏面临哪些安全问题，出现这些安全问题的本质原因是什么，如何&lt;br&gt;解决这些安全问题。&lt;/p&gt;
-&lt;h1 id=&quot;网络游戏
+        &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本篇文章主要描述网络游戏面临哪些安全问题，出现这些安全问题的本质原因是什么，如何解决这些安全问题。&lt;/p&gt;
+&lt;h1 id=&quot;网络游戏为什么会
       
     
     </summary>
@@ -63,15 +102,16 @@
     <link href="https://www.forkliu.com/2019/06/30/Game-Security-Packer-for-PC/"/>
     <id>https://www.forkliu.com/2019/06/30/Game-Security-Packer-for-PC/</id>
     <published>2019-06-30T12:35:54.000Z</published>
-    <updated>2019-07-05T02:08:35.244Z</updated>
+    <updated>2019-07-06T15:17:58.128Z</updated>
     
-    <content type="html"><![CDATA[<pre><code>笔者维护壳的时间大约在2011年-2013年这两年间，时间比较久远，很多事情都不记得了，唯一地感觉就是累，</code></pre><p>一个人维护所有游戏的加壳。在那段时间经常在凌晨两三点钟被电话叫醒，然后打车去公司处理突发情况。<br>    如何写一个针对PE文件的壳，可以参考《加密与解密》这本书。想一想当时为什么这么多问题？笔者维护这个壳<br>除了经典的壳功能，比如压缩、导入表加密等（为游戏提供基础的安全保护），还负责其他安全组件的加载，并保证<br>它们的正常运行。常见的安全组件包括：特征扫描引擎、云查引擎、协议安全模块等。<br>    维护壳经常遇到的问题：某个游戏加壳之后，不能正常运行或者游戏表现不正常，没加壳，一切正常，那么一定<br>是壳导致。这个逻辑其实没错，但是加壳之后，还启动很多安全组件，一旦出问题，需要壳的维护者确认是否是壳的<br>问题，还是其他安全组件的问题。排查问题的方法也比较简单：二分法。比如一共启动了10个安全组件，让其只加载<br>5个安全组件，看是否有问题，来定位是哪个安全组件导致的。</p><pre><code>这里记录两个具体示例：游戏花屏和无法登陆。</code></pre><h1 id="游戏花屏"><a href="#游戏花屏" class="headerlink" title="游戏花屏"></a>游戏花屏</h1><pre><code>问题描述：测试同事在某台机器上运行加壳后的游戏，游戏花屏。只在一台测试机上有问题，其他测试机器正常。问题分析：看到问题描述，感觉像是壳与特定的机器环境相互作用导致的。还是老办法：二分法。一个组件一个</code></pre><p>组件的加载运行，最后发现单独加载某个组件或者某两个组件，都不会出现花屏，单加壳也不会出现。难道是几个特定<br>的组件放在一起才会有问题？<br>    最终结论：每个安全组件和壳本身都没有问题，只是那台测试机器配置太低，加壳后会多占有内存导致的，如果不<br>加壳，写个一个DLL什么事也不干，只是分配安全组件占用的总内存，注入到没加壳的游戏进程中，也会花屏。</p><h1 id="无法登陆"><a href="#无法登陆" class="headerlink" title="无法登陆"></a>无法登陆</h1><pre><code>问题描述：某个游戏需要阻止一个特定模块的注入，因为这个模块的注入导致其他安全组件的逻辑异常，而这个特定</code></pre><p>模块使用也很大。因为壳拦截了类似LoadLibrary的函数，只需要将要阻止的模块名字加入到黑名单即可。然后对该游戏<br>加壳，经过测试，确实可以阻止目标模块的注入。但是并没有仔细测试，加壳后的游戏不能登陆，就是无法联网了。虽然<br>有开发，测试一系列流程，还是将有问题的游戏版本放到外网了，可以有时候后续的测试流程也是个摆设。<br>    原因分析：阻止了目标模块的注入，为什么该游戏就无法联网了呢，其他程序如浏览器都是可以正常访问网络的啊。<br>其实目标模块是LSP链上的一个模块，如果该模块无法加载，相对于游戏进程来说，LSP链是不正常的，故无法连网。<br>    解决办法：使用命令或者一些工具，可以对本机重置LSP链，就是所以第3方LSP模块统统不加载，即可正常连网。<br>幸亏是个DAU不大的游戏，且并不是所有机器都存在这个特定的模块。</p>]]></content>
+    <content type="html"><![CDATA[<p>笔者维护壳的时间大约在2011年-2013年这两年间，时间比较久远，很多事情都不记得了，唯一地感觉就是累，一个人维护所有游戏的加壳。在那段时间经常在凌晨两三点钟被电话叫醒，然后打车去公司处理突发情况。</p><p>如何写一个针对PE文件的壳，可以参考《加密与解密》这本书。想一想当时为什么这么多问题？笔者维护这个壳除了经典的壳功能，比如压缩、导入表加密等（为游戏提供基础的安全保护），还负责其他安全组件的加载，并保证它们的正常运行。常见的安全组件包括：特征扫描引擎、云查引擎、协议安全模块等。</p><p>维护壳经常遇到的问题：某个游戏加壳之后，不能正常运行或者游戏表现不正常，没加壳，一切正常，那么一定是壳导致。这个逻辑其实没错，但是加壳之后，还启动很多安全组件，一旦出问题，需要壳的维护者确认是否是壳的问题，还是其他安全组件的问题。排查问题的方法也比较简单：二分法。比如一共启动了10个安全组件，让其只加载5个安全组件，看是否有问题，来定位是哪个安全组件导致的。</p><p>这里记录两个具体示例：游戏花屏和无法登陆。</p><h1 id="游戏花屏"><a href="#游戏花屏" class="headerlink" title="游戏花屏"></a>游戏花屏</h1><p>问题描述：测试同事在某台机器上运行加壳后的游戏，游戏花屏。只在一台测试机上有问题，其他测试机器正常。</p><p>问题分析：看到问题描述，感觉像是壳与特定的机器环境相互作用导致的。还是老办法：二分法。一个组件一个组件的加载运行，最后发现单独加载某个组件或者某两个组件，都不会出现花屏，单加壳也不会出现。难道是几个特定的组件放在一起才会有问题？</p><p>最终结论：每个安全组件和壳本身都没有问题，只是那台测试机器配置太低，加壳后会多占有内存导致的，如果不加壳，写个一个DLL什么事也不干，只是分配安全组件占用的总内存，注入到没加壳的游戏进程中，也会花屏。</p><h1 id="无法登陆"><a href="#无法登陆" class="headerlink" title="无法登陆"></a>无法登陆</h1><p>问题描述：某个游戏需要阻止一个特定模块的注入，因为这个模块的注入导致其他安全组件的逻辑异常，而这个特定模块使用也很大。因为壳拦截了类似LoadLibrary的函数，只需要将要阻止的模块名字加入到黑名单即可。然后对该游戏加壳，经过测试，确实可以阻止目标模块的注入。但是并没有仔细测试，加壳后的游戏不能登陆，就是无法联网了。虽然有开发，测试一系列流程，还是将有问题的游戏版本放到外网了，可以有时候后续的测试流程也是个摆设。</p><p>原因分析：阻止了目标模块的注入，为什么该游戏就无法联网了呢，其他程序如浏览器都是可以正常访问网络的啊。其实目标模块是LSP链上的一个模块，如果该模块无法加载，相对于游戏进程来说，LSP链是不正常的，故无法连网。</p><p>解决办法：使用命令或者一些工具，可以对本机重置LSP链，就是所以第3方LSP模块统统不加载，即可正常连网。幸亏是个DAU不大的游戏，且并不是所有机器都存在这个特定的模块。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;pre&gt;&lt;code&gt;笔者维护壳的时间大约在2011年-2013年这两年间，时间比较久远，很多事情都不记得了，唯一地感觉就是累，&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;一个人维护所有游戏的加壳。在那段时间经常在凌晨两三点钟被电话叫醒，然后打车去公司处理突发情况。&lt;br&gt;    如何写一个
+        &lt;p&gt;笔者维护壳的时间大约在2011年-2013年这两年间，时间比较久远，很多事情都不记得了，唯一地感觉就是累，一个人维护所有游戏的加壳。在那段时间经常在凌晨两三点钟被电话叫醒，然后打车去公司处理突发情况。&lt;/p&gt;
+&lt;p&gt;如何写一个针对PE文件的壳，可以参考《加密与解密》这本书。
       
     
     </summary>
@@ -92,15 +132,15 @@
     <link href="https://www.forkliu.com/2019/06/29/Game-Security-Preface/"/>
     <id>https://www.forkliu.com/2019/06/29/Game-Security-Preface/</id>
     <published>2019-06-29T02:48:49.000Z</published>
-    <updated>2019-06-29T15:47:34.233Z</updated>
+    <updated>2019-07-06T15:18:51.338Z</updated>
     
-    <content type="html"><![CDATA[<p>笔者曾经在某厂从事网络游戏客户端安全工作8年，涉及到PC端、Android和iOS，包括FPS、MOBA和MMORPG等各种游戏类型。现在的工作不再从事游戏安全相关工作，对游戏安全这个行业既有不舍，也有无赖。为自己立个flag：计划将这8年的游戏安全相关工作经历记录下来，算是给笔者自己留个念想吧，如果能为相关从业者提供一<br>点启发，是我的荣幸。</p><p>先列个大纲，记录下来，看什么时候能完成整个游戏安全系列。</p><ul><li>总体介绍游戏可能面临哪些安全问题，有哪些防御手段，游戏安全这个系统包含哪些方面：不仅仅是客户端。</li><li>介绍在端游第1次分析的透视外挂经历</li><li>在2年端游维护壳过程中的一些趣事：让人记忆深刻的事情。</li><li>详细介绍6年移动游戏客户端安全：笔者见证了移动游戏安全从0到1的过程：<ul><li>从0开始开发一个游戏安全方案走了哪些弯路</li><li>通用游戏外挂的发展历程</li><li>每个重要外挂的防御方法</li><li>移动游戏壳开发中的一些趣事</li><li>Android 上驱动开发</li><li>VirtualApp 原理与检测方法</li></ul></li></ul><p>声明：游戏安全系列文章中的内容仅供参考，肯定有许多错误之处，愿与同行一起探讨。</p>]]></content>
+    <content type="html"><![CDATA[<p>笔者曾经在某厂从事网络游戏客户端安全工作8年，涉及到PC端、Android和iOS，包括FPS、MOBA和MMORPG等各种游戏类型。现在的工作不再从事游戏安全相关工作，对游戏安全这个行业既有不舍，也有无奈。计划将这8年的游戏安全相关工作经历记录下来，算是给笔者自己留个念想吧。</p><p>先列个大纲，记录下来，看什么时候能完成整个游戏安全系列。</p><ul><li>总体介绍游戏可能面临哪些安全问题，有哪些防御手段，游戏安全这个系统包含哪些方面：不仅仅是客户端。</li><li>介绍在端游第1次分析的透视外挂经历</li><li>在2年端游维护壳过程中的一些趣事：让人记忆深刻的事情。</li><li>详细介绍6年移动游戏客户端安全：笔者见证了移动游戏安全从0到1的过程：<ul><li>从0开始开发一个游戏安全方案走了哪些弯路</li><li>通用游戏外挂的发展历程</li><li>每个重要外挂的防御方法</li><li>移动游戏壳开发中的一些趣事</li><li>Android 上驱动开发</li><li>VirtualApp 原理与检测方法</li></ul></li></ul><p>声明：游戏安全系列文章中的内容仅供参考，肯定有许多错误之处，愿与同行一起探讨。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;笔者曾经在某厂从事网络游戏客户端安全工作8年，涉及到PC端、Android和iOS，包括FPS、MOBA和MMORPG等各种游戏类型。现在的工作不再从事游戏安全相关工作，对游戏安全这个行业既有不舍，也有无赖。为自己立个flag：计划将这8年的游戏安全相关工作经历记录下来，算
+        &lt;p&gt;笔者曾经在某厂从事网络游戏客户端安全工作8年，涉及到PC端、Android和iOS，包括FPS、MOBA和MMORPG等各种游戏类型。现在的工作不再从事游戏安全相关工作，对游戏安全这个行业既有不舍，也有无奈。计划将这8年的游戏安全相关工作经历记录下来，算是给笔者自己留个念想
       
     
     </summary>
@@ -481,31 +521,6 @@
       <category term="android" scheme="https://www.forkliu.com/tags/android/"/>
     
       <category term="unicode" scheme="https://www.forkliu.com/tags/unicode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>android 智能指针</title>
-    <link href="https://www.forkliu.com/2019/05/24/android-smart-pointer/"/>
-    <id>https://www.forkliu.com/2019/05/24/android-smart-pointer/</id>
-    <published>2019-05-24T04:55:08.000Z</published>
-    <updated>2019-05-27T01:37:45.042Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="相关源码"><a href="#相关源码" class="headerlink" title="相关源码"></a>相关源码</h1><p><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/StrongPointer.h" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/StrongPointer.h</a><br><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/RefBase.h" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/RefBase.h</a><br><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/RefBase.cpp" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/libutils/RefBase.cpp</a></p><h1 id="StrongPointer"><a href="#StrongPointer" class="headerlink" title="StrongPointer"></a>StrongPointer</h1><h1 id="INITIAL-STRONG-VALUE-为什么不是0"><a href="#INITIAL-STRONG-VALUE-为什么不是0" class="headerlink" title="INITIAL_STRONG_VALUE 为什么不是0"></a>INITIAL_STRONG_VALUE 为什么不是0</h1><p>区分从来没有指针引用该对象，还是没有指针引用该对象<br>如果从来没有调用过，那么mStrong为INITIAL_STRONG_VALUE<br>如果没有指针引用该对象，mStrong = 0</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;相关源码&quot;&gt;&lt;a href=&quot;#相关源码&quot; class=&quot;headerlink&quot; title=&quot;相关源码&quot;&gt;&lt;/a&gt;相关源码&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://androidxref.com/6.0.1_r10/xref/system/core/inc
-      
-    
-    </summary>
-    
-    
-      <category term="android" scheme="https://www.forkliu.com/tags/android/"/>
-    
-      <category term="smart pointer" scheme="https://www.forkliu.com/tags/smart-pointer/"/>
     
   </entry>
   

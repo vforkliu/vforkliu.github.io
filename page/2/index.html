@@ -347,6 +347,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.forkliu.com/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LIU JUN">
+      <meta itemprop="description" content="User Growth,Reverse Engineering,Android Development">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="forkliu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/" class="post-title-link" itemprop="url">Build source code viewer with opengrok based docker</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-17 13:05:10 / 修改时间：14:04:26" itemprop="dateCreated datePublished" datetime="2019-06-17T13:05:10+08:00">2019-06-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/17/Build-source-code-viewer-with-opengrok-based-docker/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Install-images"><a href="#Install-images" class="headerlink" title="Install images"></a>Install images</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull opengrok/docker</span><br></pre></td></tr></table></figure>
+
+<h1 id="Create-opengrok-directory"><a href="#Create-opengrok-directory" class="headerlink" title="Create opengrok directory"></a>Create opengrok directory</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">mkdir opengrok</span><br><span class="line">cd opengrok</span><br><span class="line">mkdir src</span><br><span class="line">mkdir data</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>src:opengrok src root</li>
+<li>data:opengrok index file</li>
+</ul>
+<h1 id="Start-docker"><a href="#Start-docker" class="headerlink" title="Start docker"></a>Start docker</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -e REINDEX=0 -v ~/sourceview/src:/opengrok/src -v ~/sourceview/data:/opengrok/data -p 9090:8080 --name opengrok opengrok/docker:latest</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> reindex</span><br><span class="line">docker exec &lt;container&gt; /scripts/index.sh</span><br><span class="line">docker exec opengrok /scripts/index.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> stop container</span><br><span class="line">docker stop opengrok</span><br><span class="line">docker start opengrok</span><br></pre></td></tr></table></figure>
+
+<h1 id="You-can-get-inside-a-container-using-the-command-below"><a href="#You-can-get-inside-a-container-using-the-command-below" class="headerlink" title="You can get inside a container using the command below"></a>You can get inside a container using the command below</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it &lt;container&gt; bash</span><br></pre></td></tr></table></figure>
+
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://hub.docker.com/r/opengrok/docker/" target="_blank" rel="noopener">https://hub.docker.com/r/opengrok/docker/</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.forkliu.com/2019/06/05/Debug-Android-Framework-with-Android-Studio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1967,175 +2135,6 @@ _data.writeInt(userId);</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Clie
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.forkliu.com/2019/05/24/android-smart-pointer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="LIU JUN">
-      <meta itemprop="description" content="User Growth,Reverse Engineering,Android Development">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="forkliu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/24/android-smart-pointer/" class="post-title-link" itemprop="url">android 智能指针</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-24 12:55:08" itemprop="dateCreated datePublished" datetime="2019-05-24T12:55:08+08:00">2019-05-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-27 09:37:45" itemprop="dateModified" datetime="2019-05-27T09:37:45+08:00">2019-05-27</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/05/24/android-smart-pointer/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/24/android-smart-pointer/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="相关源码"><a href="#相关源码" class="headerlink" title="相关源码"></a>相关源码</h1><p><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/StrongPointer.h" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/StrongPointer.h</a><br><a href="http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/RefBase.h" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/include/utils/RefBase.h</a><br><a href="http://androidxref.com/6.0.1_r10/xref/system/core/libutils/RefBase.cpp" target="_blank" rel="noopener">http://androidxref.com/6.0.1_r10/xref/system/core/libutils/RefBase.cpp</a></p>
-<h1 id="StrongPointer"><a href="#StrongPointer" class="headerlink" title="StrongPointer"></a>StrongPointer</h1><h1 id="INITIAL-STRONG-VALUE-为什么不是0"><a href="#INITIAL-STRONG-VALUE-为什么不是0" class="headerlink" title="INITIAL_STRONG_VALUE 为什么不是0"></a>INITIAL_STRONG_VALUE 为什么不是0</h1><p>区分从来没有指针引用该对象，还是没有指针引用该对象<br>如果从来没有调用过，那么mStrong为INITIAL_STRONG_VALUE<br>如果没有指针引用该对象，mStrong = 0</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2184,7 +2183,7 @@ _data.writeInt(userId);</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Clie
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2286,7 +2285,13 @@ _data.writeInt(userId);</code></pre><h1 id="AMS-gt-Client"><a href="#AMS-gt-Clie
                     
                       
                     
-                    <span class="site-state-item-count">33</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
