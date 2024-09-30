@@ -1,14 +1,25 @@
-AUTHOR = 'vforkliu'
-SITENAME = 'forkliu'
+AUTHOR = 'forkliu'
+SITENAME = 'FORKLIU'
 SITEURL = "https://forkliu.com"
-
+ORGNIZATION = "FORKLIU"
 PATH = "content"
 
 TIMEZONE = 'Asia/Shanghai'
 
 DEFAULT_LANG = 'en'
 
-# THEME = "themes/zend"
+AUTHORS = {
+  'forkliu': {
+    'avatar': '/images/avatars/tiger.png',
+    'bio': "Graduated in Computer Science and Engineering, but currently working with GNU/Linux infrastructure and in the spare time I'm an Open Source programmer (Python and C), a drawer and author in the FORKLIU Blog.",
+    'links': [
+        ("GitHub", "github", "#"),
+        ("Twitter", "twitter", "#"),
+        ("Google Plus", "google-plus", "#"),
+        ("Facebook", "facebook", "#"),
+    ]
+  }
+}
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -17,42 +28,112 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-ARTICLE_URL = 'posts/{category}/{slug}/'
-ARTICLE_SAVE_AS = 'posts/{category}/{slug}/index.html'
 
-PAGE_URL = 'pages/{slug}/'
-PAGE_SAVE_AS = 'pages/{slug}/index.html'
+ARTICLE_URL = 'categories/{category}/{slug}'
+ARTICLE_SAVE_AS = 'categories/{category}/{slug}/index.html'
 
-AUTHOR_URL = 'author/{slug}/'
-AUTHOR_SAVE_AS = 'author/{slug}/index.html'
+PAGE_URL = '{slug}'
+PAGE_SAVE_AS = '{slug}/index.html'
 
-CATEGORY_URL = 'category/{slug}/'
-CATEGORY_SAVE_AS = 'category/{slug}/index.html'
+AUTHORS_URL = "authors"
+AUTHOR_URL = 'authors/{slug}'
+AUTHOR_SAVE_AS = 'authors/{slug}/index.html'
 
-TAG_URL = 'tag/{slug}/'
-TAG_SAVE_AS = 'tag/{slug}/index.html'
+CATEGORIES_URL = "categories"
+CATEGORY_URL = 'categories/{slug}'
+CATEGORY_SAVE_AS = 'categories/{slug}/index.html'
+
+TAGS_URL = "tags"
+TAG_URL = 'tags/{slug}'
+TAG_SAVE_AS = 'tags/{slug}/index.html'
 
 # Blogroll
 LINKS = (
     ("Pelican", "https://getpelican.com/"),
     ("Python.org", "https://www.python.org/"),
     ("Jinja2", "https://palletsprojects.com/p/jinja/"),
-    ("You can modify those links in your config file", "#"),
 )
 
 # Social widget
 SOCIAL = (
-    ("You can add links in your config file", "#"),
-    ("Another social link", "#"),
+    ("E-mail", "envelope", "#"),
+    ("GitHub", "github", "#"),
+    ("Twitter", "twitter", "#"),
+    ("Google Plus", "google-plus", "#"),
+    ("Facebook", "facebook", "#"),
+    ("Stackoverflow", "stack-overflow", "#"),
+    ("GitTip", "gittip", "#"),
+    ("Linux User", "linux", "#"),
+    ("Feeds", "rss", "feeds.atom"),
 )
 
 DEFAULT_PAGINATION = 10
 
-# Uncomment following line if you want document-relative URLs when developing
-# RELATIVE_URLS = True
+I18N_TEMPLATES_LANG = 'en'
+
+THEME = "themes/pelican-bootstrap3"
+JINJA_ENVIRONMENT = {
+  'extensions': ['jinja2.ext.i18n', 'jinja2.ext.do']
+}
+
+SHOW_DATE_MODIFIED = True
+SHOW_ARTICLE_AUTHOR = True
+SHOW_ARTICLE_CATEGORY = True
+
+FAVICON = "extra/favicon-32x32.png"
+TOUCHICON = "extra/apple-touch-icon.png"
+
+# css
+TYPOGRIFY = False
+CUSTOM_CSS = "extra/custom.css"
+FEED_ALL_ATOM = "feeds.atom"
+FEED_ALL_RSS = "feeds.rss"
+
+PYGMENTS_STYLE='monokai'
+BOOTSTRAP_THEME='readable'
+
+# navbar
+NAVBAR_ELEMENTS = ['menu-items', 'brand-dropdown']
+DISPLAY_PAGES_ON_MENU =False
+DISPLAY_CATEGORIES_ON_MENU = False
+SUMMARY_MAX_LENGTH = 64
+SUMMARY_MAX_PARAGRAPHS = 2
+SITE_LINKS = [
+    ('Home', ''),
+    ('Authors', 'authors'),
+    ('Archives', 'archives'),
+    ('Categories', 'categories'),
+    ('Tags', 'tags'),
+    ('RSS', 'feeds.rss'),
+]
+
+GOOGLE_ANALYTICS = "G-SBY82C4X3X"
+
+# site banner
+SHOW_SITE_BANNER_IN = ['all']
+SITE_BANNER_ELEMENTS = ['logo', 'name', 'social']
+SITE_BANNER_BACKGROUND_COLOR = "#eeeeec; background-image: url('/images/background_banner.png'); background-repeat: no-repeat; background-size: cover; background-position: center center"
+SITELOGO = "images/logo.png"
+
+# sidebar
+SIDEBAR_ELEMENTS = ["condensed", "links"]
+SIDE_BRAND_ELEMENTS = ['logo', 'name', 'social']
+CONDENSED_SIDEBAR_ITEMS = ['categories', 'tagcloud', 'recent']
+
+DISPLAY_BREADCRUMBS = True
+DISPLAY_CATEGORY_IN_BREADCRUMBS = True
+
+BOOTSTRAP_FLUID = False
+
+TAG_CLOUD_STEPS = 4
+TAG_CLOUD_BADGE = True
+TAG_CLOUD_MAX_ITEMS=25
 
 MD_INCLUDE_BASE_PATH = "sourcecode"
-# MATH_JAX = {'color':'black','align':'left'}
+
+GITALK_REPO_NAME = "gitalk_comments"
+GITALK_REPO_OWNER = "vforkliu"
+GITALK_REPO_ADMIN = "vforkliu"
 
 STATIC_PATHS = [
     'images',

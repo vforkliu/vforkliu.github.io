@@ -1,9 +1,10 @@
 Title: Markdown 在 Pelican上的的支持情况
-Date: 2021-03-13 09:09:19
-Modified: 2022-05-05 15:17:53
+Date: 2024-03-13 09:00
+Modified: 2024-05-05 15:00
 Category: Misc
 Tags: markdown
 Slug: markdown-usage
+Figure: pelican.svg
 
 ## 代码
 ### C++ 代码
